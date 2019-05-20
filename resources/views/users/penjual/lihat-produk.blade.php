@@ -40,6 +40,14 @@
                         <div class="col-sm-6">
                             Jumlah : {{$produk->jumlah()}}
                         </div>
+                        <div class="col-sm-12">
+                            <strong>
+                                Status : {{$produk->tersedia ? 'Tersedia' : 'Tidak tersedia'}}
+                            </strong>
+                            <div class="clearfix"></div>
+                            <button id="btn-availability" class="btn btn-outline-{{$produk->tersedia ? 'danger' : 'success'}}"><i class="fas fa-pencil-alt"></i> Ubah ketersediaan</button>
+                        </div>
+                        <form id="form-availability" method="POST" action="{{route('produk.update.ketersediaan',[$produk->id])}}">@csrf</form>
                     </div>
                 </div>
             </div>
@@ -122,6 +130,21 @@
             if($(this).hasClass('is-invalid')){
                 $(this).removeClass('is-invalid');
             }
+        });
+
+        $('#btn-availability').click(function(){
+            var formavailable = $('#form-availability');
+            swal({
+                title: "Mengubah status Ketersediaan produk!",
+                text: "Apakah anda yakin?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((val)=>{
+                if(val){
+                    formavailable.submit();
+                }
+            });
         });
     </script>
 @endsection

@@ -36,4 +36,15 @@ class Keranjang extends Model
         return $date->isoFormat('D MMM YYYY');
     }
 
+    public function proses()
+    {
+        $this->telah_diproses = 1;
+        $this->save();
+    }
+
+    public function status()
+    {
+        return $this->hasOne('App\Delivery');
+    }
+
 }

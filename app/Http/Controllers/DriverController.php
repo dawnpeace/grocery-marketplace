@@ -38,4 +38,10 @@ class DriverController extends Controller
         });
         return redirect()->back()->with('success',"Profil ".$driver->user->nama." berhasil diperbaharui !");
     }
+
+    public function profil(Driver $driver)
+    {
+        $driver->load(['user']);
+        return $driver;
+    }
 }

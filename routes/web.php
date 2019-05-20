@@ -10,6 +10,28 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('test',function(){
+    $keranjang = App\Keranjang::with(['penjual'=>function($query){
+        $query->with(['produk']);
+    }])->get();
+    foreach($keranjang as $cart){
+        $var = [];
+        $produk = $cart->penjual->produk->random(10);
+        foreach($produk as $belanjaan){
+            $itemKeranjang = new App\Item([
+                'keranjang_id'=>$cart->id,
+                'produk_id'=> $belanjaan->id,
+                'jumlah' => rand(1,$belanjaan->jumlah_tersedia),
+                'harga' => $belanjaan->harga,
+            ]);
+            $var[] = $itemKeranjang;
+        }
+        
+        $cart->item()->saveMany($var);
+    }
+});
+
 Route::get('/','MainMenuController@index')->name('dashboard');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');
 Route::group(['middleware'=>['can:pembeli']],function(){
@@ -23,10 +45,8 @@ Route::group(['middleware'=>['can:pembeli']],function(){
     Route::get('keranjang-saya/diproses','CartController@lihatTransaksiBerjalan')->name('keranjang.diproses');
 });
 
-
-
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('driver/{driver}','DriverController@profil')->middleware('auth')->name('driver.profil');
 
 // Auth::routes();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -66,6 +86,7 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
     Route::get('/','ProdukController@index')->name('penjual.dashboard');
     Route::get('manajemen-produk/{produk}','ProdukController@edit')->name('produk.edit');
     Route::post('manajemen-produk/{produk}','ProdukController@update')->name('produk.update');    
+    Route::post('manajemen-produk/{produk}/ketersediaan','ProdukController@updateKetersediaan')->name('produk.update.ketersediaan');
 
     Route::prefix('galeri-produk')->group(function(){
         Route::get('/{produk}','GalleryController@create')->name('galeri.create');
@@ -83,6 +104,9 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
     Route::prefix('permintaan')->group(function(){
         Route::get('/','PermintaanController@lihatPermintaan')->name('permintaan');
         Route::get('/{keranjang}/detail','PermintaanController@lihatDetail')->name('permintaan.detail');
+        Route::post('/{keranjang}/proses','PermintaanController@proses')->name('permintaan.proses');
+        Route::get('/daftar-proses','PermintaanController@daftarProses')->name('permintaan.diproses');
+
     });
 
     

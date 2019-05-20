@@ -28,3 +28,11 @@ if (!function_exists('formatRP')) {
         return 'Rp '.number_format($harga,0,',','.');
     }
 }
+
+if(!function_exists('localeDate')){
+    function localeDate($timestamp)
+    {
+        $date = Carbon::parse($timestamp);
+        return $date->isoFormat('D MMM YYYY');
+    }
+}

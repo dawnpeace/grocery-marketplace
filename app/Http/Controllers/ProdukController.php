@@ -12,7 +12,7 @@ class ProdukController extends Controller
     public function index()
     {
         $user = Auth::user()->load(['penjual']);
-        $daftarProduk = Produk::where('penjual_id', $user->penjual->id)->get();
+        $daftarProduk = Produk::where('penjual_id', $user->penjual->id)->orderBy('nama_produk')->paginate(5);
         return view('users.penjual.dashboard', ['daftarProduk' => $daftarProduk]);
     }
 
@@ -31,6 +31,8 @@ class ProdukController extends Controller
 
     public function updateKetersediaan(Produk $produk)
     {
+        $this->authorize('ProdukUpdate',$produk);
         $produk->gantiKetersediaan();
+        return redirect()->back()->with('success','Status produk berhasil diperbaharui.');
     }
 }

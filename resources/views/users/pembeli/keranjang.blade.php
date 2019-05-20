@@ -11,14 +11,14 @@
 @endsection 
 
 @section('content')
-    <div style="min-height:65vh" class="container">
+    <div style="min-height:68vh" class="container">
         @if(Session::has('success'))
         <div class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             {{Session::get('success')}}
         </div>
         @endif
-        <h5 class="mb-3">Detail Keranjang</h5>
+        <h1 class="mb-3">Detail Keranjang</h1>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>

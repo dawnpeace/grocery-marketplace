@@ -3,9 +3,15 @@
 @section('breadcrumb')
     <div class="mt-4">
         <nav class="breadcrumb">
-        <a href="{{route('penjual.dashboard')}}" class="breadcrumb-item">Dashboard</a>
-        <span class="breadcrumb-item active">Permintaan</span>
+            <a href="{{route('penjual.dashboard')}}" class="breadcrumb-item">Dashboard</a>
+            <span class="breadcrumb-item active">Permintaan</span>
         </nav>
+        @if(Session::has('success'))
+        <div class="alert alert-success mt-2" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            {{Session::get('success')}}
+        </div>
+        @endif
     </div>
 @endsection
 
@@ -20,16 +26,23 @@
                 <th>Aksi</th>
             </thead>
             <tbody>
-                @foreach($permintaan as $item)
+                @forelse($permintaan as $item)
                 <tr>
                     <td>{{$item->pembeli->user->nama}}</td>
                     <td>{{$item->pembeli->kota}}</td>
                     <td>{{$item->tanggalPemesanan()}}</td>
                     <td>
-                        <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-outline-success"><i class="fas fa-check-circle"></i> Proses</a>
+                        <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-outline-info"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
+                        <button data-url="{{route('permintaan.proses',[$item->id])}}" class="btn btn-confirm btn-outline-success"><i class="fas fa-check-circle"></i> Proses</button>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="4">
+                        <h5 class="text-center">Anda belum memiliki permintaan aktif.</h5>
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
         <form id="confirm-order" action="" method="POST">@csrf</form>

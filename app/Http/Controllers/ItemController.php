@@ -45,7 +45,7 @@ class ItemController extends Controller
     public function hapusItem(Keranjang $keranjang, Item $item)
     {
         $item->delete();
-        if(!$keranjang->count()){
+        if(!$keranjang->belanjaan()->count()){
             $keranjang->delete();
             return redirect()->route('keranjang')->with('success','Item berhasil dihapus');
         }

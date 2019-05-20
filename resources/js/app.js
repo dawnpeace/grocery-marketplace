@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -7,6 +6,7 @@
 
 require('./bootstrap');
 require('sweetalert');
+require('select2');
 
 window.Vue = require('vue');
 
@@ -29,12 +29,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+//     el: '#app'
+// });
 
 
-// var turbolinks = require("turbolinks");
+var turbolinks = require("turbolinks");
 
 
-// turbolinks.start();
+turbolinks.start();
