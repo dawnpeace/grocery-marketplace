@@ -1,7 +1,7 @@
 @extends('default')
 
 @section('breadcrumb')
-<div class="m-4">
+<div class="container w-75 mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Dapurpedia</li>

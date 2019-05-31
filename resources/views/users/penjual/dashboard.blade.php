@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-md-4 text-center">Harga : {{$produk->harga}}</div>
+                        <div class="col-md-4 text-center">Harga : {{formatRP($produk->harga)}}</div>
                         <div class="col-md-4 text-center">Jumlah Tersedia : {{$produk->jumlah_tersedia}}</div>
                     </div>
                 </div>
@@ -54,7 +54,13 @@
         </div>
         @endforelse
         <form method="POST" id="form-update" action="">@csrf</form>
-        {{$daftarProduk->links()}}
+        <div class="row w-100">
+            <div class="col-md-10 col-sm-12">
+                <div class="d-flex justify-content-center">
+                    {{$daftarProduk->links()}}
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

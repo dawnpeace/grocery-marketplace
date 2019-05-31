@@ -1,6 +1,6 @@
 @extends('default')
 @section('breadcrumb')
-<div class="m-4">
+<div class="mt-4 container w-75">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <a href="{{route('dashboard')}}" class="breadcrumb-item" aria-current="page">Dapurpedia</a>
@@ -91,8 +91,8 @@
                             <strong>{{$item->nama_produk}}</strong>
                         </div>
                         <div class="card-body">
-                                <p>{{$item->harga."/".ucfirst($item->satuan_unit)}}</p>
-                                <p>{{formatRP($item->sub_total)}}</p>
+                                <p>Jumlah dibeli : {{$item->jumlah}}</p>
+                                <p>Subtotal : {{formatRP($item->sub_total)}}</p>
                             </ul>
                         </div>
                         @if($item->produk_id != $produk->id)
