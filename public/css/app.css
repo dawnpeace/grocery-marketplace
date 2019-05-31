@@ -15544,5 +15544,9 @@ body {
     height: 333px;
     max-height: 333px;
   }
+
+  .mh-70vh {
+    min-height: 75vh;
+  }
 }
 

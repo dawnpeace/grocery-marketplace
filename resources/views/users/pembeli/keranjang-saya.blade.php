@@ -2,7 +2,7 @@
 @section('breadcrumb')
 <div class="container mt-3">
     <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="{{route('dashboard')}}">Home</a>
+        <a class="breadcrumb-item" href="{{route('dashboard')}}">Dapurpedia</a>
         <span class="breadcrumb-item active">Keranjang Saya</span>
     </nav>
 </div>
@@ -16,39 +16,44 @@
             {{Session::get('success')}}
         </div>
         @endif
-        <div class="table-responsive">
-            <div>
-                <a href="{{route('keranjang.diproses')}}" class="btn btn-sm btn-outline-info float-right"><i class="fas fa-arrow-right"></i> Lihat Transaksi</a>
-                <h1 class="mt-3">Keranjang Saya</h1>
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <a href="{{route('keranjang.diproses')}}" class="btn btn-sm btn-outline-info float-right"><i class="fas fa-arrow-right"></i> Lihat Transaksi</a>
+                    <h2 class="mt-3"><i class="fa fa-cart-plus"></i> Keranjang Saya</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Produk Oleh</th>
+                            <th>Jumlah Item pada Keranjang</th>
+                            <th>Subtotal</th>
+                            <th>Aksi</th>
+                        </thead>
+                        <tbody>
+                            @forelse ($daftarBelanja as $item)
+                            <tr>
+                                <td>{{$item['penjual']}}</td>
+                                <td>{{$item['jumlah_produk']}}</td>
+                                <td>{{formatRP($item['subtotal'])}}</td>
+                                <td>
+                                    <button data-url="{{route('keranjang.hapus',[$item['keranjang_id']])}}" class="btn btn-danger btn-delete-cart" title="Hapus Belanjaan">Hapus <i class="fas fa-trash-alt"></i></button>
+                                    <a href="{{route('keranjang.detail',[$item['keranjang_id']])}}" class="btn btn-primary">Ubah <i class="fas fa-pencil-alt"></i></a>
+                                    <button class="btn btn-success btn-checkout-cart" data-url="{{route('keranjang.checkout',[$item['keranjang_id']])}}" title="Selesaikan Transaksi"><i class="fas fa-check"></i> Checkout</button>
+                                </td>
+                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4"><h5>Maaf Anda belum Memiliki Keranjang Terisi</h5></td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <form action="" method="POST" id="delete-cart">@csrf</form>
+                <form action="" method="POST" id="checkout-cart">@csrf</form>
+
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <th>Produk Oleh</th>
-                    <th>Jumlah Item pada Keranjang</th>
-                    <th>Subtotal</th>
-                    <th>Aksi</th>
-                </thead>
-                <tbody>
-                    @forelse ($daftarBelanja as $item)
-                    <tr>
-                        <td>{{$item['penjual']}}</td>
-                        <td>{{$item['jumlah_produk']}}</td>
-                        <td>{{$item['subtotal']}}</td>
-                        <td>
-                            <button data-url="{{route('keranjang.hapus',[$item['keranjang_id']])}}" class="btn btn-danger btn-delete-cart" title="Hapus Belanjaan"><i class="fas fa-trash-alt"></i></button>
-                            <a href="{{route('keranjang.detail',[$item['keranjang_id']])}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                            <button class="btn btn-success btn-checkout-cart" data-url="{{route('keranjang.checkout',[$item['keranjang_id']])}}" title="Selesaikan Transaksi"><i class="fas fa-check"></i> Checkout</button>
-                        </td>
-                    </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4"><h5>Maaf Anda belum Memiliki Keranjang Terisi</h5></td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            <form action="" method="POST" id="delete-cart">@csrf</form>
-            <form action="" method="POST" id="checkout-cart">@csrf</form>
         </div>
     </div>
 @endsection

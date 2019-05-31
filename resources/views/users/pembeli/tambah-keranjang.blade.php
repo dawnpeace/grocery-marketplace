@@ -3,7 +3,8 @@
 <div class="m-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <a href="{{route('dashboard')}}" class="breadcrumb-item" aria-current="page">Home</a>
+            <a href="{{route('dashboard')}}" class="breadcrumb-item" aria-current="page">Dapurpedia</a>
+            <a href="{{route('lihat.produk',[$produk->id])}}" class="breadcrumb-item" aria-current="page">Produk</a>
             <span class="breadcrumb-item active">Tambah Item Keranjang</span>
         </ol>
     </nav>
@@ -13,8 +14,8 @@
 
 @section('content')
 <div class="container w-75">
+    @include('users.pembeli.include.alerts')
     <h1>Tambah Keranjang</h1>
-        @include('users.pembeli.include.alerts')
         <div class="row mt-2">
             <div class="col-md-5">
                 <div class="p-2  bg-secondary border rounded">

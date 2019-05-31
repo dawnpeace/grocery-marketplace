@@ -34,7 +34,7 @@
           @endcan
         </div>
       </nav>
-        <div class="w-md-25">
+        <div class="">
           @yield('breadcrumb')
         </div>
         @guest

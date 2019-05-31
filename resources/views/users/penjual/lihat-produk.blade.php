@@ -3,7 +3,7 @@
 @section('breadcrumb')
     <div class="mt-4">
         <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="{{route('penjual.dashboard')}}">Dashboard</a>
+        <a class="breadcrumb-item" href="{{route('penjual.dashboard')}}">Dapurpedia Penjual</a>
         <span class="breadcrumb-item active">Manajemen Produk</span>
         </nav>
     </div>

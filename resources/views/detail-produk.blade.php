@@ -4,7 +4,7 @@
 <div class="m-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page"><a href="{{url('')}}">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{{url('')}}">Dapurpedia</a></li>
             <li class="breadcrumb-item active" aria-current="page">Produk</li>
         </ol>
     </nav>

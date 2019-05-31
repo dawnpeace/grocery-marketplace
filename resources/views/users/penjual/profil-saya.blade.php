@@ -4,7 +4,7 @@
 @section('breadcrumb')
     <div class="mt-4">
         <nav class="breadcrumb">
-            <a class="breadcrumb-item" href="{{route('penjual.dashboard')}}">Dashboard</a>
+            <a class="breadcrumb-item" href="{{route('penjual.dashboard')}}">Dapurpedia Penjual</a>
             <span class="breadcrumb-item active">Ubah Profil</span>
         </nav>
     </div>
@@ -28,7 +28,7 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <h1>Profil {{$user->nama}} (<i>{{$user->username}})</i></h1>
+                    <h2><i class="fa fa-user"></i> Profil {{$user->nama}} (<i>{{$user->username}})</i></h2>
                     <hr>
                     <form action="" method="POST" enctype="multipart/form-data">
                         @csrf

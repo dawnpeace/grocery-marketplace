@@ -3,7 +3,7 @@
 <div class="container mt-3">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <a href="{{route('dashboard')}}" class="breadcrumb-item" aria-current="page">Home</a>
+            <a href="{{route('dashboard')}}" class="breadcrumb-item" aria-current="page">Dapurpedia</a>
             <a href="{{route('keranjang')}}" class="breadcrumb-item" aria-current="page">Keranjang Saya</a>
             <span class="breadcrumb-item active">Dalam Proses</span>
         </ol>
@@ -19,7 +19,7 @@
             {{Session::get('success')}}
         </div>
         @endif
-        <h1>Pesanan yang sedang diproses</h1>
+        <h2>Pesanan yang sedang diproses</h2>
 
         @forelse($keranjang as $belanja)
         <ul class="list-group dark mb-3 mx-3">

@@ -2,7 +2,7 @@
 @section('breadcrumb')
     <div class="mt-4">
         <nav class="breadcrumb">
-            <span class="breadcrumb-item active">Dashboard</span>
+            <span class="breadcrumb-item active">Dapurpedia Admin</span>
         </nav>
     </div>
 @endsection

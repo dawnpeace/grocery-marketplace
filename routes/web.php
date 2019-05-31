@@ -11,26 +11,6 @@
 |
 */
 
-Route::get('test',function(){
-    $keranjang = App\Keranjang::with(['penjual'=>function($query){
-        $query->with(['produk']);
-    }])->get();
-    foreach($keranjang as $cart){
-        $var = [];
-        $produk = $cart->penjual->produk->random(10);
-        foreach($produk as $belanjaan){
-            $itemKeranjang = new App\Item([
-                'keranjang_id'=>$cart->id,
-                'produk_id'=> $belanjaan->id,
-                'jumlah' => rand(1,$belanjaan->jumlah_tersedia),
-                'harga' => $belanjaan->harga,
-            ]);
-            $var[] = $itemKeranjang;
-        }
-        
-        $cart->item()->saveMany($var);
-    }
-});
 
 Route::get('/','MainMenuController@index')->name('dashboard');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');
@@ -85,9 +65,13 @@ Route::group(['middleware'=>['can:superadmin'],'prefix'=>'admin'],function(){
 Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
     Route::get('/','ProdukController@index')->name('penjual.dashboard');
     Route::get('manajemen-produk/{produk}','ProdukController@edit')->name('produk.edit');
-    Route::post('manajemen-produk/{produk}','ProdukController@update')->name('produk.update');    
+    Route::post('manajemen-produk/{produk}','ProdukController@update')->name('produk.update'); 
+    Route::post('manajemen-produk/{produk}/hapus','ProdukController@delete')->name('produk.delete');    
     Route::post('manajemen-produk/{produk}/ketersediaan','ProdukController@updateKetersediaan')->name('produk.update.ketersediaan');
 
+    Route::get('tambah-produk','ProdukController@create')->name('produk.tambah');
+    Route::post('tambah-produk','ProdukController@store')->name('produk.simpan');
+    
     Route::prefix('galeri-produk')->group(function(){
         Route::get('/{produk}','GalleryController@create')->name('galeri.create');
         Route::post('/{produk}','GalleryController@store')->name('galeri.store');
@@ -108,7 +92,6 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
         Route::get('/daftar-proses','PermintaanController@daftarProses')->name('permintaan.diproses');
 
     });
-
     
 });
 

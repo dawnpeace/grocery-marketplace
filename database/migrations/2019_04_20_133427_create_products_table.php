@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('tb_produk', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_produk',255);
-            $table->boolean('tersedia');
+            $table->boolean('tersedia')->default(1);
             $table->integer('jumlah_tersedia');
             $table->bigInteger('harga')->comment('harga satuan');
             $table->string('satuan_unit')->comment('satuan tersedia produk e.g Kg, Unit, Buah, Gr');

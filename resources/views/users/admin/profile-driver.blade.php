@@ -4,7 +4,7 @@
 @section('breadcrumb')
     <div class="mt-4">
         <nav class="breadcrumb">
-            <a href="{{route('admin.dashboard')}}" class="breadcrumb-item">Dashboard</a>
+            <a href="{{route('admin.dashboard')}}" class="breadcrumb-item">Dapurpedia Admin</a>
             <a href="{{route('admin.manajemen.driver')}}" class="breadcrumb-item">Manajemen Driver</a>
             <span class="breadcrumb-item active">Profil Driver</span>
         </nav>

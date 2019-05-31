@@ -4,7 +4,7 @@
 <div class="m-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
+            <li class="breadcrumb-item active" aria-current="page">Dapurpedia</li>
         </ol>
     </nav>
 </div>
@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="container w-75">
-    <div class="row my-4">
+    <div class="row my-4 mh-70vh">
         @foreach($produk as $item)
             <div class="col-md-3">
                 <div class="p-2">

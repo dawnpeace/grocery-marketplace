@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <div class="container my-3">
     <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="{{route('dashboard')}}">Dashboard</a>
+        <a class="breadcrumb-item" href="{{route('dashboard')}}">Dapurpedia</a>
         <a class="breadcrumb-item" href="{{route('keranjang')}}">Keranjang</a>
         <span class="breadcrumb-item active">Detail Keranjang</span>
     </nav>

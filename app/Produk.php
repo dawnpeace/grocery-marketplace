@@ -34,6 +34,16 @@ class Produk extends Model
         return $this->hasOne('App\FotoProduk');
     }
 
+    public function items()
+    {
+        return $this->hasMany('App\Item','produk_id');
+    }
+
+    public function item()
+    {
+        return $this->hasOne('App\Item');
+    }
+
     public function deskripsi()
     {
         return nl2br($this->deskripsi);

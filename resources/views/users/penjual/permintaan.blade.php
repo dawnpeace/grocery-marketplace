@@ -3,7 +3,7 @@
 @section('breadcrumb')
     <div class="mt-4">
         <nav class="breadcrumb">
-            <a href="{{route('penjual.dashboard')}}" class="breadcrumb-item">Dashboard</a>
+            <a href="{{route('penjual.dashboard')}}" class="breadcrumb-item"> Dapurpedia Penjual</a>
             <span class="breadcrumb-item active">Permintaan</span>
         </nav>
         @if(Session::has('success'))
@@ -16,35 +16,39 @@
 @endsection
 
 @section('content')
-    <div class="table-responsive">
-        <h1 class="mt-2">Permintaan Toko Anda</h1>
-        <table class="table w-100 table-striped">
-            <thead>
-                <th>Pembeli</th>
-                <th>Kota</th>
-                <th>Tanggal Pemesanan</th>
-                <th>Aksi</th>
-            </thead>
-            <tbody>
-                @forelse($permintaan as $item)
-                <tr>
-                    <td>{{$item->pembeli->user->nama}}</td>
-                    <td>{{$item->pembeli->kota}}</td>
-                    <td>{{$item->tanggalPemesanan()}}</td>
-                    <td>
-                        <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-outline-info"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
-                        <button data-url="{{route('permintaan.proses',[$item->id])}}" class="btn btn-confirm btn-outline-success"><i class="fas fa-check-circle"></i> Proses</button>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="4">
-                        <h5 class="text-center">Anda belum memiliki permintaan aktif.</h5>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="mt-2"><i class="fa fa-check-square"></i> Permintaan Toko Anda</h2>
+            <div class="table-responsive">
+                <table class="table w-100 table-striped">
+                    <thead>
+                        <th>Pembeli</th>
+                        <th>Kota</th>
+                        <th>Tanggal Pemesanan</th>
+                        <th>Aksi</th>
+                    </thead>
+                    <tbody>
+                        @forelse($permintaan as $item)
+                        <tr>
+                            <td>{{$item->pembeli->user->nama}}</td>
+                            <td>{{$item->pembeli->kota}}</td>
+                            <td>{{$item->tanggalPemesanan()}}</td>
+                            <td>
+                                <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-outline-info"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
+                                <button data-url="{{route('permintaan.proses',[$item->id])}}" class="btn btn-confirm btn-outline-success"><i class="fas fa-check-circle"></i> Proses</button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4">
+                                <h5 class="text-center">Anda belum memiliki permintaan aktif.</h5>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <form id="confirm-order" action="" method="POST">@csrf</form>
     </div>
 @endsection
