@@ -55,7 +55,6 @@ class ProdukController extends Controller
         $this->authorize('ProdukUpdate',$produk);
         $produk->gantiKetersediaan();
         return redirect()->back()->with('success','Status produk berhasil diperbaharui.');
-<<<<<<< HEAD
     }
 
     public function delete(Produk $produk)
@@ -63,7 +62,5 @@ class ProdukController extends Controller
         $this->authorize('ProdukDelete',$produk);
         $produk->delete();
         return redirect()->back()->with('success','Produk berhasil dihapus.');
-=======
->>>>>>> ea32ab5a5f33af24d91c41465a5332e8ad9dafe7
     }
 }
