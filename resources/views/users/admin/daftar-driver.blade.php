@@ -1,5 +1,5 @@
 @extends("users.admin.include.admin-navbar")
-@section("content")
+
 
 @section('breadcrumb')
     <div class="mt-4">
@@ -9,6 +9,9 @@
         </nav>
     </div>
 @endsection
+
+@section("content")
+
 
 @include('users.admin.include.alerts')
     <div class="table-responsive mb-5">

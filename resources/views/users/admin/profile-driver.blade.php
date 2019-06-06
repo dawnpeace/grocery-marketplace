@@ -1,5 +1,5 @@
 @extends('users.admin.include.admin-navbar')
-@section('content')
+
 
 @section('breadcrumb')
     <div class="mt-4">
@@ -10,6 +10,8 @@
         </nav>
     </div>
 @endsection
+
+@section('content')
 
 @if (Session::has('success'))
     <div class="alert alert-success mt-2" role="alert">

@@ -1,4 +1,32 @@
 <div class="form-group row">
+    <label for="pasar_id" class="col-md-4 col-form-label text-md-right">Pasar</label>
+    <div class="col-md-6">
+        <select name="pasar_id" id="pasar_id" class="select2 form-control">
+            @foreach($pasar as $market)
+                <option value="{{$market->id}}">{{$market->nama_pasar}}</option>
+            @endforeach
+        </select>
+        @if ($errors->has('alamat'))
+            <p class="text-danger">{{ $errors->first('alamat') }}</p>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="nama_toko" class="col-md-4 col-form-label text-md-right">Nama Toko</label>
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" id="nama_toko" name="nama_toko" value="{{old('nama_toko')}} " class="form-control {{$errors->has('nama_toko') ? 'is-invalid' : ''}}" />
+        </div>
+        @if ($errors->has('nama_toko'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('nama_toko') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row">
     <label for="kota" class="col-md-4 col-form-label text-md-right">Kota</label>
 
     <div class="col-md-6">
@@ -49,3 +77,4 @@
         @endif
     </div>
 </div>
+

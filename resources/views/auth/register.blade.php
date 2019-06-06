@@ -83,7 +83,7 @@
                             </div>
                         </div>
 
-                        @component($viewComponent)
+                        @component($viewComponent,['pasar' => $pasar])
                         @endcomponent
 
                         <div class="form-group row mb-0">
@@ -100,4 +100,11 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('js')
+    <script>
+        $('.select2').select2();
+    </script>
 @endsection

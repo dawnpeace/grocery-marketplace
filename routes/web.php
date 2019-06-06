@@ -26,7 +26,8 @@ Route::group(['middleware'=>['can:pembeli']],function(){
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('driver/{driver}','DriverController@profil')->middleware('auth')->name('driver.profil');
+Route::get('profil-driver/{driver}','DriverController@profil')->middleware('auth')->name('driver.profil');
+Route::get('pasar/{pasar}','MainMenuController@daftarProduk')->name('dashboard.produk');
 
 // Auth::routes();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -37,12 +38,21 @@ Route::middleware(['guest'])->group(function(){
     Route::view('daftar-registrasi','auth.daftar-registrasi')->name('register.index');
     Route::get('register/{jenis?}','Auth\CustomRegisterController@buat')->name('register');
     Route::post('register/driver','Auth\CustomRegisterController@simpanDriver');
-    Route::post('register/penjual','Auth\CustomRegisterController@simpanPembeli');
-    Route::post('register/pembeli','Auth\CustomRegisterController@simpanPenjual');
+    Route::post('register/penjual','Auth\CustomRegisterController@simpanPenjual');
+    Route::post('register/pembeli','Auth\CustomRegisterController@simpanPembeli');
 });
 
 Route::group(['middleware'=>['can:superadmin'],'prefix'=>'admin'],function(){
     Route::get('/','AdminDashboardController@index')->name('admin.dashboard');
+
+    Route::get('manajemen-pasar','PasarController@index')->name('admin.manajemen.pasar');
+    Route::get('manajemen-pasar/tambah-pasar','PasarController@create')->name('pasar.create');
+    Route::post('manajemen-pasar/tambah-pasar','PasarController@store')->name('pasar.store');
+    Route::get('manajemen-pasar/{pasar}/edit','PasarController@edit')->name('pasar.edit');
+    Route::post('manajemen-pasar/{pasar}/edit','PasarController@update')->name('pasar.update');
+
+    Route::post('manajemen-pasar/{pasar}/hapus','PasarController@delete')->name('pasar.delete');
+
     Route::get('manajemen-driver','VerifikasiController@indexDriver')->name('admin.manajemen.driver');
     Route::get('manajemen-pembeli','VerifikasiController@indexPembeli')->name('admin.manajemen.pembeli');
     Route::get('manajemen-penjual','VerifikasiController@indexPenjual')->name('admin.manajemen.penjual');
@@ -96,4 +106,7 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
 });
 
 
-
+Route::group(['middleware'=>['can:driver'],'prefix'=>'driver'],function(){
+    Route::get('/','AntarController@index')->name('driver.dashboard');
+    
+});

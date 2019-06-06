@@ -5,6 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page"><a href="{{url('')}}">Dapurpedia</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{{route('dashboard.produk',[$produk->penjual->pasar->id])}}">Pasar</a></li>
             <li class="breadcrumb-item active" aria-current="page">Produk</li>
         </ol>
     </nav>
@@ -71,9 +72,9 @@
     <hr>
     <div class="mt-2">
         @if(!$penjual->produk->isEmpty())
-        <h5 class="text-center">Produk Lainnya dari {{$penjual->user->nama}}</h5>
+        <h5 class="text-center">Produk Lainnya dari {{$penjual->nama_toko}}</h5>
         @endif
-        <div class="w-75 mx-auto mt-2">
+        <div class="mx-auto mt-2">
             <div class="row">
                 @forelse($penjual->produk as $item)
                 <div class="col-md-3 my-2">
@@ -82,7 +83,9 @@
                             <img src="{{gambarDefaultProduk($item)}}" alt="" class="img-fluid mh-25">
                         </a>
                         <div class="card-body">
-                            <p class="text-center">{{$item->nama_produk}}</p>
+                            <p class="text-center text-primary">{{$item->nama_produk}}</p>
+                            <p data-deskripsi="{{$item->deskripsi}}" class="text-secondary text-description">{{$item->lessDeskripsi()}}</p>
+                            <button type="button" class="btn btn-link btn-sm read-more">Selengkapnya</button>
                         </div>
                     </div>
                 </div>
@@ -93,4 +96,13 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script>
+        $('button.read-more').click(function(){
+            deskripsi = $(this).siblings('.text-description');
+            deskripsi.text(deskripsi.data('deskripsi'));
+        });
+    </script>
 @endsection

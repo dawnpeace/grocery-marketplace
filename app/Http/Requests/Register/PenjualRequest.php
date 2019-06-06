@@ -32,7 +32,8 @@ class PenjualRequest extends FormRequest
             'username' => ['required', 'regex:/^[a-zA-Z0-9_]*$/', 'between:5,12', 'unique:users,username'],
             'kota' => ['required','string', 'max:191'],
             'alamat' => ['required','string', 'max:191'],
-            'no_telp' => ['required','string']
+            'no_telp' => ['required','string'],
+            'pasar_id' => ['required','exists:tb_pasar,id']
         ];
     }
 }

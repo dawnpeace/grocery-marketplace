@@ -49,10 +49,16 @@ class Produk extends Model
         return nl2br($this->deskripsi);
     }
 
+    public function lessDeskripsi()
+    {
+        return substr($this->deskripsi,0,25)."..";
+    }
+
     public function gantiKetersediaan()
     {
         $this->tersedia = $this->tersedia ? 0 : 1;
         $this->save();
+        return $this;
     }
 
 }

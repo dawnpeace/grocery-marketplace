@@ -18,7 +18,10 @@ class CreateSellersTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references('id')->on("users");
             $table->string("kota");
+            $table->string('nama_toko');
             $table->string("no_telp");
+            $table->unsignedBigInteger('pasar_id');
+            $table->foreign('pasar_id')->references('id')->on('tb_pasar');
             $table->boolean("telah_diverifikasi")->default(0);
             $table->string("alamat",255);
             $table->string("deskripsi")->nullable();

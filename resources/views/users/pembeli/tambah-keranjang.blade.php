@@ -4,6 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <a href="{{route('dashboard')}}" class="breadcrumb-item" aria-current="page">Dapurpedia</a>
+            <li class="breadcrumb-item" aria-current="page"><a href="{{route('dashboard.produk',[$produk->penjual->pasar->id])}}">Pasar</a></li>
             <a href="{{route('lihat.produk',[$produk->id])}}" class="breadcrumb-item" aria-current="page">Produk</a>
             <span class="breadcrumb-item active">Tambah Item Keranjang</span>
         </ol>
@@ -48,7 +49,9 @@
                 <div class="border">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><strong>{{$produk->nama_produk}}</strong></li>
+                        @if($produk->tersedia)
                         <li class="list-group-item">Tersedia &#177; {{$produk->jumlah_tersedia}} {{$produk->satuan_unit}}</li>
+                        @endif
                         <li class="list-group-item">{{$produk->harga()}}/{{$produk->satuan_unit}}</li>
                         <li class="list-group-item">
                             <div>{{$produk->deskripsi()}}</div>
@@ -82,7 +85,7 @@
             
             <div class="row">
                 <div class="col-md-12 mb-2">
-                    <h3 class="text-center">Produk {{$produk->penjual->user->nama}}, di keranjang Anda</h3>
+                    <h3 class="text-center">Produk {{$produk->penjual->nama_toko}}, di keranjang Anda</h3>
                 </div>
             @forelse($belanjaan as $item)
                 <div class="col-md-3 mb-2">

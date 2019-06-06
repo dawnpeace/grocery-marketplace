@@ -10,9 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Enums\UserLevel;
-use App\Pembeli;
-use App\Penjual;
-use App\Driver;
+use App\Pasar;
 use App\User;
 
 class CustomRegisterController extends Controller
@@ -26,7 +24,7 @@ class CustomRegisterController extends Controller
         $jenisView = ["driver" => "auth.component.register-driver", "pembeli"=>"auth.component.register-pembeli", "penjual" => "auth.component.register-penjual"];
         // cek apabila request URI diizinkan dan mengirim component view path
         if(in_array(($jenis),array_keys($jenisView))){
-            return view("auth.register",["viewComponent"=>$jenisView[$jenis],"jenis"=>ucfirst($jenis)]);
+            return view("auth.register",["viewComponent"=>$jenisView[$jenis],"jenis"=>ucfirst($jenis),'pasar'=>Pasar::all()]);
         } else {
             return abort(404);
         }
@@ -67,7 +65,7 @@ class CustomRegisterController extends Controller
         $request['jenis'] = UserLevel::PENJUAL;
         $request['password'] = Hash::make($request->password);
         DB::transaction(function() use ($request){
-            $namaberkasfoto = unqid().".".$request->file('foto_profil')->extension();
+            $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
             $array = [
                 'nama' => $request->nama,
                 'password' => $request->password,
@@ -79,6 +77,7 @@ class CustomRegisterController extends Controller
                 'no_telp' => $request->no_telp,
                 'jenis' => UserLevel::PENJUAL,
                 'foto_profil' => $namaberkasfoto,
+                'pasar_id' => $request->pasar_id
             ];
             $userPenjual = User::create($array);
             $penjual = $userPenjual->penjual()->create($array);
@@ -91,7 +90,7 @@ class CustomRegisterController extends Controller
     {
         $request['password'] = Hash::make($request->password);
         DB::transaction(function() use ($request){
-            $namaberkasfoto = unqid().".".$request->file('foto_profil')->extension();
+            $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
             $array = [
                 'nama' => $request->nama,
                 'password' => $request->password,
