@@ -52,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('ProdukUpdate','App\Policies\ProdukPolicy@update');
         Gate::define('ProdukDelete','App\Policies\ProdukPolicy@delete');
         Gate::define('PasarDelete','App\Policies\PasarPolicy@delete');
+        Gate::define('StatusBekerja','App\Policies\BekerjaPolicy@index');
 
         
 

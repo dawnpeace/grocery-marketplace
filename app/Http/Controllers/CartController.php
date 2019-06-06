@@ -23,7 +23,7 @@ class CartController extends Controller
         {
             $subtotal = 0;
             $jumlahProduk = 0;
-            $penjual = $keranjang->penjual->user->nama;
+            $penjual = $keranjang->penjual->nama_toko;
             foreach($keranjang->belanjaan as $belanjaan)
             {
                 $jumlahProduk++;
@@ -32,7 +32,7 @@ class CartController extends Controller
             $subKeranjang = collect(
                 [
                     'keranjang_id' => $keranjang->id,
-                    'penjual' => $penjual,
+                    'nama_toko' => $penjual,
                     'subtotal' => $subtotal,
                     'jumlah_produk' => $jumlahProduk,
                     

@@ -104,6 +104,10 @@
                             <div class="form-group">
                                 <input id="foto-profil" type="file" name="foto_profil" class="form-control-file {{$errors->has('foto') ? 'is-invalid' : ''}}">
                             </div>
+
+                            <div class="form-group">
+                                <button type="button" data-toggle="modal" data-target="#modal-sim" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Lihat SIM</button>
+                            </div>
                         </div>
                         
                         <button class="btn btn-primary center btn-lg">Submit</button>
@@ -111,6 +115,23 @@
                     </div>
                 </form>
 
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modal-sim" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-body m-auto">
+                        <div class="border border-secondary">
+                            <img src="{{$driver->urlSIM()}}" alt="" class="img img-fluid">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

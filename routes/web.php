@@ -26,7 +26,6 @@ Route::group(['middleware'=>['can:pembeli']],function(){
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('profil-driver/{driver}','DriverController@profil')->middleware('auth')->name('driver.profil');
 Route::get('pasar/{pasar}','MainMenuController@daftarProduk')->name('dashboard.produk');
 
 // Auth::routes();
@@ -91,8 +90,8 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
     });
 
     Route::prefix('profil')->group(function(){
-        Route::get('/','PenjualController@editProfil')->name('profil.edit');
-        Route::post('/','PenjualController@updateProfil')->name('profil.update');
+        Route::get('/','PenjualController@editProfil')->name('penjual.profil.edit');
+        Route::post('/','PenjualController@updateProfil')->name('penjual.profil.update');
     });
 
     Route::prefix('permintaan')->group(function(){
@@ -108,5 +107,13 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
 
 Route::group(['middleware'=>['can:driver'],'prefix'=>'driver'],function(){
     Route::get('/','AntarController@index')->name('driver.dashboard');
+
+    Route::get('/profil-saya','DriverController@editProfil')->name('driver.profil.edit');
+    Route::post('/profil-saya','DriverController@updateProfil')->name('driver.profil.update');
+
+    Route::group(['middleware'=>['can:StatusBekerja']],function(){
+        Route::get('/detail-pesanan/{keranjang}','AntarController@detailPesanan')->name('pesanan.detail');
+        Route::post('/ambil-pesanan/{keranjang}','AntarController@ambilPesanan')->name('pesanan.ambil');
+    });
     
 });

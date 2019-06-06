@@ -35,42 +35,42 @@
                         <div class="form-group">
                             <label for="name">Nama</label>
                             <input type="text" id="name" name="nama" value="{{old('nama') ?? $user->nama}}" class="form-control {{$errors->has('nama') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('nama'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('nama') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('nama'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('nama') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="text" id="email" name="email" value="{{old('email') ?? $user->email}}" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="no_telp">Nomor Handphone</label>
                             <input type="text" id="no_telp" name="no_telp" value="{{old('no_telp') ?? $user->penjual->no_telp}} " class="form-control {{$errors->has('no_telp') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('no_telp'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('no_telp') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('no_telp'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('no_telp') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="kota">Kota</label>
                             <input type="text" id="kota" name="kota" value="{{old('kota') ?? $user->penjual->kota}} " class="form-control {{$errors->has('kota') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('kota'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('kota') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('kota'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('kota') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="password_lama">Password Lama</label>
@@ -81,12 +81,12 @@
                         <div class="form-group">
                             <label for="password">Password Baru</label>
                             <input type="password" id="password" name="password" value="" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="password_confirmation">Konfirmasi Password</label>
@@ -96,22 +96,22 @@
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <input type="text" id="alamat" name="alamat" value="{{old('alamat') ?? $user->penjual->alamat}} " class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('alamat'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('alamat') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('alamat'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('alamat') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Profil Penjual</label>
                             <textarea id="deskripsi" rows="3" name="deskripsi" class="form-control">{{old('$deskripsi') ?? $user->penjual->deskripsi}}</textarea>
+                            @if ($errors->has('deskripsi'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('deskripsi') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @if ($errors->has('deskripsi'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('deskripsi') }}</strong>
-                            </span>
-                        @endif
 
                         <div class="form-group">
                             <label for="foto_profil">Foto Penjual</label>

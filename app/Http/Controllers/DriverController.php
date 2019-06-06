@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Edit\DriverRequest;
+use App\Http\Requests\Profil\DriverRequest as ProfileDriverRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use App\Driver;
-use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class DriverController extends Controller
 {
@@ -39,9 +41,41 @@ class DriverController extends Controller
         return redirect()->back()->with('success',"Profil ".$driver->user->nama." berhasil diperbaharui !");
     }
 
-    public function profil(Driver $driver)
+    public function editProfil()
     {
-        $driver->load(['user']);
-        return $driver;
+        $user = Auth::user()->load(['driver']);
+        return view('users.driver.profil-saya',compact('user'));
+    }
+
+    public function updateProfil(ProfileDriverRequest $request)
+    {
+        $user = Auth::user()->load(['driver']);
+        $arrUser = [
+            "nama" => $request->nama,
+            "email" => $request->email,
+        ];
+        if(!empty($request->password))
+        {
+            if(Hash::check($request->password_lama,$user->password)){
+                $arrUser['password'] = Hash::make($request->password);
+            } else {
+                return redirect()->back()->with("error","Password Lama Tidak sesuai");
+            }
+        }
+        $user->update($arrUser);
+        $arrProfilDriver = [
+            "deskripsi" => $request->deskripsi,
+            "no_telp" => $request->no_telp,
+            "kota" => $request->kota,
+            "alamat" => $request->alamat,
+        ];
+        if($request->hasFile('foto_profil'))
+        {
+            $filename = empty($user->driver->foto_profil) ? uniqid().'.'.$request->file('foto_profil')->extension() : explode(".",$user->driver->foto_profil)[0].'.'.$request->file('foto_profil')->extension();
+            $arrProfilDriver["foto_profil"] = $filename;
+            $request->file('foto_profil')->storeAs('foto_profil',$filename,'public');
+        }
+        $user->driver->update($arrProfilDriver);
+        return redirect()->back()->with("success","Profil anda berhasil diperbaharui !");
     }
 }

@@ -25,24 +25,25 @@
                             <div class="form-group">
                                 <label for="nama_pasar">Nama Pasar</label>
                                 <input type="text" id="nama_pasar" name="nama_pasar" value="{{old('nama_pasar')}}" class="form-control {{$errors->has('nama_pasar') ? 'is-invalid' : ''}}" required/>
+                                @if ($errors->has('nama_pasar'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('nama_pasar') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            @if ($errors->has('nama_pasar'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('nama_pasar') }}</strong>
-                                </span>
-                            @endif
 
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" id="alamat" name="alamat" value="{{old('alamat')}}" class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" required/>
+                                @if ($errors->has('alamat'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('alamat') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            @if ($errors->has('alamat'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('alamat') }}</strong>
-                                </span>
-                            @endif
                             <button type="submit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> Submit</button>
                         </div>
+                        
                         <div class="col-md-5">
                             <div class="border border-secondary rounded">
                                 <img id="img-show" src="" alt="" class="img img-fluid">

@@ -15,4 +15,23 @@ class Driver extends Model
     {
         return $this->belongsTo("App\User");
     }
+
+    public function urlFoto()
+    {
+        return empty($this->foto_profil) ? asset('img/default.jpg') : asset('storage/foto_profil/'.$this->foto_profil);
+    }
+
+    public function urlSIM()
+    {
+        return asset('storage/foto_sim/'.$this->foto_sim) ?? '';
+    }
+
+    public function gantiStatusBekerja()
+    {
+        $status = $this->sedang_bekerja ? 0 : 1;
+        $this->sedang_bekerja = $status;
+        $this->save();
+        return $this;
+    }
+
 }

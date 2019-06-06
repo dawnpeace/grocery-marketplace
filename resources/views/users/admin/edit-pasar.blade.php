@@ -25,22 +25,22 @@
                             <div class="form-group">
                                 <label for="nama_pasar">Nama Pasar</label>
                                 <input type="text" id="nama_pasar" name="nama_pasar" value="{{old('nama_pasar') ?? $pasar->nama_pasar}}" class="form-control {{$errors->has('nama_pasar') ? 'is-invalid' : ''}}" required/>
+                                @if ($errors->has('nama_pasar'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('nama_pasar') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            @if ($errors->has('nama_pasar'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('nama_pasar') }}</strong>
-                                </span>
-                            @endif
 
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" id="alamat" name="alamat" value="{{old('alamat') ?? $pasar->alamat}}" class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" required/>
+                                @if ($errors->has('alamat'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('alamat') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            @if ($errors->has('alamat'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('alamat') }}</strong>
-                                </span>
-                            @endif
                             <button type="submit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> Submit</button>
                         </div>
                         <div class="col-md-5">
@@ -51,10 +51,10 @@
                             <div class="form-group mt-3">
                                 <label for="foto_pasar">Foto Pasar</label>
                                 <input type="file" id="foto_pasar" name="foto_pasar" class="form-control-file" />
+                                @if ($errors->has('foto_pasar'))
+                                    <p class="text-danger"> {{ $errors->first('foto_pasar') }} </p>
+                                @endif
                             </div>
-                            @if ($errors->has('foto_pasar'))
-                                <p class="text-danger"> {{ $errors->first('foto_pasar') }} </p>
-                            @endif
 
                             <br>
                             @csrf

@@ -25,6 +25,7 @@ class CreateDriversTable extends Migration
             $table->string('foto_profil')->nullable();
             $table->string('nomor_sim');
             $table->string('foto_sim')->nullable();
+            $table->boolean('sedang_bekerja')->default(0);
             $table->timestamps();
         });
     }

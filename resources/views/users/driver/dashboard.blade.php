@@ -12,6 +12,12 @@
 
 @section('content')
     <div class="container">
+        @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            {{Session::get('success')}}
+        </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -24,18 +30,38 @@
                             <th>Aksi</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i> Pesan</button>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-check-square"></i> Ambil</button>
-                                    <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-bars"></i> Detail</button>
-                                </td>
-                            </tr>
+                            @forelse ($keranjang as $item)
+                                <tr>
+                                    <td>{{$item->penjual->nama_toko}}</td>
+                                    <td>{{$item->penjual->alamat}}</td>
+                                    <td>{{$item->pembeli->alamat}}</td>
+                                    <td>
+                                        @can('StatusBekerja')
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i> WA Penjual</button>
+                                            <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-check-square"></i> Ambil</button>
+                                            <a href="{{route('pesanan.detail',[$item->id])}}" type="button" class="btn btn-sm btn-secondary"><i class="fa fa-bars"></i> Detail</a>
+                                        </div>
+                                        @endcan
+                                        @cannot('StatusBekerja')
+                                            <button type="button" class="btn btn-sm btn-secondary" disabled><i class="fa fa-times"></i> Harap selesaikan pekerjaan anda.</button>
+                                        @endcannot
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4">
+                                        <h5 class="text-center">Belum terdapat permintaan.</h5>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
+                    <div class="d-flex">
+                        <div class="m-auto">
+                            {{$keranjang->links()}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

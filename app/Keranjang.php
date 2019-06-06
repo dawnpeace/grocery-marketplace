@@ -42,6 +42,13 @@ class Keranjang extends Model
         $this->save();
     }
 
+    public function ambilPesanan()
+    {
+        $this->telah_diambil_driver = 1;
+        $this->save();
+        return $this;
+    }
+
     public function status()
     {
         return $this->hasOne('App\Delivery');

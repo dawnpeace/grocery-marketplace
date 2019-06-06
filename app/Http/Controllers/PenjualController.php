@@ -69,10 +69,11 @@ class PenjualController extends Controller
         ];
         if($request->hasFile('foto_profil'))
         {
-            $filename = empty($user->penjual->foto_profil) ? uniqid("dp-").'.'.$request->file('foto_profil')->extension() : explode(".",$user->penjual->foto_profil)[0].'.'.$request->file('foto_profile');
+            $filename = empty($user->penjual->foto_profil) ? uniqid().'.'.$request->file('foto_profil')->extension() : explode(".",$user->penjual->foto_profil)[0].'.'.$request->file('foto_profile');
+            $request->file('foto')->storeAs('foto_profil',$filename,'public');
             $arrProfilPenjual["foto_profil"] = $filename;
         }
-        $user->penjual->update();
+        $user->penjual->update($arrProfilPenjual);
         return redirect()->back()->with("success","Profil anda berhasil diperbaharui !");
     }
 }

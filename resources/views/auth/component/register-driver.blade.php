@@ -62,7 +62,7 @@
 <div class="form-group row">
     <label class="col-md-4 col-form-label text-md-right" for="nomor_sim">Nomor Sim</label>
     <div class="col-md-6">
-        <input type="text" id="nomor_sim" name="nomor_sim" value="{{old('nomor_sim')}} " class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" />
+        <input type="text" id="nomor_sim" name="nomor_sim" value="{{old('nomor_sim')}}" class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" required/>
         @if ($errors->has('nomor_sim'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('nomor_sim') }}</strong>

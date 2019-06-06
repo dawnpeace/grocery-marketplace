@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Delivery extends Model
 {
     protected $table = 'tb_status_pengantaran';
+    protected $fillable = ['keranjang_id','driver_id','telah_dijemput','telah_sampai'];
 
     public function keranjang()
     {
@@ -30,4 +31,6 @@ class Delivery extends Model
             return "Item telah sampai ditujuan";
         }
     }
+
+    
 }

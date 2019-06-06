@@ -33,7 +33,7 @@
                         <tbody>
                             @forelse ($daftarBelanja as $item)
                             <tr>
-                                <td>{{$item['penjual']}}</td>
+                                <td>{{$item['nama_toko']}}</td>
                                 <td>{{$item['jumlah_produk']}}</td>
                                 <td>{{formatRP($item['subtotal'])}}</td>
                                 <td>

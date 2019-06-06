@@ -59,6 +59,11 @@
                             <div class="form-group">
                                 <label for="no_telp">No Handphone</label>
                                 <input type="text" name="no_telp" value="{{old('no_telp') ?? $pembeli->no_telp }}" id="no_telp" class="form-control {{$errors->has('no_telp') ? 'is-invalid' : ''}}" placeholder="Nomor Handphone">
+                                @if ($errors->has('no_telp'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('no_telp') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>

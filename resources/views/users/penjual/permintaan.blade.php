@@ -24,6 +24,7 @@
                     <thead>
                         <th>Pembeli</th>
                         <th>Kota</th>
+                        <th>Alamat</th>
                         <th>Tanggal Pemesanan</th>
                         <th>Aksi</th>
                     </thead>
@@ -32,15 +33,16 @@
                         <tr>
                             <td>{{$item->pembeli->user->nama}}</td>
                             <td>{{$item->pembeli->kota}}</td>
+                            <td>{{$item->pembeli->alamat}}</td>
                             <td>{{$item->tanggalPemesanan()}}</td>
                             <td>
-                                <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-outline-info"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
-                                <button data-url="{{route('permintaan.proses',[$item->id])}}" class="btn btn-confirm btn-outline-success"><i class="fas fa-check-circle"></i> Proses</button>
+                                <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-sm btn-outline-info"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
+                                <button data-url="{{route('permintaan.proses',[$item->id])}}" class="btn btn-sm btn-confirm btn-outline-success"><i class="fas fa-check-circle"></i> Proses</button>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4">
+                            <td colspan="5">
                                 <h5 class="text-center">Anda belum memiliki permintaan aktif.</h5>
                             </td>
                         </tr>
