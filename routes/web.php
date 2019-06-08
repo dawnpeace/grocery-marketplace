@@ -23,6 +23,7 @@ Route::group(['middleware'=>['can:pembeli']],function(){
     Route::post('keranjang/{keranjang}/hapus/{item}','ItemController@hapusItem')->name('hapus.item');
     Route::post('keranjang/{keranjang}/checkout','CartController@checkoutKeranjang')->name('keranjang.checkout');
     Route::get('keranjang-saya/diproses','CartController@lihatTransaksiBerjalan')->name('keranjang.diproses');
+    Route::post('selesaikan-transaksi/{keranjang}','AntarController@transaksiSelesai')->name('transaksi.selesai');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -99,7 +100,7 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
         Route::get('/{keranjang}/detail','PermintaanController@lihatDetail')->name('permintaan.detail');
         Route::post('/{keranjang}/proses','PermintaanController@proses')->name('permintaan.proses');
         Route::get('/daftar-proses','PermintaanController@daftarProses')->name('permintaan.diproses');
-
+        Route::post('/pesanan/{keranjang}/diambil','PermintaanController@diambilDriver')->name('permintaan.diambil');
     });
     
 });
@@ -111,9 +112,14 @@ Route::group(['middleware'=>['can:driver'],'prefix'=>'driver'],function(){
     Route::get('/profil-saya','DriverController@editProfil')->name('driver.profil.edit');
     Route::post('/profil-saya','DriverController@updateProfil')->name('driver.profil.update');
 
-    Route::group(['middleware'=>['can:StatusBekerja']],function(){
+    Route::group(['middleware'=>['can:TidakBekerja']],function(){
         Route::get('/detail-pesanan/{keranjang}','AntarController@detailPesanan')->name('pesanan.detail');
         Route::post('/ambil-pesanan/{keranjang}','AntarController@ambilPesanan')->name('pesanan.ambil');
+    });
+
+    Route::middleware(['can:SedangBekerja'])->group(function(){
+        Route::get('pekerjaan-aktif','PekerjaanController@index')->name('pekerjaan.index');
+        Route::post('selesaikan-pekerjaan','PekerjaanController@selesaikanPekerjaan')->name('pekerjaan.selesai');
     });
     
 });

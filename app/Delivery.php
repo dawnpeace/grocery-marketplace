@@ -25,12 +25,11 @@ class Delivery extends Model
             return "Belum menemukan driver.";
         } else if(!$this->telah_dijemput && $this->driver_id){
             return "Menunggu jemputan driver.";
-        } else if($this->telah_dijemput && !$this->driver_id){
+        } else if($this->telah_dijemput && !$this->telah_sampai){
             return "Item dalam pengantaran";
         } else if($this->telah_sampai){
             return "Item telah sampai ditujuan";
         }
     }
-
     
 }

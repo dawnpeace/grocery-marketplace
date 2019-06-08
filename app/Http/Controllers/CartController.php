@@ -71,13 +71,15 @@ class CartController extends Controller
         $user = Auth::user()->load(['pembeli']);
         $keranjang = Keranjang::where('pembeli_id',$user->pembeli->id)
             ->where('telah_diselesaikan',1)
+            ->where('transaksi_selesai',0)
             ->with([
                 'belanjaan'=>function($query){
                     $query->with(['produk']);
                 },
                 'penjual'=>function($query){
                     $query->with(['user']);
-                }
+                },
+                'status'
             ])
             ->get();
         return view('users.pembeli.keranjang-diproses',compact('keranjang'));

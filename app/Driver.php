@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     protected $table = 'tb_driver';
-    protected $fillable = ["plat_nomor_kendaraan","kota","alamat","no_telp","foto_profil","foto_sim","nomor_sim"];
+    protected $fillable = ["plat_nomor_kendaraan","kota","alamat","no_telp","foto_profil","foto_sim","nomor_sim","sedang_bekerja","keranjang_id"];
     protected $hidden = ['telah_diverifikasi'];
 
 
@@ -32,6 +32,11 @@ class Driver extends Model
         $this->sedang_bekerja = $status;
         $this->save();
         return $this;
+    }
+
+    public function keranjang()
+    {
+        return $this->belongsTo('App\Keranjang');
     }
 
 }

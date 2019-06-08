@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Keranjang;
 use Illuminate\Support\Facades\Auth;
 use App\Delivery;
+use Illuminate\Support\Facades\DB;
 
 class AntarController extends Controller
 {
@@ -58,12 +59,23 @@ class AntarController extends Controller
         {
             return abort(404);
         }
-        
-        $user = Auth::user()->load(['driver']);
-        $user->driver->gantiStatusBekerja();
-        $keranjang->ambilPesanan();
-        $keranjang->status->update(['driver_id'=>$user->driver->id]);
+
+        DB::transaction(function() use($keranjang){
+            $user = Auth::user()->load(['driver']);
+            $user->driver->update(['sedang_bekerja'=>1,'keranjang_id'=>$keranjang->id]);
+            $keranjang->update(['telah_diambil_driver'=>1]);
+            $keranjang->status->update(['driver_id'=>$user->driver->id]);
+            $keranjang->load(['status']);
+        });
         
         return redirect()->route('driver.dashboard')->with('success','Pesanan berhasil diambil, Selamat Bekerja');
+    }
+
+    public function transaksiSelesai(Keranjang $keranjang)
+    {
+        $keranjang->load(['status']);   
+        $this->authorize('SelesaikanTransaksi',$keranjang);
+        $keranjang->update(['transaksi_selesai'=>1]);
+        return redirect()->back()->with('success','Transaksi telah diselesaikan. Terima kasih telah beberbelanja di Dapurpedia !');
     }
 }

@@ -1,6 +1,6 @@
 @extends('users.driver.include.driver-navbar')
 @section('breadcrumb')
-    <div class="mt-4 container">
+    <div class="mt-4">
         <nav class="breadcrumb">
             <a class="breadcrumb-item" href="{{route('driver.dashboard')}}">Dapurpedia Driver</a>
             <span class="breadcrumb-item active">Ubah Profil</span>
@@ -23,7 +23,7 @@
     {{Session::get('error')}}
 </div>
 @endif
-    <div class="container my-3">
+    <div class="my-3">
         <div class="row">
             <div class="col-md-7">
                 <div class="card">

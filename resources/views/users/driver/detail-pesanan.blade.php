@@ -1,7 +1,7 @@
 @extends('users.driver.include.driver-navbar')
 
 @section('breadcrumb')
-    <div class="container mt-4">
+    <div class="mt-4">
         <nav class="breadcrumb">
             <a class="breadcrumb-item" href="{{route('driver.dashboard')}}">Dapurpedia Driver</a>
             <span class="breadcrumb-item active">Detail Pesanan</span>
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="">
         <div class="card mb-4">
             <div class="card-body">
                 <div class="table-responsive">

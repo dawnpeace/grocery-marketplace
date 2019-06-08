@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Keranjang extends Model
 {
     protected $table = "tb_keranjang_belanja";
-    protected $fillable = ["penjual_id","telah_diselesaikan"];
+    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai"];
 
     public function belanjaan()
     {

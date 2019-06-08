@@ -54,6 +54,7 @@ class PermintaanController extends Controller
         $user = Auth::user()->load(['penjual']);
         $permintaan = Keranjang::where('penjual_id',$user->penjual->id)
             ->where('telah_diproses',1)
+            ->where('transaksi_selesai',0)
             ->with([
                 'pembeli' => function($query){
                     $query->with(['user']);
@@ -66,5 +67,13 @@ class PermintaanController extends Controller
             ])
         ->get();
         return view('users.penjual.permintaan-diproses',compact('permintaan'));
+    }
+
+    public function diambilDriver(Keranjang $keranjang)
+    {
+        $keranjang->load(['status']);
+        $this->authorize('ProdukDiambilDriver',$keranjang);
+        $keranjang->status->update(['telah_dijemput'=>1]);
+        return redirect()->back()->with('success','Barang telah dijemput!');
     }
 }

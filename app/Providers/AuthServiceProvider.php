@@ -31,15 +31,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('pembeli',function($user){
-            return $user->jenis == UserLevel::PEMBELI;
+            return $user->jenis == UserLevel::PEMBELI && $user->pembeli->telah_diverifikasi;
         });
 
         Gate::define('penjual',function($user){
-            return $user->jenis == UserLevel::PENJUAL;
+            return $user->jenis == UserLevel::PENJUAL && $user->penjual->telah_diverifikasi;
         });
 
         Gate::define('driver',function($user){
-            return $user->jenis == UserLevel::DRIVER;
+            return $user->jenis == UserLevel::DRIVER && $user->driver->telah_diverifikasi;
         });
 
         Gate::define('PhotoCreate','App\Policies\GalleryPolicy@create');
@@ -52,10 +52,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('ProdukUpdate','App\Policies\ProdukPolicy@update');
         Gate::define('ProdukDelete','App\Policies\ProdukPolicy@delete');
         Gate::define('PasarDelete','App\Policies\PasarPolicy@delete');
-        Gate::define('StatusBekerja','App\Policies\BekerjaPolicy@index');
-
-        
-
+        Gate::define('SedangBekerja','App\Policies\BekerjaPolicy@bekerja');
+        Gate::define('TidakBekerja','App\Policies\BekerjaPolicy@tidakBekerja');
+        Gate::define('ProdukDiambilDriver','App\Policies\KeranjangPolicy@diambilDriver');
+        Gate::define('DapatDiselesaikan','App\Policies\BekerjaPolicy@pekerjaanSelesai');
+        Gate::define('SelesaikanTransaksi','App\Policies\TransaksiPolicy@transaksiSelesai');
 
     }
 }

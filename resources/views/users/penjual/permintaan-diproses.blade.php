@@ -35,7 +35,12 @@
                             <td>{{$item->tanggalPemesanan()}}</td>
                             <td>{{$item->status->driver->user->nama ?? "-"}}</td>
                             <td>{{$item->status->tampilStatus()}}</td>
-                            <td></td>
+                            <td>
+                                @if($item->telah_diambil_driver && !$item->status->telah_dijemput)
+                                <button data-url="{{route('permintaan.diambil',[$item->id])}}" class="btn btn-takeout btn-sm btn-primary"><i class="fa fa-thumbs-up"></i> Barang Diambil</button>
+                                @endif
+                                <a href="#" class="btn btn-outline-success btn-sm"><i class="fab fa-whatsapp"></i> Kirimi pesan</a>
+                            </td>
                         </tr>
                         @empty
                         <tr>
@@ -44,7 +49,31 @@
                         @endforelse
                     </tbody>
                 </table>
+                <form method="POST" id="form-ambil" action="">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        var form = $('#form-ambil');
+        $('.btn-takeout').click(function(){
+            url = $(this).data('url');
+            form.attr('action',url);
+            swal({
+                title: "Status Pemesanan : Diambil Driver !",
+                text: "Apakah anda yakin?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((val)=>{
+                if(val){
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection
