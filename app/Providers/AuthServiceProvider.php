@@ -57,6 +57,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('ProdukDiambilDriver','App\Policies\KeranjangPolicy@diambilDriver');
         Gate::define('DapatDiselesaikan','App\Policies\BekerjaPolicy@pekerjaanSelesai');
         Gate::define('SelesaikanTransaksi','App\Policies\TransaksiPolicy@transaksiSelesai');
-
+        Gate::define('DetailPermintaan','App\Policies\PermintaanPolicy@lihatPermintaan');
+        Gate::define('ProsesPermintaan','App\Policies\PermintaanPolicy@prosesPermintaan');
     }
 }

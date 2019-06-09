@@ -28,6 +28,9 @@
                     @can('SelesaikanTransaksi',[$belanja])
                     <button data-url="{{route('transaksi.selesai',[$belanja->id])}}" class="btn btn-sm btn-outline-success btn-selesai"><i class="fa fa-thumbs-up"></i> Transaksi Selesai</button>
                     @endcan
+                    @if($belanja->telah_diambil_driver)
+                    <a href="{{route('profil.driver',$belanja->status->driver_id)}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-motorcycle"></i> Lihat Driver</a>
+                    @endcan
                     <button class="btn btn-sm btn-outline-info btn-detail"><i class="fa fa-eye"></i></button>
                 </div>
                 {{$belanja->penjual->user->nama}}

@@ -32,6 +32,10 @@
                             <td><p>{{$keranjang->penjual->alamat}}</p></td>
                         </tr>
                         <tr>
+                            <th>Kontak Toko</th>
+                            <td><p><button data-toggle="tooltip" title="Kirim Pesan ke Penjual" data-placement="bottom" onclick="openWA({{whatsappLink($keranjang->penjual->no_telp)}})" class="btn btn-outline-dark"><i class="fab fa-whatsapp"></i> {{$keranjang->penjual->no_telp}}</button></p></td>                            
+                        </tr>
+                        <tr>
                             <th>Nama Pembeli</th>
                             <td><p>{{$keranjang->pembeli->user->nama}}</p></td>
                         </tr>
@@ -40,8 +44,8 @@
                             <td><p>{{$keranjang->pembeli->alamat}}</p></td>
                         </tr>
                         <tr>
-                            <th>No Telp. Pembeli</th>
-                            <td><p><a href="#" class="btn btn-outline-dark"><i class="fab fa-whatsapp"></i> {{$keranjang->pembeli->no_telp}}</a></p></td>
+                            <th>Kontak Pembeli</th>
+                            <td><p><button data-toggle="tooltip" title="Kirim Pesan ke Pembeli" data-placement="bottom" onclick="openWA({{whatsappLink($keranjang->pembeli->no_telp)}})" class="btn btn-outline-dark"><i class="fab fa-whatsapp"></i> {{$keranjang->pembeli->no_telp}}</button></p></td>
                         </tr>
                     </table>
         
@@ -76,6 +80,9 @@
 
 @section('js')
     <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
         $('#btn-confirm').click(function(){
             swal({
                 title: "Proses Pesanan",

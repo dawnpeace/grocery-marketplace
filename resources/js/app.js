@@ -35,6 +35,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 
 var turbolinks = require("turbolinks");
-
-
 turbolinks.start();
+
+window.openWA = function(url) {
+    console.log(url);
+    win = window.open(url, '_blank');
+    win.focus();
+}

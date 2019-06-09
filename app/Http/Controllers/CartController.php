@@ -35,7 +35,7 @@ class CartController extends Controller
                     'nama_toko' => $penjual,
                     'subtotal' => $subtotal,
                     'jumlah_produk' => $jumlahProduk,
-                    
+                    'penjual_id' => $keranjang->penjual->id
                 ]
             );
             $daftarBelanja->put($key,$subKeranjang);

@@ -55197,6 +55197,12 @@ var turbolinks = __webpack_require__(/*! turbolinks */ "./node_modules/turbolink
 
 turbolinks.start();
 
+window.openWA = function (url) {
+  console.log(url);
+  win = window.open(url, '_blank');
+  win.focus();
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

@@ -37,8 +37,9 @@ class PermintaanController extends Controller
             'pembeli'=>function($query){
                 $query->with(['user']);
             }
-        ]);
-        
+            ]);
+        $this->authorize('DetailPermintaan',$keranjang);
+            
         return view('users.penjual.detail-permintaan',compact('keranjang'));
     }
 

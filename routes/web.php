@@ -14,6 +14,10 @@
 
 Route::get('/','MainMenuController@index')->name('dashboard');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');
+
+Route::get('profil-penjual/{penjual}','ProfilController@penjual')->name('profil.penjual');
+Route::get('profil-driver/{driver}','ProfilController@driver')->name('profil.driver')->middleware('auth');
+
 Route::group(['middleware'=>['can:pembeli']],function(){
     Route::get('tambah-keranjang/{produk}','ItemController@lihatProduk')->name('tambah.produk');
     Route::post('tambah-keranjang/{produk}','ItemController@tambahKeranjang')->name('tambah.item');

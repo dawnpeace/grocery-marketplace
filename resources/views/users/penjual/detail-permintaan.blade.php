@@ -16,8 +16,11 @@
             <div class="card-body">
                 <h2 class="mt-2 ml-2 mb-2"><i class="fa fa-info-circle"></i> Detail Keranjang {{$keranjang->pembeli->user->nama}}</h2>
                 <div class="float-right m-2">
-                    <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-outline-success btn-sm"><i class="fas fa-check-circle"></i> Proses</button>
-                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#modal-info"><i class="fa fa-info"></i> Informasi Pelanggan</button>
+                    @can('ProsesPermintaan',$keranjang)
+                    <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Proses</button>
+                    @endcan
+                    <button type="button" class="btn btn-outline-info btn-sm my-1" data-toggle="modal" data-target="#modal-info"><i class="fa fa-info"></i> Informasi Pelanggan</button>
+                    <button type="button" onclick="openWA({{whatsappLink($keranjang->pembeli->no_telp)}})" class="btn btn-sm btn-outline-success my-1"><i class="fab fa-whatsapp"></i> Hubungi Pembeli</button>
                 </div>
                 <div class="clearfix"></div>
                 <table class="table table-striped">

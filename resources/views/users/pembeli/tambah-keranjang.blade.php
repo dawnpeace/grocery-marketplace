@@ -70,7 +70,11 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <button type="submit" class="btn btn-primary float-right mt-2"><i class="fas fa-cart-plus"></i> Tambah</button>
+                            <div class="float-right mt-2">
+                                <button type="button" onclick="openWA({{whatsappLink($produk->penjual->no_telp)}})" class="btn-whatsapp btn btn-outline-success"><i class="fab fa-whatsapp"></i> Tanya Penjual</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Tambah</button>
+                            </div>
+                            <div class="clearfix"></div>
                             </form>
                             @else 
                                 <p>Produk sedang tidak tersedia.</p>
@@ -85,7 +89,7 @@
             
             <div class="row">
                 <div class="col-md-12 mb-2">
-                    <h3 class="text-center">Produk {{$produk->penjual->nama_toko}}, di keranjang Anda</h3>
+                    <h3 class="text-center">Produk <a href="{{route('profil.penjual',[$produk->penjual->id])}}">{{$produk->penjual->nama_toko}}</a>, di keranjang Anda</h3>
                 </div>
             @forelse($belanjaan as $item)
                 <div class="col-md-3 mb-2">

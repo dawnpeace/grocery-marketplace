@@ -1,5 +1,6 @@
 <?php
 use App\FotoProduk;
+use App\Enums\UserLevel;
 
 if (!function_exists('displayUrl')) {
     function displayUrl(FotoProduk $fotoProduk = null)
@@ -34,5 +35,30 @@ if(!function_exists('localeDate')){
     {
         $date = Carbon::parse($timestamp);
         return $date->isoFormat('D MMM YYYY');
+    }
+}
+
+if(!function_exists('whatsappLink')){
+    function whatsappLink($number)
+    {
+        $user = Auth::user();
+        $greetings = "";
+        switch($user->jenis){
+            case UserLevel::PEMBELI:
+                $greetings = "Halo saya $user->nama, pembeli dari Dapurpedia. ";
+                break;
+            case UserLevel::PENJUAL:
+                $greetings = "Halo saya dari ".$user->penjual->nama_toko." penjual dari Dapurpedia. ";
+                break;
+            case UserLevel::DRIVER:
+                $greetings = "Halo saya $user->nama, driver yang berasosiasi dengan Dapurpedia. ";
+                break;
+            case UserLevel::SUPERADMIN;
+                $greetings = "Halo saya $user->name admin dari Dapurpedia !. ";
+                break;
+            default:
+                return '';
+        }
+        return "'https://web.whatsapp.com/send?phone=".$number.'&text='.$greetings."'";
     }
 }

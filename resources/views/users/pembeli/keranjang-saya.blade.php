@@ -33,7 +33,8 @@
                         <tbody>
                             @forelse ($daftarBelanja as $item)
                             <tr>
-                                <td>{{$item['nama_toko']}}</td>
+                                <td>
+                                <a class="btn btn-link" href="{{route('profil.penjual',[$item['penjual_id']])}}">{{$item['nama_toko']}}</td></a>
                                 <td>{{$item['jumlah_produk']}}</td>
                                 <td>{{formatRP($item['subtotal'])}}</td>
                                 <td>
