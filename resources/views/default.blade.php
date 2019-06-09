@@ -17,8 +17,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="form-inline w-50 ml-auto">
-            <input class="form-control mr-sm-2 w-100" type="search" placeholder="Search" aria-label="Search">
+          <form method="GET" action="{{route('pencarian')}}" class="form-inline w-50 ml-auto">
+            <input class="form-control mr-sm-2 w-100" name="q" type="search" placeholder="Pencarian" aria-label="Search">
           </form>
           @guest
           <div class="btn-group">

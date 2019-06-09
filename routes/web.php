@@ -13,6 +13,7 @@
 
 
 Route::get('/','MainMenuController@index')->name('dashboard');
+Route::get('/cari','PencarianController@cari')->name('pencarian');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');
 
 Route::get('profil-penjual/{penjual}','ProfilController@penjual')->name('profil.penjual');
