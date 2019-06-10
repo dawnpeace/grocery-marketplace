@@ -31,7 +31,6 @@
                 </div>
             </div>
         </form>
-        <!-- <div class="clearfix"></div> -->
         <table class="table table-sm table-striped">
             <thead>
                 

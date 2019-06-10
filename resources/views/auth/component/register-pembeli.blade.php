@@ -32,7 +32,8 @@
 
     <div class="col-md-6">
         <input id="no_telp" type="text" class="form-control{{ $errors->has('no_telp') ? ' is-invalid' : '' }}" value="{{old('no_telp')}}" name="no_telp" required>
-
+        <small class="float-right">Format Indonesia (+62)</small>
+        <div class="clearfix"></div>
         @if ($errors->has('no_telp'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('no_telp') }}</strong>
@@ -40,3 +41,14 @@
         @endif
     </div>
 </div>
+
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right" for="foto_profil">Foto Profil</label>
+    <div class="col-md-6">
+        <input type="file" id="foto_profil" name="foto_profil" value="{{old('foto_profil')}} " class="form-control-file {{$errors->has('alamat') ? 'is-invalid' : ''}}" />
+        @if ($errors->has('foto_profil'))
+        <p class="text-danger">{{$errors->first('foto_profil')}}</p>
+        @endif
+    </div>
+</div>
+

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Penjual extends Model
 {
     protected $table = 'tb_penjual';
-    protected $fillable = ['kota','alamat','no_telp','foto_profil','pasar_id'];
+    protected $fillable = ['kota','alamat','no_telp','foto_profil','pasar_id','nama_toko'];
     protected $hidden = ['telah_diverifikasi'];
 
     public function user()

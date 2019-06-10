@@ -44,6 +44,17 @@
             </div>
         </div>
         @endguest
+        @auth
+        @if(Auth::user()->jenis == 'PEMBELI')
+        @cannot('pembeli')
+        <div class="container w-75">
+          <div class="alert alert-secondary" role="alert">
+              <strong>Akun anda masih dalam tahap verifikasi.</strong>
+          </div>
+        </div>
+        @endcannot
+        @endif
+        @endauth
         @yield('content')
 
       </div>

@@ -27,7 +27,8 @@ class AddCartsToDriverTable extends Migration
     public function down()
     {
         Schema::table('tb_driver', function (Blueprint $table) {
-            $table->removeColumn('keranjang_id');
+            $table->dropForeign(['keranjang_id']);
+            $table->dropColumn('keranjang_id');
         });
     }
 }

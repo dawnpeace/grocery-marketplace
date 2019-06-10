@@ -15,8 +15,8 @@
 <div class="form-group row">
     <label for="nama_toko" class="col-md-4 col-form-label text-md-right">Nama Toko</label>
     <div class="col-md-6">
-        <div class="form-group">
-            <input type="text" id="nama_toko" name="nama_toko" value="{{old('nama_toko')}} " class="form-control {{$errors->has('nama_toko') ? 'is-invalid' : ''}}" />
+        <div class="">
+            <input type="text" id="nama_toko" name="nama_toko" value="{{old('nama_toko')}}" class="form-control {{$errors->has('nama_toko') ? 'is-invalid' : ''}}" />
         </div>
         @if ($errors->has('nama_toko'))
             <span class="invalid-feedback" role="alert">
@@ -45,7 +45,8 @@
 
     <div class="col-md-6">
         <input id="no-telp" type="text" class="form-control{{ $errors->has('alamat') ? ' is-invalid' : '' }}" value="{{old('alamat')}}" name="alamat" required>
-
+        <small class="float-right">Format Indonesia (+62)</small>
+        <div class="clearfix"></div>
         @if ($errors->has('alamat'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('alamat') }}</strong>

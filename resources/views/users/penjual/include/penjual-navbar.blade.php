@@ -27,7 +27,7 @@
         <a href="{{route('permintaan') == url()->current() ? '#' : route('permintaan')}}" class="list-group-item list-group-item-action bg-light {{route('permintaan') == url()->current() ? 'text-primary font-weight-bold' : route('permintaan')}}"> <i class="fa fa-check-square"></i> Permintaan</a>
         <a href="{{route('permintaan.diproses') == url()->current() ? '#' : route('permintaan.diproses')}}" class="list-group-item list-group-item-action bg-light {{route('permintaan.diproses') == url()->current() ? 'text-primary font-weight-bold' : route('permintaan.diproses')}}"> <i class="fas fa-clipboard"></i> </i> Permintaan Ditunggu</a>
         <a href="{{route('penjual.profil.edit') == url()->current() ? '#' : route('penjual.profil.edit')}}" class="list-group-item list-group-item-action bg-light {{route('penjual.profil.edit') == url()->current() ? 'text-primary font-weight-bold' : route('penjual.profil.edit')}}"> <i class="fas fa-user"></i> </i> Profil Saya</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light"> <i class="fas fa-phone"></i> Hubungi Admin</a>
+        <button onclick="openWA({{whatsappLink(whatsappAdmin())}})" href="#" class="list-group-item list-group-item-action bg-light"> <i class="fas fa-phone"></i> Hubungi Admin</button>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

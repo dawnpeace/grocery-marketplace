@@ -73,6 +73,7 @@ class CustomRegisterController extends Controller
                 'username' => $request->username,
                 'password' => $request->password,
                 'kota' => $request->kota,
+                'nama_toko' => $request->nama_toko,
                 'alamat' => $request->alamat,
                 'no_telp' => $request->no_telp,
                 'jenis' => UserLevel::PENJUAL,

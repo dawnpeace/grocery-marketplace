@@ -25,7 +25,7 @@
       <div class="list-group list-group-flush">
         <a href="{{route('driver.dashboard') == url()->current() ? '#' : route('driver.dashboard')}}" class="list-group-item list-group-item-action bg-light {{route('driver.dashboard') == url()->current() ? 'text-primary font-weight-bold' : route('driver.dashboard')}}"> <i class="fa fa-list"></i> Permintan</a>
         <a href="{{route('driver.profil.edit') == url()->current() ? '#' : route('driver.profil.edit')}}" class="list-group-item list-group-item-action bg-light {{route('driver.profil.edit') == url()->current() ? 'text-primary font-weight-bold' : route('driver.profil.edit')}}"> <i class="fas fa-user"></i> Profil Saya</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light"> <i class="fas fa-phone"></i> Hubungi Admin</a>
+        <button onclick="openWA({{whatsappLink(whatsappAdmin())}})" class="list-group-item list-group-item-action bg-light"> <i class="fas fa-phone"></i> Hubungi Admin</button>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

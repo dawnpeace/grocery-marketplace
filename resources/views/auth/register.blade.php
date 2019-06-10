@@ -8,6 +8,7 @@
     </nav>
 </div>
 @endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -51,7 +52,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required>
-                                <small class="float-right"><i>Display Name</i></small>
+                                <small class="float-right"><i>Login Username</i></small>
                                 <div class="clearfix"></div>
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback" role="alert">

@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-<div class="container w-75">
+<div class="container mh-70vh w-75">
     <div class="mt-5">
         <h1>Informasi Produk</h1>
         <div class="row">

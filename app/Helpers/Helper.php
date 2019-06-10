@@ -1,5 +1,6 @@
 <?php
 use App\FotoProduk;
+use App\Admin;
 use App\Enums\UserLevel;
 
 if (!function_exists('displayUrl')) {
@@ -60,5 +61,12 @@ if(!function_exists('whatsappLink')){
                 return '';
         }
         return "'https://web.whatsapp.com/send?phone=".$number.'&text='.$greetings."'";
+    }
+}
+
+if(!function_exists('whatsappAdmin')){
+    function whatsappAdmin()
+    {
+        return Admin::first()->no_telp ?? '0';
     }
 }

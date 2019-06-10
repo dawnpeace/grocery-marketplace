@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="bg-secondary p-1 border">
+                                <div class="bg-secondary d-flex m-auto p-1 border">
                                     <img id="img-show" src="" alt="" class="img img-fluid">
                                 </div>
                                 

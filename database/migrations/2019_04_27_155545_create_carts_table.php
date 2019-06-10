@@ -33,7 +33,7 @@ class CreateCartsTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {   
         Schema::dropIfExists('tb_keranjang_belanja');
     }
 }

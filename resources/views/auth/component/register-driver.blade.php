@@ -50,7 +50,8 @@
 
     <div class="col-md-6">
         <input id="no_telp" type="text" class="form-control{{ $errors->has('no_telp') ? ' is-invalid' : '' }}" name="no_telp" value="{{ old('no_telp') }}" required>
-
+        <small class="float-right">Format Indonesia (+62)</small>
+        <div class="clearfix"></div>
         @if ($errors->has('no_telp'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('no_telp') }}</strong>
