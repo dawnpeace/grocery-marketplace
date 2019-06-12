@@ -15,9 +15,9 @@
         {{Session::get('success')}}
     </div>
     @endif
-    <div class="py-3 row justify-content-center">
-        <div class="col-md-10 border border-dark bg-light">
-            <div class="py-3">
+    <div class="py-3">
+        <div class="card">
+            <div class="card-body">
                 <h2><i class="fa fa-map"></i> Perbaharui {{$pasar->nama_pasar}}</h2>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
@@ -44,8 +44,8 @@
                             <button type="submit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> Submit</button>
                         </div>
                         <div class="col-md-5">
-                            <div class="border border-secondary rounded">
-                                <img id="img-show" src="{{$pasar->displayUrl()}}" alt="" class="img img-fluid">
+                            <div class="border d-flex border-secondary rounded">
+                                <img id="img-show" src="{{$pasar->displayUrl()}}" alt="" class="img m-auto img-fluid">
                             </div>
 
                             <div class="form-group mt-3">

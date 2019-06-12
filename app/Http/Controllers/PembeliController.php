@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Edit\PembeliRequest;
+use App\Http\Requests\Profil\PembeliRequest as ProfilPembeliRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Pembeli;
+use Illuminate\Support\Facades\Auth;
 
 class PembeliController extends Controller
 {
@@ -22,6 +25,7 @@ class PembeliController extends Controller
         $reqArray = empty($request->password) ? $request->except('password') : $request->all();
 
         DB::transaction(function () use ($request, $reqArray, $pembeli){
+            $reqArray['password'] = Hash::make($request['password']);
             if(!empty($request->file('foto_profil')))
             {
                 $reqArray['foto_profil'] = uniqid().'.'.$request->file('foto_profil')->extension();
@@ -36,6 +40,46 @@ class PembeliController extends Controller
         });
 
         return redirect()->back()->with('success',"Profil ". $pembeli->user->nama." berhasil diperbaharui !");
+    }
+
+    public function editProfil()
+    {
+        $user = Auth::user()->load(['pembeli']);
+        return view('users.pembeli.profil-saya',compact('user'));
+
+    }
+
+    public function updateProfil(ProfilPembeliRequest $request)
+    {
+        $user = Auth::user();
+        $arrUser = [
+            "nama" => $request->nama,
+            "email" => $request->email,
+        ];
+        if(!empty($request->password))
+        {
+            if(Hash::check($request->password_lama,$user->password)){
+                $arrUser['password'] = Hash::make($request->password);
+            } else {
+                return redirect()->back()->with("error","Password Lama Tidak sesuai");
+            }
+        }
+        $user->update($arrUser);
+        $arrProfilPembeli = [
+            "deskripsi" => $request->deskripsi,
+            "no_telp" => $request->no_telp,
+            "kota" => $request->kota,
+            "alamat" => $request->alamat,
+        ];
+        if($request->hasFile('foto_profil'))
+        {
+            
+            $filename = empty($user->pembeli->foto_profil) ? uniqid().'.'.$request->file('foto_profil')->extension() : explode(".",$user->pembeli->foto_profil)[0].'.'.$request->file('foto_profil')->extension();
+            $arrProfilPembeli["foto_profil"] = $filename;
+            $request->file('foto_profil')->storeAs('foto_profil',$filename,'public');
+        }
+        $user->pembeli->update($arrProfilPembeli);
+        return redirect()->back()->with("success","Profil anda berhasil diperbaharui !");
     }
 
 }

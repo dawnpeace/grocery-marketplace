@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Rules\IndonesianPhoneNumber;
 
-class DriverRequest extends FormRequest
+class PembeliRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class DriverRequest extends FormRequest
      */
     public function rules()
     {
-        $user = Auth::user()->load(['driver']);
+        $user = Auth::user()->load(['pembeli']);
         return [
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users','email')->ignore($user->id)],
@@ -34,7 +34,7 @@ class DriverRequest extends FormRequest
             'password' => ['nullable', 'string', 'min:6', 'confirmed',"required_with:password_lama","different:password_lama"],
             'kota' => ['required','string', 'max:191'],
             'alamat' => ['required','string', 'max:191'],
-            'no_telp' => ['required','string',Rule::unique('tb_penjual','no_telp')->ignore($user->driver->id),new IndonesianPhoneNumber],
+            'no_telp' => ['required','string',Rule::unique('tb_penjual','no_telp')->ignore($user->pembeli->id),new IndonesianPhoneNumber],
             'foto_profil' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
         ];
     }

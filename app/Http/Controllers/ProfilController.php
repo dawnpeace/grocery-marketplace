@@ -26,4 +26,5 @@ class ProfilController extends Controller
         $driver->load(['user']);
         return view('profile-driver',compact('driver'));
     }
+
 }

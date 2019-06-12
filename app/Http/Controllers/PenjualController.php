@@ -24,6 +24,7 @@ class PenjualController extends Controller
         $penjual = Penjual::findOrFail($id)->load(["user"]);
         $reqArray = empty($request->password) ? $request->except('password') : $request->all();
         DB::transaction(function() use($request,$reqArray,$penjual){
+            $reqArray['password'] = Hash::make($request['password']);
             if(!empty($request->file('foto_profil')))
             {
                 $reqArray['foto_profil'] = uniqid().'.'.$request->file('foto_profil')->extension();
@@ -65,6 +66,7 @@ class PenjualController extends Controller
             "deskripsi" => $request->deskripsi,
             "no_telp" => $request->no_telp,
             "kota" => $request->kota,
+            "nama_toko" => $request->nama_toko,
             "alamat" => $request->alamat,
         ];
         if($request->hasFile('foto_profil'))

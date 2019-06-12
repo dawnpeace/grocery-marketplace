@@ -61,6 +61,20 @@ class User extends Authenticatable
         return $tanggal->isoFormat("d MMMM Y");
     }
 
+    public function profilUrl()
+    {
+        switch($this->jenis){
+            case UserLevel::DRIVER:
+                return route('driver.profil.edit');
+            case UserLevel::PENJUAL:
+                return route('penjual.profil.edit');
+            case UserLevel::PEMBELI:
+                return route('pembeli.profil.edit');
+            default:
+                return '#';
+        }
+    }
+
     public function dashboardUrl()
     {
         switch($this->jenis){

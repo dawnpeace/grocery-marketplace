@@ -71,7 +71,7 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="float-right mt-2">
-                                <button type="button" onclick="openWA({{whatsappLink($produk->penjual->no_telp)}})" class="btn-whatsapp btn btn-outline-success"><i class="fab fa-whatsapp"></i> Tanya Penjual</button>
+                                <button type="button" onclick="openWA({{whatsappLink($produk->penjual->no_telp)}})" class="btn-whatsapp btn btn-success"><i class="fab fa-whatsapp"></i> Tanya Penjual</button>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Tambah</button>
                             </div>
                             <div class="clearfix"></div>

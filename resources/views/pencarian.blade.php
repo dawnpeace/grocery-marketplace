@@ -18,7 +18,7 @@
                         <form action="{{route('pencarian')}}">
                                 <div class="form-group">
                                     <label for="q">Pencarian</label>
-                                    <input type="text" id="q" value="{{request('q')}}" name="q" value="{{old('q')}} " class="form-control-sm {{$errors->has('q') ? 'is-invalid' : ''}}" />
+                                    <input type="text" id="q" value="{{request('q')}}" name="q" value="{{old('q')}} " class="form-control form-control-sm {{$errors->has('q') ? 'is-invalid' : ''}}" />
                                     @if ($errors->has('q'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('q') }}</strong>
@@ -26,7 +26,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                <select name="cari"  class="form-control-sm">
+                                <select name="cari"  class="form-control form-control-sm">
                                         <option value="produk" {{request('cari') == 'produk' ? 'selected' :  ''}}>Produk</option>
                                         <option value="penjual" {{request('cari') == 'penjual' ? 'selected' :  ''}}>Penjual</option>
                                     </select>

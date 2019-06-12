@@ -52,7 +52,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required>
-                                <small class="float-right"><i>Login Username</i></small>
+                                <small class="float-right"><i>Login Username, 5-18 Karakter</i></small>
                                 <div class="clearfix"></div>
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback" role="alert">

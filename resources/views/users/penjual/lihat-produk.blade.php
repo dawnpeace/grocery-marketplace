@@ -45,7 +45,7 @@
                                 Status : {{$produk->tersedia ? 'Tersedia' : 'Tidak tersedia'}}
                             </strong>
                             <div class="clearfix"></div>
-                            <button id="btn-availability" class="btn btn-outline-{{$produk->tersedia ? 'danger' : 'success'}}"><i class="fas fa-pencil-alt"></i> Ubah ketersediaan</button>
+                            <button id="btn-availability" class="btn btn-{{$produk->tersedia ? 'secondary' : 'success'}}"><i class="fas fa-pencil-alt"></i> Ubah ketersediaan</button>
                         </div>
                         <form id="form-availability" method="POST" action="{{route('produk.update.ketersediaan',[$produk->id])}}">@csrf</form>
                     </div>

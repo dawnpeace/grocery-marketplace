@@ -60,6 +60,8 @@ class ProdukController extends Controller
     public function delete(Produk $produk)
     {
         $this->authorize('ProdukDelete',$produk);
+        $produk->load(['gallery']);
+        $produk->deleteGallery();
         $produk->delete();
         return redirect()->back()->with('success','Produk berhasil dihapus.');
     }

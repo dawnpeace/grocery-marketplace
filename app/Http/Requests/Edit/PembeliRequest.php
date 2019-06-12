@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use App\Pembeli;
 use Illuminate\Validation\Rule;
+use App\Rules\IndonesianPhoneNumber;
 
 class PembeliRequest extends FormRequest
 {
@@ -34,7 +35,7 @@ class PembeliRequest extends FormRequest
             'username' => ['required', 'regex:/^[a-zA-Z0-9._]*$/', 'between:5,24', Rule::unique('users','username')->ignore($pembeliUser->id)],
             'kota' => ['required','string', 'max:191'],
             'alamat' => ['required','string', 'max:191'],
-            'no_telp' => ['required','string'],
+            'no_telp' => ['required','string',new IndonesianPhoneNumber],
             'foto_profil' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
         ];
     }

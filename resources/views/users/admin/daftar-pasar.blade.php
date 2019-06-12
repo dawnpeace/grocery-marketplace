@@ -19,23 +19,25 @@
         </div>
         @endif
         <div class="card">
-            <div class="card-body">
+            <div class="card-body my-5">
                 <a href="{{route('pasar.create')}}" class="btn btn-primary btn-sm float-right"><i class="fa fa-plus"></i> Tambah Pasar</a>
                 <h2><i class="fa fa-list"></i> Daftar Pasar</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-sm table-striped">
                         <thead>
+                            <th>No</th>
                             <th>Nama Pasar</th>
                             <th>Alamat</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
-                            @foreach($pasar as $market)
+                            @foreach($pasar as $key => $market)
                             <tr>
+                                <td>{{++$key}}</td>
                                 <td>{{$market->nama_pasar}}</td>
                                 <td>{{$market->alamat}}</td>
                                 <td>
-                                    <a href="{{route('pasar.edit',[$market->id])}}" class="btn btn-outline-info btn-sm"><i class="fa fa-pencil-alt"></i> Ubah</a>
+                                    <a href="{{route('pasar.edit',[$market->id])}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i> Ubah</a>
                                     @if(!empty($market->pedagang))
                                         <button type="button" class="btn btn-sm btn-danger" disabled><i class="fa fa-trash"></i> Hapus</button>
                                     @else

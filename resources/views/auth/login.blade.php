@@ -25,7 +25,8 @@
                         id='username' name='username' type='text'
                         placeholder='Username'
                         value='{{ old('username') }}'
-                        class='form-control {{ !$errors->has('username') ?: 'is-invalid' }}'>
+                        class='form-control {{ !$errors->has('username') ?: 'is-invalid' }}'
+                        autofocus>
                 
                     <div class='invalid-feedback'>
                         {{ $errors->first('username') }}
@@ -56,7 +57,7 @@
                 </div>
 
                 <div class="mt-3 text-right">
-                    <a href="{{route('register.index')}}" class="btn btn-outline-secondary">Daftar</a>
+                    <a href="{{route('register.index')}}" class="btn btn-dark">Daftar</a>
                     <button class="btn btn-primary">
                         Log In
                         <i class="fa fa-sign-in"></i>

@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Driver;
 use App\User;
+use App\Rules\IndonesianPhoneNumber;
 
 class DriverRequest extends FormRequest
 {
@@ -36,7 +37,7 @@ class DriverRequest extends FormRequest
             'plat_nomor_kendaraan' => ['required', 'regex:/^[a-zA-Z0-9]+$/', 'between:3,9', Rule::unique('tb_driver','plat_nomor_kendaraan')->ignore($driver->id)],
             'kota' => ['required','string', 'max:191'],
             'alamat' => ['required','string', 'max:191'],
-            'no_telp' => ['required','string'],
+            'no_telp' => ['required','string', new IndonesianPhoneNumber],
             'foto_profil' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
         ];
     }

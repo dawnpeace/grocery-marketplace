@@ -43,7 +43,7 @@
                                     @can('TidakBekerja')
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" onclick="openWA({{whatsappLink($item->penjual->no_telp)}})" class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i> WA Penjual</button>
+                                            <button type="button" onclick="openWA({{whatsappLink($item->penjual->no_telp)}})" class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i> Kirim Pesan WA ke Penjual</button>
                                             <button data-url="{{route('pesanan.ambil',[$item->id])}}" type="button" class="btn btn-sm btn-primary btn-ambil"><i class="fa fa-check-square"></i> Ambil</button>
                                             <a href="{{route('pesanan.detail',[$item->id])}}" type="button" class="btn btn-sm btn-secondary"><i class="fa fa-bars"></i> Detail</a>
                                         </div>

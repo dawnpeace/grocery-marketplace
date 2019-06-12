@@ -26,6 +26,7 @@ class DriverController extends Controller
         $reqArray = empty($request->password) ? $request->except('password') : $request->all();
 
         DB::transaction(function() use ($request,$reqArray,$driver){
+            $reqArray['password'] = Hash::make($request['password']);
             if(!empty($request->file('foto_profil')))
             {
                 $reqArray['foto_profil'] = uniqid().'.'.$request->file('foto_profil')->extension();

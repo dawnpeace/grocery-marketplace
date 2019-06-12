@@ -5,6 +5,7 @@ namespace App\Http\Requests\Profil;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Rules\IndonesianPhoneNumber;
 
 class PenjualRequest extends FormRequest
 {
@@ -33,7 +34,9 @@ class PenjualRequest extends FormRequest
             'password' => ['nullable', 'string', 'min:6', 'confirmed',"required_with:password_lama","different:password_lama"],
             'kota' => ['required','string', 'max:191'],
             'alamat' => ['required','string', 'max:191'],
-            'no_telp' => ['required','string',Rule::unique('tb_penjual','no_telp')->ignore($user->penjual->id)],
+            'nama_toko' => ['required','string'],
+            'deskripsi' => ['required','string'],
+            'no_telp' => ['required','string',Rule::unique('tb_penjual','no_telp')->ignore($user->penjual->id), new IndonesianPhoneNumber],
             'foto_profil' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
         ];
     }

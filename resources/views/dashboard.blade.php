@@ -19,7 +19,7 @@
                     <div class="p-2">
                         <div class="card shadow">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-5 m-auto">
                                     <img src="{{$pasar->displayUrl()}}" class="img img-fluid">
                                 </div>
                                 <div class="col-md-7">

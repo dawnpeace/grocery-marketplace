@@ -44,9 +44,9 @@
                                 <button data-url="{{route('permintaan.diambil',[$item->id])}}" class="btn btn-takeout btn-sm btn-primary"><i class="fa fa-thumbs-up"></i> Barang Diambil</button>
                                 @endif
                                 @can('DetailPermintaan',$item)
-                                <a class="btn btn-sm btn-outline-secondary" href="{{route('permintaan.detail',[$item->id])}}"><i class="fa fa-list"></i> Detail</a>
+                                <a class="btn btn-sm btn-secondary" href="{{route('permintaan.detail',[$item->id])}}"><i class="fa fa-list"></i> Detail</a>
                                 @endcan
-                                <button onclick="openWA({{whatsappLink($item->pembeli->no_telp)}})" class="btn btn-outline-success btn-sm"><i class="fab fa-whatsapp"></i> WA Pembeli</button>
+                                <button onclick="openWA({{whatsappLink($item->pembeli->no_telp)}})" class="btn btn-success btn-sm"><i class="fab fa-whatsapp"></i> WA Pembeli</button>
                             </td>
                         </tr>
                         @empty

@@ -20,8 +20,8 @@ class IndonesianPhoneNumber implements Rule
      * @return bool
      */
     public function passes($attribute, $value)
-    {
-        return substr($value,0,3) == '+62';
+    {   
+        return substr($value,0,3) == '+62' && is_numeric(substr($value,1));
     }
 
     /**

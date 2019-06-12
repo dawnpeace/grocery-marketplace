@@ -45,7 +45,8 @@ class PasarController extends Controller
         if($request->has('foto_pasar')){
             $gambar = $request->file('foto_pasar');
             $ext = $gambar->extension();
-            $foto_pasar = explode('.',$pasar->foto_pasar)[0].".".$ext;
+            $nama_file =explode('.',$pasar->foto_pasar);
+            $foto_pasar = (empty($nama_file[0]) ? uniqid('pasar-') : $nama_file[0]).".".$ext;
             Storage::disk('public')->delete('foto_pasar/'.$pasar->foto_pasar);
             $gambar->storeAs('foto_pasar',$foto_pasar,'public');
         }

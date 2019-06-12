@@ -29,60 +29,62 @@
                                 <div class="form-group">
                                     <label for="nama_produk">Nama Produk</label>
                                     <input type="text" id="nama_produk" name="nama_produk" value="{{old('nama_produk')}} " class="form-control {{$errors->has('nama_produk') ? 'is-invalid' : ''}}" />
+                                    @if ($errors->has('nama_produk'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('nama_produk') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
-                                @if ($errors->has('nama_produk'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('nama_produk') }}</strong>
-                                    </span>
-                                @endif
         
                                 <div class="form-group">
                                     <label for="jumlah_tersedia">Jumlah Tersedia</label>
                                     <input type="text" id="jumlah_tersedia" name="jumlah_tersedia" value="{{old('jumlah_tersedia')}}" class="form-control {{$errors->has('jumlah_tersedia') ? 'is-invalid' : ''}}" />
+                                    @if ($errors->has('jumlah_tersedia'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('jumlah_tersedia') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
-                                @if ($errors->has('jumlah_tersedia'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('jumlah_tersedia') }}</strong>
-                                    </span>
-                                @endif
         
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
                                     <input type="text" id="harga" name="harga" value="{{old('harga')}}" class="form-control {{$errors->has('harga') ? 'is-invalid' : ''}}" />
+                                    @if ($errors->has('harga'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('harga') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
-                                @if ($errors->has('harga'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('harga') }}</strong>
-                                    </span>
-                                @endif
         
                                 <div class="form-group">
                                     <label for="satuan_unit">Satuan Unit</label>
                                     <input type="text" id="satuan_unit" name="satuan_unit" value="{{old('satuan_unit')}}" class="form-control {{$errors->has('satuan_unit') ? 'is-invalid' : ''}}" />
+                                    <small class="float-right">Mis : Kg, Gr, Ikat, Potong</small>
+                                    <div class="clearfix"></div>
+                                    @if ($errors->has('satuan_unit'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('satuan_unit') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
-                                @if ($errors->has('satuan_unit'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('satuan_unit') }}</strong>
-                                    </span>
-                                @endif
         
-                                <div class="form-group">
+                                <div class="form-group {{$errors->has('deskripsi') ? 'has-error' : ''}}">
                                     <label for="deskripsi">Deskripsi</label>
-                                    <textarea rows="3" id="deskripsi" name="deskripsi" class="form-control">{{old('deskripsi')}}</textarea>
+                                    <textarea rows="3" id="deskripsi" name="deskripsi" class="form-control {{$errors->has('deskripsi') ? 'is-invalid' : ''}}">{{old('deskripsi')}}</textarea>
+                                    @if ($errors->has('deskripsi'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('deskripsi') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
-                                @if ($errors->has('deskripsi'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('deskripsi') }}</strong>
-                                    </span>
-                                @endif
 
                                 <div class="form-group">
                                     <label for="foto_produk">Upload Foto Produk</label>
                                     <input type="file" id="foto_produk" name="foto_produk" class="form-control-file" />
+                                    @if ($errors->has('foto_produk'))
+                                        <p class="text-danger"> {{ $errors->first('foto_produk') }} </p>
+                                    @endif
                                 </div>
-                                @if ($errors->has('foto_produk'))
-                                    <p class="text-danger"> {{ $errors->first('foto_produk') }} </p>
-                                @endif
                                 @csrf
                                 <button type="submit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> Tambah</button>
                             </form>

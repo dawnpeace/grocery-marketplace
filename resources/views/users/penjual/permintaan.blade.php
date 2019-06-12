@@ -36,7 +36,7 @@
                             <td>{{$item->pembeli->alamat}}</td>
                             <td>{{$item->tanggalPemesanan()}}</td>
                             <td>
-                                <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-sm btn-outline-info"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
+                                <a href="{{route('permintaan.detail',[$item->id])}}" class="btn btn-sm btn-secondary"><i class="fas fa-clipboard"></i> Detail Transaksi</a>
                                 <button data-url="{{route('permintaan.proses',[$item->id])}}" class="btn btn-sm btn-confirm btn-primary"><i class="fas fa-check-circle"></i> Proses</button>
                             </td>
                         </tr>

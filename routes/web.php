@@ -29,6 +29,8 @@ Route::group(['middleware'=>['can:pembeli']],function(){
     Route::post('keranjang/{keranjang}/checkout','CartController@checkoutKeranjang')->name('keranjang.checkout');
     Route::get('keranjang-saya/diproses','CartController@lihatTransaksiBerjalan')->name('keranjang.diproses');
     Route::post('selesaikan-transaksi/{keranjang}','AntarController@transaksiSelesai')->name('transaksi.selesai');
+    Route::get('profil-saya','PembeliController@editProfil')->name('pembeli.profil.edit');
+    Route::post('profil-saya','PembeliController@updateProfil')->name('pembeli.profil.update');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

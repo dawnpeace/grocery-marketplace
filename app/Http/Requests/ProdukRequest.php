@@ -29,7 +29,7 @@ class ProdukRequest extends FormRequest
             'harga' => 'required|integer',
             'satuan_unit' => 'required|string',
             'deskripsi' => 'required|string',
-            'foto_produk' => 'nullable|max:512|image|mimes:jpg,jpeg,png'
+            'foto_produk' => 'required|max:512|image|mimes:jpg,jpeg,png'
         ];
     }
 }

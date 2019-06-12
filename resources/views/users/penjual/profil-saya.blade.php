@@ -53,8 +53,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="email">Nama Toko</label>
+                            <input type="text" id="nama_toko" name="nama_toko" value="{{old('nama_toko') ?? $user->penjual->nama_toko}}" class="form-control {{$errors->has('nama_toko') ? 'is-invalid' : ''}}" />
+                            @if ($errors->has('nama_toko'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('nama_toko') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
                             <label for="no_telp">Nomor Handphone</label>
-                            <input type="text" id="no_telp" name="no_telp" value="{{old('no_telp') ?? $user->penjual->no_telp}} " class="form-control {{$errors->has('no_telp') ? 'is-invalid' : ''}}" />
+                            <input type="text" id="no_telp" name="no_telp" value="{{old('no_telp') ?? $user->penjual->no_telp}}" class="form-control {{$errors->has('no_telp') ? 'is-invalid' : ''}}" />
                             @if ($errors->has('no_telp'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('no_telp') }}</strong>
@@ -64,7 +74,7 @@
 
                         <div class="form-group">
                             <label for="kota">Kota</label>
-                            <input type="text" id="kota" name="kota" value="{{old('kota') ?? $user->penjual->kota}} " class="form-control {{$errors->has('kota') ? 'is-invalid' : ''}}" />
+                            <input type="text" id="kota" name="kota" value="{{old('kota') ?? $user->penjual->kota}}" class="form-control {{$errors->has('kota') ? 'is-invalid' : ''}}" />
                             @if ($errors->has('kota'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('kota') }}</strong>
@@ -95,7 +105,7 @@
 
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="text" id="alamat" name="alamat" value="{{old('alamat') ?? $user->penjual->alamat}} " class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" />
+                            <input type="text" id="alamat" name="alamat" value="{{old('alamat') ?? $user->penjual->alamat}}" class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}" />
                             @if ($errors->has('alamat'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('alamat') }}</strong>
@@ -103,9 +113,9 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{$errors->has('deskripsi') ? 'has-error' : ''}}">
                             <label for="deskripsi">Deskripsi Profil Penjual</label>
-                            <textarea id="deskripsi" rows="3" name="deskripsi" class="form-control">{{old('$deskripsi') ?? $user->penjual->deskripsi}}</textarea>
+                            <textarea id="deskripsi" rows="3" name="deskripsi" class="form-control {{$errors->has('deskripsi') ? 'is-invalid' : ''}}">{{old('deskripsi') ?? $user->penjual->deskripsi}}</textarea>
                             @if ($errors->has('deskripsi'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('deskripsi') }}</strong>

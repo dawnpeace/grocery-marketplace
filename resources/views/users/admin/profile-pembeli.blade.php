@@ -5,7 +5,7 @@
         <nav class="breadcrumb">
             <a href="{{route('admin.dashboard')}}" class="breadcrumb-item">Dapurpedia Admin</a>
             <a href="{{route('admin.manajemen.pembeli')}}" class="breadcrumb-item">Manajemen Pembeli</a>
-            <span class="breadcrumb-item active">Profil Driver</span>
+            <span class="breadcrumb-item active">Profil Pembeli</span>
         </nav>
     </div>
 @endsection
@@ -17,9 +17,9 @@
         {{Session::get('success')}}
     </div>
 @endif
-    <div class="py-3 row justify-content-center">
-        <div class="col-md-10 border border-dark bg-light">
-            <div class="p-3">
+    <div class="py-3 container">
+        <div class="card mb-3">
+            <div class="card-body">
                 <h4 class="py-2">Profil {{$pembeli->user->nama}}</h4>
                 <form action="" method="POST" enctype="multipart/form-data">
                     @csrf

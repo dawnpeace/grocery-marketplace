@@ -19,16 +19,16 @@
 <h2><i class="fa fa-list"></i> Daftar Produk Anda</h2>
 <div class="row">
     <div class="col-md-10 col-sm-12">
-        <a href="{{route('produk.tambah')}}" class="btn btn-primary float-right">Tambah Produk <i class="fa fa-plus"></i></a>
+        <a href="{{route('produk.tambah')}}" class="btn btn-primary float-right"><i class="fa fa-plus"></i> Tambah Produk</a>
     </div>
         @forelse($daftarProduk as $produk)
         <div class="col-md-10 col-sm-12">
             <div class="card my-3"> 
                 <div class="card-body">
                     <div class="text-right">
-                        <a href="{{route('produk.edit',[$produk->id])}}" class="btn btn-sm btn-outline-primary">Perbaharui <i class="far fa-edit"></i></a>
-                        <button data-url={{route('produk.delete',[$produk->id])}} class="btn btn-sm btn-outline-danger btn-delete " {{empty($produk->item) ? '' : 'disabled'}}>Hapus <i class="fa fa-trash"></i></button>
-                        <button data-toggle="tooltip" data-placement="bottom" title="{{$produk->tersedia ? 'Tersedia' : 'Tidak Tersedia'}}" data-url="{{route('produk.update.ketersediaan',[$produk->id])}}" class="btn btn-sm {{$produk->tersedia ? 'btn-secondary' : 'btn-success'}} btn-update">Ganti Ketersediaan <i class="fa fa-pencil-alt"></i></button>
+                        <a href="{{route('produk.edit',[$produk->id])}}" class="btn btn-sm btn-primary"><i class="far fa-edit"></i> Perbaharui</a>
+                        <button data-url={{route('produk.delete',[$produk->id])}} class="btn btn-sm btn-danger btn-delete " {{empty($produk->item) ? '' : 'disabled'}}><i class="fa fa-trash"></i>Hapus</button>
+                        <button data-toggle="tooltip" data-placement="bottom" title="{{$produk->tersedia ? 'Tersedia' : 'Tidak Tersedia'}}" data-url="{{route('produk.update.ketersediaan',[$produk->id])}}" class="btn btn-sm {{$produk->tersedia ? 'btn-secondary' : 'btn-success'}} btn-update"><i class="fa fa-pencil-alt"></i> Ganti Ketersediaan</button>
                     </div>
                     <h5>{{$produk->nama_produk}}</h5> 
                     <hr>

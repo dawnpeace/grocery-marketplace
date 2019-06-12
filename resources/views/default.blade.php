@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{asset('js/app.js')}}"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div id="app">
@@ -17,21 +17,48 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form method="GET" action="{{route('pencarian')}}" class="form-inline w-50 ml-auto">
-            <input class="form-control mr-sm-2 w-100" name="q" type="search" placeholder="Pencarian" aria-label="Search">
+          
+          <form method="GET" action="{{route('pencarian')}}" class="mx-2 my-auto d-inline w-100">
+            <div class="input-group">
+              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Pencarian" aria-label="Search">
+              @can('pembeli')
+              <a href="{{route('keranjang')}}" class="btn btn-primary">
+                  <i class="fas fa-cart-plus"></i>
+                  Keranjang Anda
+              </a>
+              @endcan
+              
+            </div>
           </form>
+          @auth
+          <div class="navbar-nav ml-auto">
+            <li class="nav-item active dropdown mr-1">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{explode(" ",Auth::user()->nama)[0]}}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                @if(auth()->user()->jenis != 'SUPERADMIN')
+                <a class="dropdown-item" href="{{Auth::user()->profilUrl()}}">Profil</a>
+                @endif
+                @if(auth()->user()->jenis != 'PEMBELI')
+                <a class="dropdown-item" href="{{Auth::user()->dashboardUrl()}}">Dashboard</a>
+                @endif
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+              </div>
+            </li>
+          </div>
+          @endauth
           @guest
           <div class="btn-group">
             <a href="{{route('login')}}" class="btn btn-light">Masuk</a>
             <a href="{{route('register')}}" class="btn btn-light">Daftar</a>
           </div>
           @endguest
-          @can('pembeli')
-          <a href="{{route('keranjang')}}" class="btn btn-primary d-block">
-              <i class="fas fa-cart-plus"></i>
-              Keranjang Anda
-          </a>
-          @endcan
+
         </div>
       </nav>
         <div class="">
@@ -82,6 +109,11 @@
           Dapurpedia &copy; 2019 
         </div>
       </footer>
+      <script>
+        $(document).ready(function() {
+          $(".dropdown-toggle").dropdown();
+        });
+      </script>
       @yield('js')
 </body>
 </html>

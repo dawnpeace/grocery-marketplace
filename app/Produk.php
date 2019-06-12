@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Produk extends Model
 {
@@ -58,6 +59,16 @@ class Produk extends Model
     {
         $this->tersedia = $this->tersedia ? 0 : 1;
         $this->save();
+        return $this;
+    }
+
+    public function deleteGallery()
+    {
+        foreach($this->gallery as $foto)
+        {
+            Storage::disk('public')->delete('foto_produk/'.$foto->foto_produk);
+        }
+        $this->gallery()->delete();
         return $this;
     }
 

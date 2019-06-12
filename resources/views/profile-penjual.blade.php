@@ -34,10 +34,11 @@
                             </li>
                         </ul>
                         <div class="clearfix mb-2"></div>
-                        <button type="button" onclick="openWA({{whatsappLink($penjual->no_telp)}})" class="btn btn-outline-success float-right"><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
+                        <button type="button" onclick="openWA({{whatsappLink($penjual->no_telp)}})" class="btn btn-success float-right"><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
                     </div>
                 </div>
                 <hr>
+                <h4 class="text-center">Produk {{$penjual->nama_toko}}</h4>
                 <div class="row">
                     @forelse($penjual->produk as $item)
                     <div class="col-md-3">
