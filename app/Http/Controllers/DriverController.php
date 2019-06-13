@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Driver;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class DriverController extends Controller
 {
@@ -44,6 +45,9 @@ class DriverController extends Controller
 
     public function editProfil()
     {
+        if(!Gate::allows('driver')){
+            return redirect('/')->with('warning','Akun anda belum diverifikasi pihak Admin.');
+        }
         $user = Auth::user()->load(['driver']);
         return view('users.driver.profil-saya',compact('user'));
     }

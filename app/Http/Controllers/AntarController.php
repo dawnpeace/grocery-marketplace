@@ -7,11 +7,15 @@ use App\Keranjang;
 use Illuminate\Support\Facades\Auth;
 use App\Delivery;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class AntarController extends Controller
 {
     public function index()
     {
+        if(!Gate::allows('driver')){
+            return redirect('/')->with('warning','Akun anda belum diverifikasi pihak Admin.');            
+        }
         $user = Auth::user()->load(['driver']);
         $keranjang =  Keranjang::where('telah_diselesaikan',1)
             ->where('telah_diproses',1)

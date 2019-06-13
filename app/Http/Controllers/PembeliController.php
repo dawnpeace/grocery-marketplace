@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Edit\PembeliRequest;
 use App\Http\Requests\Profil\PembeliRequest as ProfilPembeliRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 use App\Pembeli;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +46,9 @@ class PembeliController extends Controller
     public function editProfil()
     {
         $user = Auth::user()->load(['pembeli']);
+        if(!Gate::allows('pembeli')){
+            return redirect('/')->with('warning','Akun anda belum diverifikasi pihak Admin.');
+        }
         return view('users.pembeli.profil-saya',compact('user'));
 
     }

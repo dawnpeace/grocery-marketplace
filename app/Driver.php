@@ -8,7 +8,7 @@ class Driver extends Model
 {
     protected $table = 'tb_driver';
     protected $fillable = ["plat_nomor_kendaraan","kota","alamat","no_telp","foto_profil","foto_sim","nomor_sim","sedang_bekerja","keranjang_id"];
-    protected $hidden = ['telah_diverifikasi'];
+    // protected $hidden = ['telah_diverifikasi'];
 
 
     public function user()

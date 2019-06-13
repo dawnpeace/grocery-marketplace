@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Profil\PenjualRequest as ProfilPenjualRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class PenjualController extends Controller
 {
@@ -43,6 +44,9 @@ class PenjualController extends Controller
     public function editProfil()
     {
         $user = Auth::user()->load(['penjual']);
+        if(!Gate::allows('penjual')){
+            return redirect('/')->with('warning','Akun anda belum diverifikasi pihak Admin.');            
+        }
         return view('users.penjual.profil-saya',compact('user'));
     }
 
@@ -72,7 +76,7 @@ class PenjualController extends Controller
         if($request->hasFile('foto_profil'))
         {
             $filename = empty($user->penjual->foto_profil) ? uniqid().'.'.$request->file('foto_profil')->extension() : explode(".",$user->penjual->foto_profil)[0].'.'.$request->file('foto_profile');
-            $request->file('foto')->storeAs('foto_profil',$filename,'public');
+            $request->file('foto_profil')->storeAs('foto_profil',$filename,'public');
             $arrProfilPenjual["foto_profil"] = $filename;
         }
         $user->penjual->update($arrProfilPenjual);

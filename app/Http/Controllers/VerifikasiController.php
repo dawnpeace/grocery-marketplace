@@ -15,19 +15,39 @@ class VerifikasiController extends Controller
 {
     public function indexDriver()
     {
-        $user = User::where('jenis','driver')->where('users.nama','like','%'.request('nama').'%')->with("driver")->paginate(15);
+        $user = User::join('tb_driver','tb_driver.user_id','users.id')
+            ->select('users.*','tb_driver.telah_diverifikasi')
+            ->where('jenis','driver')->where('users.nama','like','%'.request('nama').'%')
+            ->orderBy('telah_diverifikasi','asc')
+            ->orderBy('created_at','desc')
+            ->with("driver")
+            ->paginate(15);
         return view('users.admin.daftar-driver',["users" => $user]);
     }
 
     public function indexPembeli()
     {
-        $user = User::where('jenis','pembeli')->where('users.nama','like','%'.request('nama').'%')->with("pembeli")->paginate(15);
+        $user = User::join('tb_pembeli','users.id','tb_pembeli.user_id')
+            ->select('users.*','tb_pembeli.telah_diverifikasi')
+            ->where('jenis','pembeli')
+            ->where('users.nama','like','%'.request('nama').'%')
+            ->with("pembeli")
+            ->orderBy('telah_diverifikasi','asc')
+            ->orderBy('created_at','asc')
+            ->paginate(15);
         return view('users.admin.daftar-pembeli',["users" => $user]);
     }
 
     public function indexPenjual()
     {
-        $user = User::where('jenis','penjual')->where('users.nama','like','%'.request('nama').'%')->with("penjual")->paginate(15);
+        $user = User::join('tb_penjual','users.id','tb_penjual.user_id')
+            ->select('users.*','tb_penjual.telah_diverifikasi')
+            ->where('jenis','penjual')
+            ->where('users.nama','like','%'.request('nama').'%')
+            ->with("penjual")
+            ->orderBy('telah_diverifikasi','asc')
+            ->orderBy('created_at','asc')
+            ->paginate(15);
         return view('users.admin.daftar-penjual',["users" => $user]);
     }
 

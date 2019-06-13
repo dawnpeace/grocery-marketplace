@@ -92,8 +92,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="bg-secondary d-flex m-auto p-1 border">
-                                    <img id="img-show" src="" alt="" class="img img-fluid">
+                                <div class="bg-secondary d-flex p-1 border">
+                                    <img id="img-show m-auto" src="" alt="" class="img img-fluid">
                                 </div>
                                 
                             </div>

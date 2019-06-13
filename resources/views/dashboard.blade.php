@@ -12,6 +12,12 @@
 
 @section('content')
 <div class="container w-75">
+    @if(Session::has('warning'))
+    <div class="alert alert-warning my-2" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        {{Session::get('warning')}}
+    </div>
+    @endif
     <div class="row my-4 mh-70vh">
         @foreach($daftarPasar as $pasar)
             <div class="col-md-6 col-sm-12">

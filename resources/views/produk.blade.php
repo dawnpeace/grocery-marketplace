@@ -38,7 +38,7 @@
                         <div class="card-body">
                             <hr>
                             <p class="h5">{{$item->nama_produk}}</p>
-                            <p class="text-primary font-weight-bold">{{$item->penjual->nama_toko}}</p>
+                            <p class="text-primary font-weight-bold"> <a href="{{route('profil.penjual',$item->penjual->id)}}">{{$item->penjual->nama_toko}}</a></p>
                             <i>{{$item->harga()."/".$item->satuan_unit}}</i>
                         </div>
                         @can('pembeli')

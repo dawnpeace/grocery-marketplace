@@ -40,6 +40,7 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Username</th>
+                        <th>Nama Toko</th>
                         <th>Tanggal Daftar</th>
                         <th>Status</th>
                         <th>E-Mail</th>
@@ -51,6 +52,7 @@
                             <td>{{$i}}</td>
                             <td>{{$user->nama}}</td>
                             <td>{{$user->username}}</td>
+                            <td>{{$user->penjual['nama_toko']}}</td>
                             <td>{{$user->tanggalDaftar()}}</td>
                             <td>{{$user->penjual['telah_diverifikasi'] ? 'Telah Diverifikasi' : 'Belum Diverifikasi'}}</td>
                             <td>{{$user->email}}</td>
