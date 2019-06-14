@@ -71,7 +71,7 @@
                     </div>
                     @endcan
                     <div class="clearfix"></div>
-                    
+
                     @endcan
                     @cannot('SedangBekerja')
                     <h2><i class="fa fa-list"></i> Daftar Pesanan</h2>
@@ -141,5 +141,19 @@
             });
         });
 
+        $('#btn-finish').click(function(){
+            swal({
+                title: "Selesaikan Pekerjaan",
+                text: "Pekerjaan akan diselesaikan, Lanjutkan?",
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+            }).then((val)=>{
+                if(val){
+                    $('#form-pekerjaan').submit();
+                }
+            });
+        });
+        
     </script>
 @endsection
