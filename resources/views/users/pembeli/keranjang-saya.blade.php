@@ -26,8 +26,8 @@
                     <table class="table table-striped">
                         <thead>
                             <th>Produk Oleh</th>
-                            <th>Jumlah Item pada Keranjang</th>
-                            <th>Subtotal</th>
+                            <th class="text-right">Jumlah Item pada Keranjang</th>
+                            <th class="text-right">Subtotal</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
@@ -35,8 +35,8 @@
                             <tr>
                                 <td>
                                 <a class="btn btn-link" href="{{route('profil.penjual',[$item['penjual_id']])}}">{{$item['nama_toko']}}</td></a>
-                                <td>{{$item['jumlah_produk']}}</td>
-                                <td>{{formatRP($item['subtotal'])}}</td>
+                                <td class="text-right">{{$item['jumlah_produk']}}</td>
+                                <td class="text-right">{{formatRP($item['subtotal'])}}</td>
                                 <td>
                                     <button data-url="{{route('keranjang.hapus',[$item['keranjang_id']])}}" class="btn btn-danger btn-delete-cart" title="Hapus Belanjaan">Hapus <i class="fas fa-trash-alt"></i></button>
                                     <a href="{{route('keranjang.detail',[$item['keranjang_id']])}}" class="btn btn-primary">Ubah <i class="fas fa-pencil-alt"></i></a>

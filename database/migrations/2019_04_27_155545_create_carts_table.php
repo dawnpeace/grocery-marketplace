@@ -23,6 +23,9 @@ class CreateCartsTable extends Migration
             $table->boolean('telah_diproses')->default(0);
             $table->boolean('transaksi_selesai')->default(0);
             $table->boolean('telah_diambil_driver')->default(0);
+            $table->timestamp('tanggal_checkout')->nullable();
+            $table->timestamp('tanggal_diproses')->nullable();
+            $table->timestamp('tanggal_dijemput')->nullable();
             $table->timestamps();
         });
     }

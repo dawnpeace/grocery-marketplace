@@ -14,44 +14,68 @@
     <div class="table-responsive">
         <div class="card">
             <div class="card-body">
-                <h2 class="mt-2 ml-2 mb-2"><i class="fa fa-info-circle"></i> Detail Keranjang {{$keranjang->pembeli->user->nama}}</h2>
                 <div class="float-right m-2">
                     @can('ProsesPermintaan',$keranjang)
-                    <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Proses</button>
+                    <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Terima Pesanan Ini</button>
                     @endcan
                     <button type="button" class="btn btn-info btn-sm my-1" data-toggle="modal" data-target="#modal-info"><i class="fa fa-info"></i> Informasi Pelanggan</button>
                     <button type="button" onclick="openWA({{whatsappLink($keranjang->pembeli->no_telp)}})" class="btn btn-sm btn-success my-1"><i class="fab fa-whatsapp"></i> Kirim Pesan WA ke Pembeli</button>
                 </div>
                 <div class="clearfix"></div>
-                <table class="table table-striped">
-                    <thead>
-                        <th>Nama Produk</th>
-                        <th>Harga Satuan</th>
-                        <th>Jumlah</th>
-                        <th class="text-center">Subtotal</th>
-                    </thead>
-                    <tbody>
-                        @php $total = 0; @endphp
-                        @foreach($keranjang->belanjaan as $item)
+                <h2 class="ml-2 mb-2"><i class="fa fa-info-circle"></i> Detail Keranjang {{$keranjang->pembeli->user->nama}}</h2>
+                 
+                <div class="table-responsive my-3">
+                    <table class="table-sm table-borderless">
                         <tr>
-                            @php 
-                                $subtotal = $item->jumlah*$item->harga;
-                                $total+=$subtotal;
-                            @endphp
-                            <td>{{$item->produk->nama_produk}}</td>
-                            <td>{{$item->harga}}</td>
-                            <td>{{$item->jumlah}}</td>
-                            <td class="text-right">{{formatRP($subtotal)}}</td>
+                            <th>Tanggal Checkout</th>
+                            <td>{{localeDate($keranjang->tanggal_checkout)}}</td>
                         </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
+                        @if($keranjang->telah_diproses)
                         <tr>
-                            <td colspan="3"><h5 class="font-weight-bold">Total</h5></td>
-                            <td><h5 class="text-right"><strong><u>{{formatRP($total)}},-<u></strong></h5></td>
+                            <th>Tanggal Proses</th>
+                            <td>{{localeDate($keranjang->tanggal_diproses)}}</td>
                         </tr>
-                    </tfoot>
-                </table>
+                        @endif
+                        @if($keranjang->telah_diambil_driver)
+                        <tr>
+                            <th>Tanggal Jemputan Driver</th>
+                            <td>{{localeDateTime($keranjang->tanggal_dijemput)}}</td>
+                        </tr>
+                        @endif
+                    </table>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Nama Produk</th>
+                            <th class="text-right">Jumlah</th>
+                            <th class="text-right">Harga Satuan</th>
+                            <th class="text-center">Subtotal</th>
+                        </thead>
+                        <tbody>
+                            @php $total = 0; @endphp
+                            @foreach($keranjang->belanjaan as $item)
+                            <tr>
+                                @php 
+                                    $subtotal = $item->jumlah*$item->harga;
+                                    $total+=$subtotal;
+                                @endphp
+                                <td>{{$item->produk->nama_produk}}</td>
+                                <td class="text-right">{{$item->jumlah}}</td>
+                                <td class="text-right">{{formatRP($item->harga)}}</td>
+                                <td class="text-right">{{formatRP($subtotal)}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"><h5 class="font-weight-bold">Total</h5></td>
+                                <td><h5 class="text-right"><strong><u>{{formatRP($total)}},-<u></strong></h5></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
             </div>
         </div>
@@ -66,15 +90,32 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    <h4>Informasi Pelanggan</h4>
+                    <hr>
                     <div class="clearfix"></div>
                     <div class="text-center">
                         <img style="max-height:14rem" src="{{$keranjang->pembeli->urlFoto()}}" alt="" class="img img-fluid">
                     </div>
-                    <ul class="list-group mt-3">
-                        <li class="list-group-item">{{$keranjang->pembeli->kota}}</li>
-                        <li class="list-group-item">{{$keranjang->pembeli->alamat}}</li>
-                        <li class="list-group-item">{{$keranjang->pembeli->no_telp}}</li>
-                    </ul>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <th>Nama Pelanggan</th>
+                                <td> : {{$keranjang->pembeli->user->nama}}</td>
+                            </tr>
+                            <tr>
+                                <th>Kota</th>
+                                <td> : {{$keranjang->pembeli->kota}}</td>
+                            </tr>
+                            <tr>
+                                <th>No Telp</th>
+                                <td> : {{$keranjang->pembeli->no_telp}}</td>
+                            </tr>
+                            <tr>
+                                <th>Alamat</th>
+                                <td> : {{$keranjang->pembeli->alamat}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 
             </div>

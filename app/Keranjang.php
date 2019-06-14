@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Keranjang extends Model
 {
     protected $table = "tb_keranjang_belanja";
-    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai"];
+    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai","tanggal_checkout","tanggal_dijemput","tanggal_diproses"];
 
     public function belanjaan()
     {
@@ -17,7 +17,7 @@ class Keranjang extends Model
 
     public function checkout()
     {
-        $this->update(['telah_diselesaikan'=>1]);
+        $this->update(['telah_diselesaikan'=>1,'tanggal_checkout'=>now()]);
     }
 
     public function penjual()
@@ -39,12 +39,14 @@ class Keranjang extends Model
     public function proses()
     {
         $this->telah_diproses = 1;
+        $this->tanggal_diproses = now();
         $this->save();
     }
 
     public function ambilPesanan()
     {
         $this->telah_diambil_driver = 1;
+        $this->tanggal_dijemput = now();
         $this->save();
         return $this;
     }

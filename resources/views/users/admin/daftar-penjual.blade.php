@@ -13,7 +13,7 @@
 @include('users.admin.include.alerts')
     <div class="card">
         <div class="card-body">
-            <div class="table-responsive my-5">
+            <div class="table-responsive">
                 <div class="float-right">
                     <div class="pb-2 text-right">
                         Verifikasi Akun - <button class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>

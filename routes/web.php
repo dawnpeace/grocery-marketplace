@@ -125,7 +125,7 @@ Route::group(['middleware'=>['can:driver'],'prefix'=>'driver'],function(){
     });
 
     Route::middleware(['can:SedangBekerja'])->group(function(){
-        Route::get('pekerjaan-aktif','PekerjaanController@index')->name('pekerjaan.index');
+        // Route::get('pekerjaan-aktif','PekerjaanController@index')->name('pekerjaan.index');
         Route::post('selesaikan-pekerjaan','PekerjaanController@selesaikanPekerjaan')->name('pekerjaan.selesai');
     });
     

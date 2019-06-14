@@ -18,12 +18,62 @@
             {{Session::get('success')}}
         </div>
         @endif
-        <div class="card">
+        <div class="card my-2">
             <div class="card-body">
                 <div class="table-responsive">
                     @can('SedangBekerja')
-                        <a href="{{route('pekerjaan.index')}}" class="btn btn-outline-info btn-sm float-right">Pekerjaan Saya</a>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>Pasar - Nama Toko</th>
+                            <td>{{$user->driver->keranjang->penjual->pasar->nama_pasar." - ".$user->driver->keranjang->penjual->nama_toko}}</td>
+                        </tr>
+                        <tr>
+                            <th>Alamat Toko</th>
+                            <td>{{$user->driver->keranjang->penjual->alamat}}</td>
+                        </tr>
+                        <tr>
+                            <th>Nama Pembeli</th>
+                            <td>{{$user->driver->keranjang->pembeli->user->nama}}</td>
+                        </tr>
+                        <tr>
+                            <th>Alamat Pembeli</th>
+                            <td>{{$user->driver->keranjang->pembeli->alamat}}</td>
+                        </tr>
+                        <tr>
+                            <th>Kontak Pembeli</th>
+                            <td>{{$user->driver->keranjang->pembeli->no_telp}}</td>
+                        </tr>
+                    </table>
+
+                    <h3>Detail belanja</h3>
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead>
+                            <th>Nama Produk</th>
+                            <th class="text-right">Jumlah</th>
+                            <th class="text-right">Satuan Unit</th>
+                        </thead>
+                        <tbody>
+                            @foreach($user->driver->keranjang->belanjaan as $item)
+                            <tr>
+                                <td>{{$item->produk->nama_produk}}</td>
+                                <td class="text-right">{{$item->jumlah}}</td>
+                                <td class="text-right">{{$item->produk->satuan_unit}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @can('DapatDiselesaikan',[$user->driver->keranjang])
+                    <div class="float-right">
+                        <form id="form-pekerjaan" method="POST" action="{{route('pekerjaan.selesai')}}">
+                            @csrf
+                            <button id="btn-finish" type="button" class="btn btn-primary"><i class="fa fa-thumbs-up"></i> Pekerjaan Selesai</button>
+                        </form>
+                    </div>
                     @endcan
+                    <div class="clearfix"></div>
+                    
+                    @endcan
+                    @cannot('SedangBekerja')
                     <h2><i class="fa fa-list"></i> Daftar Pesanan</h2>
                     <table class="table table-striped table-sm">
                         <thead>
@@ -65,6 +115,7 @@
                         </div>
                     </div>
                     <form method="POST" id="form-ambil" action="">@csrf</form>
+                    @endcannot
                 </div>
             </div>
         </div>
@@ -89,5 +140,6 @@
                 }
             });
         });
+
     </script>
 @endsection

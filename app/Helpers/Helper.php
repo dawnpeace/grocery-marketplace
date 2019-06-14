@@ -2,6 +2,7 @@
 use App\FotoProduk;
 use App\Admin;
 use App\Enums\UserLevel;
+use Carbon\Carbon as Carbon;
 
 if (!function_exists('displayUrl')) {
     function displayUrl(FotoProduk $fotoProduk = null)
@@ -36,6 +37,14 @@ if(!function_exists('localeDate')){
     {
         $date = Carbon::parse($timestamp);
         return $date->isoFormat('D MMM YYYY');
+    }
+}
+
+if(!function_exists('localeDateTime')){
+    function localeDateTime($timestamp)
+    {
+        $date = Carbon::parse($timestamp);
+        return $date->isoFormat('D MMM YYYY, hh:mm');
     }
 }
 

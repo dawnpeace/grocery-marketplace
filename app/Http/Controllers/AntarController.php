@@ -16,7 +16,24 @@ class AntarController extends Controller
         if(!Gate::allows('driver')){
             return redirect('/')->with('warning','Akun anda belum diverifikasi pihak Admin.');            
         }
-        $user = Auth::user()->load(['driver']);
+        $user = Auth::user()->load([
+            'driver'=> function($query){
+                $query->with([
+                    'keranjang'=>function($query){
+                        $query->with([
+                            'pembeli'=>function($query){
+                                $query->with(['user']);
+                            },
+                            'belanjaan'=>function($query){
+                                $query->with(['produk']);
+                            },
+
+                    'penjual'=>function($query){
+                        $query->with(['pasar']);
+                    }]);
+                }]);
+            }]);
+        
         $keranjang =  Keranjang::where('telah_diselesaikan',1)
             ->where('telah_diproses',1)
             ->where('telah_diambil_driver',0)
@@ -31,7 +48,9 @@ class AntarController extends Controller
                 'status'
             ])
             ->paginate(15);
-        return view('users.driver.dashboard',compact('keranjang'));
+
+        
+        return view('users.driver.dashboard',compact(['keranjang','user']));
     }
 
     public function detailPesanan(Keranjang $keranjang)

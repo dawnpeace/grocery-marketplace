@@ -40,15 +40,15 @@
                     <table class="table table-sm table-striped table-bordered">
                         <thead>
                             <th>Nama Produk</th>
-                            <th>Jumlah</th>
-                            <th>Satuan Unit</th>
+                            <th class="text-right">Jumlah</th>
+                            <th class="text-right">Satuan Unit</th>
                         </thead>
                         <tbody>
                             @foreach($user->driver->keranjang->belanjaan as $item)
                             <tr>
                                 <td>{{$item->produk->nama_produk}}</td>
-                                <td>{{$item->jumlah}}</td>
-                                <td>{{$item->produk->satuan_unit}}</td>
+                                <td class="text-right">{{$item->jumlah}}</td>
+                                <td class="text-right">{{$item->produk->satuan_unit}}</td>
                             </tr>
                             @endforeach
                         </tbody>

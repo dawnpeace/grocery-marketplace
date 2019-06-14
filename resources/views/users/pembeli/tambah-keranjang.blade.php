@@ -16,7 +16,7 @@
 @section('content')
 <div class="container w-75">
     @include('users.pembeli.include.alerts')
-    <h1>Tambah Keranjang</h1>
+    <h1>Tambah Item ke Keranjang</h1>
         <div class="row mt-2">
             <div class="col-md-5">
                 <div class="p-2  bg-secondary border rounded">
