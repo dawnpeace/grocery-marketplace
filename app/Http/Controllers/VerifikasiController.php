@@ -33,7 +33,7 @@ class VerifikasiController extends Controller
             ->where('users.nama','like','%'.request('nama').'%')
             ->with("pembeli")
             ->orderBy('telah_diverifikasi','asc')
-            ->orderBy('created_at','asc')
+            ->orderBy('created_at','desc')
             ->paginate(15);
         return view('users.admin.daftar-pembeli',["users" => $user]);
     }
@@ -46,7 +46,7 @@ class VerifikasiController extends Controller
             ->where('users.nama','like','%'.request('nama').'%')
             ->with("penjual")
             ->orderBy('telah_diverifikasi','asc')
-            ->orderBy('created_at','asc')
+            ->orderBy('created_at','desc')
             ->paginate(15);
         return view('users.admin.daftar-penjual',["users" => $user]);
     }

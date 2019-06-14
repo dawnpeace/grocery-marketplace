@@ -11,8 +11,6 @@
 @endsection
 
 @section("content")
-
-
 @include('users.admin.include.alerts')
 <div class="card">
     <div class="card-body">

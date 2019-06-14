@@ -10,6 +10,7 @@
 @endsection
 
 @section("content")
+@include('users.admin.include.alerts')
     <div class="card">
         <div class="card-body">
             <div class="table-responsive my-5">
