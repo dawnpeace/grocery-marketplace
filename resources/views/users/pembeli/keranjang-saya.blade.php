@@ -38,9 +38,8 @@
                                 <td class="text-right">{{$item['jumlah_produk']}}</td>
                                 <td class="text-right">{{formatRP($item['subtotal'])}}</td>
                                 <td>
-                                    <button data-url="{{route('keranjang.hapus',[$item['keranjang_id']])}}" class="btn btn-danger btn-delete-cart" title="Hapus Belanjaan">Hapus <i class="fas fa-trash-alt"></i></button>
-                                    <a href="{{route('keranjang.detail',[$item['keranjang_id']])}}" class="btn btn-primary">Ubah <i class="fas fa-pencil-alt"></i></a>
-                                    <button class="btn btn-success btn-checkout-cart" data-url="{{route('keranjang.checkout',[$item['keranjang_id']])}}" title="Selesaikan Transaksi"><i class="fas fa-check"></i> Checkout</button>
+                                    <button data-url="{{route('keranjang.hapus',[$item['keranjang_id']])}}" class="btn btn-danger btn-delete-cart" title="Hapus Belanjaan"><i class="fas fa-trash-alt"></i> Hapus</button>
+                                    <a href="{{route('keranjang.detail',[$item['keranjang_id']])}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Ubah/Checkout</a>
                                 </td>
                             </tr>
                             @empty
@@ -52,7 +51,6 @@
                     </table>
                 </div>
                 <form action="" method="POST" id="delete-cart">@csrf</form>
-                <form action="" method="POST" id="checkout-cart">@csrf</form>
 
             </div>
         </div>
@@ -77,20 +75,5 @@
             });
         });
 
-        $('.btn-checkout-cart').click(function(){
-            swal({
-                title: "Selesaikan Belanjaan",
-                text: "Anda ingin menyelesaikan transaksi?",
-                icon: "info",
-                buttons: true,
-                dangerMode: true,
-            }).then((val)=>{
-                if(val){
-                    formdel = $('form#checkout-cart');
-                    formdel.attr('action',$(this).data('url'));
-                    formdel.submit();
-                }
-            });
-        });
     </script>
 @endsection

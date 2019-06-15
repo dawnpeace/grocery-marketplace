@@ -72,6 +72,11 @@
                             <div class="clearfix"></div>
                             <div class="float-right mt-2">
                                 <button type="button" onclick="openWA({{whatsappLink($produk->penjual->no_telp)}})" class="btn-whatsapp btn btn-success"><i class="fab fa-whatsapp"></i> Tanya Penjual</button>
+                                <button 
+                                    @if(!$belanjaan->isEmpty())
+                                        onclick="javascript:location.href='{{route('keranjang.detail',$belanjaan->first()->keranjang_id)}}'"
+                                    @endif
+                                type="button" class="btn btn-info" {{$belanjaan->isEmpty() ? 'disabled' : ''}}><i class="fa fa-eye"></i> Lihat Keranjang</button>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Tambah</button>
                             </div>
                             <div class="clearfix"></div>

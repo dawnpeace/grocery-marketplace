@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Keranjang;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CartController extends Controller
 {
@@ -46,10 +47,13 @@ class CartController extends Controller
 
     public function detailKeranjang(Keranjang $keranjang)
     {
+        if(!Gate::allows('BelumCheckout',$keranjang)){
+            return redirect()->route('keranjang');
+        }
+
         $keranjang->load(['belanjaan'=>function($query){
             $query->with(['produk']);
         }]);
-        
         return view('users.pembeli.keranjang',compact('keranjang'));
     }
 
@@ -62,8 +66,9 @@ class CartController extends Controller
 
     public function checkoutKeranjang(Keranjang $keranjang)
     {
+        $this->authorize('BelumCheckout',$keranjang);
         $keranjang->checkout();
-        return redirect()->back()->with('success','Transaksi anda telah diselesaikan, menunggu konfirmasi Penjual.');
+        return redirect()->route('keranjang')->with('success','Transaksi anda telah diselesaikan, menunggu konfirmasi Penjual.');
     }
 
     public function lihatTransaksiBerjalan()

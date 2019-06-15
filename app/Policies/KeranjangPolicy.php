@@ -21,4 +21,9 @@ class KeranjangPolicy
         }
         return false;
     }
+
+    public function belumCheckout(User $user, Keranjang $keranjang)
+    {
+        return $user->pembeli->id == $keranjang->pembeli_id && !$keranjang->telah_diselesaikan;
+    }
 }

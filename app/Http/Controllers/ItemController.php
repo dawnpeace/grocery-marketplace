@@ -68,7 +68,7 @@ class ItemController extends Controller
 
         if(!is_null($keranjang))
         {
-            $belanjaan = Item::select('tb_produk.id as produk_id','tb_belanjaan.harga as harga','jumlah',DB::raw('tb_belanjaan.harga * tb_belanjaan.jumlah as sub_total'),'tb_produk.nama_produk','tb_belanjaan.id as item_id','tb_produk.satuan_unit')->join('tb_produk','tb_produk.id','tb_belanjaan.produk_id')->where('keranjang_id',$keranjang->id)->get();
+            $belanjaan = Item::select('tb_produk.id as produk_id','tb_belanjaan.harga as harga','jumlah',DB::raw('tb_belanjaan.harga * tb_belanjaan.jumlah as sub_total'),'tb_produk.nama_produk','tb_belanjaan.id as item_id','tb_produk.satuan_unit','keranjang_id')->join('tb_produk','tb_produk.id','tb_belanjaan.produk_id')->where('keranjang_id',$keranjang->id)->get();
             $filter = $belanjaan->where('produk_id',$produk->id);
             if(!$filter->isEmpty())
             {
@@ -76,7 +76,7 @@ class ItemController extends Controller
                 $punyaProduk["jumlah"] = $filter->first()->jumlah;
             }
         }
-        return view('users.pembeli.tambah-keranjang',['belanjaan'=> $belanjaan ?? [],'produk'=>$produk, 'punyaProduk'=>$punyaProduk]);
+        return view('users.pembeli.tambah-keranjang',['belanjaan'=> $belanjaan ?? collect([]),'produk'=>$produk, 'punyaProduk'=>$punyaProduk]);
     }
 
 }

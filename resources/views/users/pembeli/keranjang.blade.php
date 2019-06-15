@@ -18,42 +18,57 @@
             {{Session::get('success')}}
         </div>
         @endif
-        <h1 class="mb-3">Detail Keranjang</h1>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <th>Nama Produk</th>
-                    <th>Jumlah</th>
-                    <th>Harga</th>
-                    <th>Subtotal</th>
-                    <th>Aksi</th>
-                </thead>
-                <tbody>
-                    @php $total = 0 @endphp
-                    @foreach($keranjang->belanjaan as $item)
-                    @php $subtotal = $item->jumlah*$item->harga; @endphp
-                    <tr>
-                        <td>{{$item->produk->nama_produk}}</td>
-                        <td>{{$item->jumlah}}</td>
-                        <td>{{formatRP($item->harga)}}</td>
-                        <td>{{formatRP($subtotal)}}</td>
-                        <td>
-                            <button data-url="{{route('hapus.item',[$keranjang->id,$item->id])}}" class="btn btn-delete-item btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            <a href="{{route('tambah.produk',[$item->produk_id])}}" class="btn btn-primary"><i class="fas fa-arrow-right"></i></a>
-                        </td>
-                    </tr>
-                    @php $total+=$subtotal; @endphp
-                    @endforeach
-                    <tfoot>
-                        <td colspan="3"><h5>Total</h5></td>
-                        <td class="text-right" colspan="2">
-                            <h5><u>{{formatRP($total)}}</u></h5>
-                        </td>
-                    </tfoot>
-                </tbody>
-            </table>
-            <form id="delete-item" action="" method="POST">@csrf</form>
+        <div class="card">
+            <div class="card-body">
+                <div class="float-right">
+                    @if(!$keranjang->telah_diselesaikan)
+                    <form method="POST" action="{{route('keranjang.checkout',$keranjang->id)}}">
+                        @csrf
+                        <button  id="btn-checkout" type="button" class="btn btn-success"><i class="fa fa-check"></i> Checkout</button>
+                    </form>
+                    @endif
+                </div>
+                <h2 class="mb-3">Detail Keranjang</h2>
+                <div class="clearfix"></div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Nama Produk</th>
+                            <th class="text-right">Jumlah</th>
+                            <th class="text-right">Harga</th>
+                            <th class="text-right">Subtotal</th>
+                            <th>Aksi</th>
+                        </thead>
+                        <tbody>
+                            @php $total = 0 @endphp
+                            @foreach($keranjang->belanjaan as $item)
+                            @php $subtotal = $item->jumlah*$item->harga; @endphp
+                            <tr>
+                                <td>{{$item->produk->nama_produk}}</td>
+                                <td class="text-right">{{$item->jumlah}}</td>
+                                <td class="text-right">{{formatRP($item->harga)}}</td>
+                                <td class="text-right">{{formatRP($subtotal)}}</td>
+                                <td>
+                                    <button data-url="{{route('hapus.item',[$keranjang->id,$item->id])}}" class="btn btn-delete-item btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    <a href="{{route('tambah.produk',[$item->produk_id])}}" class="btn btn-primary"><i class="fas fa-arrow-right"></i></a>
+                                </td>
+                            </tr>
+                            @php $total+=$subtotal; @endphp
+                            @endforeach
+                            <tfoot>
+                                <td colspan="2"><h5>Total</h5></td>
+                                <td class="text-right" colspan="2">
+                                    <h5><u>{{formatRP($total)}}</u></h5>
+                                </td>
+                                <td></td>
+                            </tfoot>
+                        </tbody>
+                    </table>
+                    <form id="delete-item" action="" method="POST">@csrf</form>
+                </div>
+            </div>
         </div>
+        
 
     </div>
 @endsection
@@ -72,6 +87,20 @@
                     formdel = $('form#delete-item');
                     formdel.attr('action',$(this).data('url'));
                     formdel.submit();
+                }
+            });
+        });
+
+        $("#btn-checkout").click(function(){
+            swal({
+                title: "Checkout Keranjang",
+                text: "Apakah anda yakin?",
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+            }).then((val)=>{
+                if(val){
+                    $(this).parent('form').submit();
                 }
             });
         });
