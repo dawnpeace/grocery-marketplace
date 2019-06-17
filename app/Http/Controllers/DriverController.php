@@ -76,6 +76,7 @@ class DriverController extends Controller
         ];
         if($request->hasFile('foto_profil'))
         {
+            Storage::disk('public')->delete('foto_profil/'.$user->driver->foto_profil);
             $filename = empty($user->driver->foto_profil) ? uniqid().'.'.$request->file('foto_profil')->extension() : explode(".",$user->driver->foto_profil)[0].'.'.$request->file('foto_profil')->extension();
             $arrProfilDriver["foto_profil"] = $filename;
             $request->file('foto_profil')->storeAs('foto_profil',$filename,'public');

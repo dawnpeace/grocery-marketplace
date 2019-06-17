@@ -75,6 +75,7 @@ class PenjualController extends Controller
         ];
         if($request->hasFile('foto_profil'))
         {
+            Storage::disk('public')->delete('foto_profil/'.$user->penjual->foto_profil);
             $filename = empty($user->penjual->foto_profil) ? uniqid().'.'.$request->file('foto_profil')->extension() : explode(".",$user->penjual->foto_profil)[0].'.'.$request->file('foto_profile');
             $request->file('foto_profil')->storeAs('foto_profil',$filename,'public');
             $arrProfilPenjual["foto_profil"] = $filename;
