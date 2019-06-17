@@ -35,7 +35,7 @@
                         </ul>
                         <div class="clearfix mb-2"></div>
                         
-                        <button type="button" @auth onclick="openWA({{whatsappLink($penjual->no_telp)}})"@endauth class="btn btn-success float-right" @guest disabled @endguest><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
+                        <button type="button" onclick="openWA({{whatsappLink($penjual->no_telp)}})" class="btn btn-success float-right"><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
                         
                     </div>
                 </div>

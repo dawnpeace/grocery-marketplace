@@ -52,25 +52,31 @@ if(!function_exists('localeDateTime')){
 if(!function_exists('whatsappLink')){
     function whatsappLink($number)
     {
-        $user = Auth::user();
+        
         $greetings = "";
-        switch($user->jenis){
-            case UserLevel::PEMBELI:
-                $greetings = "Halo saya $user->nama, pembeli dari Dapurpedia. ";
-                break;
-            case UserLevel::PENJUAL:
-                $greetings = "Halo saya dari ".$user->penjual->nama_toko." penjual dari Dapurpedia. ";
-                break;
-            case UserLevel::DRIVER:
-                $greetings = "Halo saya $user->nama, driver yang berasosiasi dengan Dapurpedia. ";
-                break;
-            case UserLevel::SUPERADMIN;
-                $greetings = "Halo saya $user->name admin dari Dapurpedia !. ";
-                break;
-            default:
-                return '';
+        $user  = Auth::user();
+
+        if($user != null){
+            switch($user->jenis){
+                case UserLevel::PEMBELI:
+                    $greetings = "Halo saya $user->nama, pembeli dari Dapurpedia. ";
+                    break;
+                case UserLevel::PENJUAL:
+                    $greetings = "Halo saya dari ".$user->penjual->nama_toko." penjual dari Dapurpedia. ";
+                    break;
+                case UserLevel::DRIVER:
+                    $greetings = "Halo saya $user->nama, driver yang berasosiasi dengan Dapurpedia. ";
+                    break;
+                case UserLevel::SUPERADMIN;
+                    $greetings = "Halo saya $user->name admin dari Dapurpedia !. ";
+                    break;
+            }
+            return "'https://web.whatsapp.com/send?phone=".$number.'&text='.$greetings."'";
+        } else {
+            return "'https://web.whatsapp.com/send?phone=".$number.'&text=Halo saya melihat profil anda dari Dapurpedia'."'";
         }
-        return "'https://web.whatsapp.com/send?phone=".$number.'&text='.$greetings."'";
+
+        
     }
 }
 
