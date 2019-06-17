@@ -2,6 +2,7 @@
 use App\FotoProduk;
 use App\Admin;
 use App\Enums\UserLevel;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon as Carbon;
 
 if (!function_exists('displayUrl')) {
