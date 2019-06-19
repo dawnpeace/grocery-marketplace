@@ -11,6 +11,12 @@
 @endsection
 
 @section('content')
+    @if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        {{Session::get('success')}}
+    </div>
+    @endif
     <div class="table-responsive">
         <div class="card">
             <div class="card-body">
@@ -27,21 +33,50 @@
                 <div class="table-responsive my-3">
                     <table class="table-sm table-borderless">
                         <tr>
-                            <th>Tanggal Checkout</th>
+                            <th class="text-right">Tanggal Checkout</th>
                             <td>{{localeDate($keranjang->tanggal_checkout)}}</td>
                         </tr>
                         @if($keranjang->telah_diproses)
                         <tr>
-                            <th>Tanggal Proses</th>
+                            <th class="text-right">Tanggal Proses</th>
                             <td>{{localeDate($keranjang->tanggal_diproses)}}</td>
                         </tr>
                         @endif
+                        
                         @if($keranjang->telah_diambil_driver)
                         <tr>
-                            <th>Tanggal Jemputan Driver</th>
+                            <th class="text-right">Tanggal Jemputan Driver</th>
                             <td>{{localeDateTime($keranjang->tanggal_dijemput)}}</td>
                         </tr>
+                        <tr>
+                            <th  class="text-right">Biaya Antar</th>
+                            <td>{{formatRP($keranjang->biaya_antar)}}</td>
+                        </tr>
                         @endif
+                        @can('InputBiayaAntar',$keranjang)
+                        <tr>
+                            <th class="text-right">Biaya Antar</th>
+                            <td>
+                                <form method="POST" action="{{route('permintaan.biaya',[$keranjang->id])}}">
+                                    @csrf
+                                    <div class="form-group {{$errors->has('biaya_antar') ? 'has-error' : ''}} m-auto">
+                                        <div class="input-group">
+                                            <input type="text" id="biaya_antar" name="biaya_antar" value="{{old('biaya_antar') ?? ($keranjang->biaya_antar ?? 0)}}" class="form-control form-control-sm {{$errors->has('biaya_antar') ? 'is-invalid' : ''}}" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i></button>
+                                            </div>
+                                        </div>
+                                        @if ($errors->has('biaya_antar'))
+                                            <p class="text-danger">{{ $errors->first('biaya_antar') }}</p>
+                                        @endif
+                                        @if(is_null($keranjang->biaya_antar))
+                                            <p class="text-secondary">Permintaan dapat diproses setelah biaya antar terisi.</p>
+                                        @endif
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        @endcan
                     </table>
                 </div>
 
@@ -71,7 +106,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="3"><h5 class="font-weight-bold">Total</h5></td>
-                                <td><h5 class="text-right"><strong><u>{{formatRP($total)}},-<u></strong></h5></td>
+                                <td><h5 class="text-right"><strong><u>{{formatRP($total+($keranjang->biaya_antar ?? 0))}},-<u></strong></h5></td>
                             </tr>
                         </tfoot>
                     </table>

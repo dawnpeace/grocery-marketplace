@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Keranjang extends Model
 {
     protected $table = "tb_keranjang_belanja";
-    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai","tanggal_checkout","tanggal_dijemput","tanggal_diproses"];
+    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai","tanggal_checkout","tanggal_dijemput","tanggal_diproses","biaya_antar"];
 
     public function belanjaan()
     {
@@ -29,12 +29,14 @@ class Keranjang extends Model
     {
         return $this->belongsTo('App\Pembeli');
     }
+    
 
     public function tanggalPemesanan()
     {
         $date = Carbon::parse($this->created_at);
         return $date->isoFormat('D MMM YYYY');
     }
+
 
     public function proses()
     {

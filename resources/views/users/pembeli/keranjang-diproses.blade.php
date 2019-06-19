@@ -41,6 +41,12 @@
                         <td>{{localeDate($belanja->tanggal_diproses)}}</td>
                     </tr>
                     @endif
+                    @isset($belanja->biaya_antar)
+                    <tr>
+                        <th>Biaya Antar</th>
+                        <td>{{formatRP($belanja->biaya_antar)}}</td>
+                    </tr>
+                    @endisset
                     <tr>
                         <td colspan="2" class="text-right">
                             @can('SelesaikanTransaksi',[$belanja])
@@ -52,6 +58,7 @@
                             <button data-bid="{{$belanja->id}}" class="btn btn-sm btn-outline-info btn-detail"><i class="fa fa-eye"></i> Lihat Detail</button>
                         </td>
                     </tr>
+                    
                 </table>
                 @php $subTotal = 0; @endphp
                 <table class="table table-sm table-striped border-right border-bottom border-left">
@@ -72,7 +79,8 @@
                     @php $subTotal+= $item->jumlah*$item->harga; @endphp
                     @endforeach
                         <tr>
-                            <td colspan="4"><h5 class="text-right">{{formatRP($subTotal)}},-</h5></td>
+                            <th colspan="2">Total Biaya</th>
+                            <td colspan="2"><h5 class="text-right">{{formatRP($subTotal + ($belanja->biaya_antar ?? 0))}},-</h5></td>
                         </tr>
                     </tbody>
                 </table>

@@ -22,6 +22,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     @can('SedangBekerja')
+                    <h3>Informasi Pekerjaan</h3>
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th>Pasar - Nama Toko</th>
@@ -40,10 +41,19 @@
                             <td>{{$user->driver->keranjang->pembeli->alamat}}</td>
                         </tr>
                         <tr>
-                            <th>Kontak Pembeli</th>
+                            <th rowspan="2">Kontak Pembeli</th>
                             <td>{{$user->driver->keranjang->pembeli->no_telp}}</td>
                         </tr>
+                        <tr>
+                            
+                            <td><button type="button" onclick="openWA({{whatsappLink($user->driver->keranjang->pembeli->no_telp)}})" class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i> Kontak Whatsapp</button></td>
+                        </tr>
+                        <tr>
+                            <th>Biaya Antar</th>
+                            <td>{{formatRP($user->driver->keranjang->biaya_antar)}}</td>
+                        </tr>
                     </table>
+                    
 
                     <h3>Detail belanja</h3>
                     <table class="table table-sm table-striped table-bordered">
@@ -80,9 +90,8 @@
                             <th>Nama Toko</th>
                             <th>Alamat Toko</th>
                             <th>Alamat Tujuan</th>
-                            @can('TidakBekerja')
+                            <th>Biaya Antar</th>
                             <th>Aksi</th>
-                            @endcan
                         </thead>
                         <tbody>
                             @forelse ($keranjang as $item)
@@ -90,7 +99,7 @@
                                     <td>{{$item->penjual->nama_toko}}</td>
                                     <td>{{$item->penjual->alamat}}</td>
                                     <td>{{$item->pembeli->alamat}}</td>
-                                    @can('TidakBekerja')
+                                    <td>{{formatRP($item->biaya_antar)}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" onclick="openWA({{whatsappLink($item->penjual->no_telp)}})" class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i> Kirim Pesan WA ke Penjual</button>
@@ -98,7 +107,6 @@
                                             <a href="{{route('pesanan.detail',[$item->id])}}" type="button" class="btn btn-sm btn-secondary"><i class="fa fa-bars"></i> Detail</a>
                                         </div>
                                     </td>
-                                    @endcan
                                 </tr>
                             @empty
                                 <tr>

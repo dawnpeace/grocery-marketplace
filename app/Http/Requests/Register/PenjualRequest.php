@@ -35,7 +35,7 @@ class PenjualRequest extends FormRequest
             'alamat' => ['required','string', 'max:191'],
             'no_telp' => ['required','string', new RuleNumber],
             'pasar_id' => ['required','exists:tb_pasar,id'],
-            'foto_profil' => ['required','file','mimes:jpg,jpeg,png','max:1024']
+            'foto_profil' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
         ];
     }
 }

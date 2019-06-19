@@ -45,9 +45,24 @@ class PermintaanController extends Controller
 
     public function proses(Keranjang $keranjang)
     {
+        $this->authorize('ProsesPermintaan',$keranjang);
         $keranjang->status()->save(new Delivery);
         $keranjang->proses();
         return redirect()->route('permintaan')->with('success','Permintaan telah diproses!');
+    }
+
+    public function tambahBiayaAntar(Keranjang $keranjang, Request $request)
+    {
+        $this->authorize('DetailPermintaan',$keranjang);
+        $this->authorize('InputBiayaAntar',$keranjang);
+        $request->validate([
+            'biaya_antar'  => 'required|integer'
+        ]);
+        $keranjang->update([
+            'biaya_antar' => $request->biaya_antar,
+        ]);
+
+        return redirect()->back()->with('success','Biaya antar berhasil ditambahkan !');
     }
 
     public function daftarProses()

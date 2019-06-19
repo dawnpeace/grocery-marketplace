@@ -39,4 +39,10 @@ class Driver extends Model
         return $this->belongsTo('App\Keranjang');
     }
 
+    public function selesaiBekerja()
+    {
+        $this->keranjang_id = null;
+        $this->save();
+    }
+
 }

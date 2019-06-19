@@ -65,7 +65,12 @@ class CustomRegisterController extends Controller
         $request['jenis'] = UserLevel::PENJUAL;
         $request['password'] = Hash::make($request->password);
         DB::transaction(function() use ($request){
-            $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
+            if($request->hasFile('foto_profil')){
+                $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
+                $request->file('foto_profil')->storeAs('foto_profil',$namaberkasfoto,'public');
+            } else {
+                $namaberkasfoto = null;
+            }
             $array = [
                 'nama' => $request->nama,
                 'password' => $request->password,
@@ -82,7 +87,6 @@ class CustomRegisterController extends Controller
             ];
             $userPenjual = User::create($array);
             $penjual = $userPenjual->penjual()->create($array);
-            $request->file('foto_profil')->storeAs('foto_profil',$namaberkasfoto,'public');
         });        
         return redirect()->route('login')->with("success","Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
     }
@@ -91,7 +95,12 @@ class CustomRegisterController extends Controller
     {
         $request['password'] = Hash::make($request->password);
         DB::transaction(function() use ($request){
-            $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
+            if($request->hasFile('foto_profil')){
+                $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
+                $request->file('foto_profil')->storeAs('foto_profil',$namaberkasfoto,'public');
+            } else {
+                $namaberkasfoto = null;
+            }
             $array = [
                 'nama' => $request->nama,
                 'password' => $request->password,
@@ -106,7 +115,6 @@ class CustomRegisterController extends Controller
             ];
             $userPembeli = User::create($array);
             $pembeli = $userPembeli->pembeli()->create($array);
-            $request->file('foto_profil')->storeAs('foto_profil',$namaberkasfoto,'public');
         });
         return redirect()->route('login')->with("success","Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
     }

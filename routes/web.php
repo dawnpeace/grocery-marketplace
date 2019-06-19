@@ -108,6 +108,7 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
         Route::post('/{keranjang}/proses','PermintaanController@proses')->name('permintaan.proses');
         Route::get('/daftar-proses','PermintaanController@daftarProses')->name('permintaan.diproses');
         Route::post('/pesanan/{keranjang}/diambil','PermintaanController@diambilDriver')->name('permintaan.diambil');
+        Route::post('/{keranjang}/biaya-antar','PermintaanController@tambahBiayaAntar')->name('permintaan.biaya');
     });
     
 });

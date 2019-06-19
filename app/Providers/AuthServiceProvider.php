@@ -60,5 +60,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('SelesaikanTransaksi','App\Policies\TransaksiPolicy@transaksiSelesai');
         Gate::define('DetailPermintaan','App\Policies\PermintaanPolicy@lihatPermintaan');
         Gate::define('ProsesPermintaan','App\Policies\PermintaanPolicy@prosesPermintaan');
+        Gate::define('InputBiayaAntar','App\Policies\PermintaanPolicy@gantiBiayaAntar');
     }
 }

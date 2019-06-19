@@ -41,9 +41,9 @@ class PekerjaanController extends Controller
         
         $keranjang = $user->driver->keranjang;
         $keranjang->status->update(['telah_sampai'=>1,'transaksi_selesai'=>1]);
-        $user->driver->update(['sedang_bekerja'=>0,'keranjang_id' => null]);
+        $user->driver->update(['sedang_bekerja'=>0]);
 
-        return redirect()->route('driver.dashboard')->with('success','Pekerjaan telah selesai, Silahkan ambil pekerjaan lain !');
+        return redirect()->route('driver.dashboard')->with('success','Pekerjaan telah diselesaikan menunggu konfirmasi Pembeli !');
     }
 
 }

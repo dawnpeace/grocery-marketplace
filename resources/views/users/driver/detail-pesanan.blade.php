@@ -47,6 +47,10 @@
                             <th>Kontak Pembeli</th>
                             <td><p><button data-toggle="tooltip" title="Kirim Pesan ke Pembeli" data-placement="bottom" onclick="openWA({{whatsappLink($keranjang->pembeli->no_telp)}})" class="btn btn-success"><i class="fab fa-whatsapp"></i> Kirim Pesan Whatsapp</button></p></td>
                         </tr>
+                        <tr>
+                            <th>Biaya Antar</th>
+                            <td>{{formatRP($keranjang->biaya_antar)}}</td>
+                        </tr>
                     </table>
         
                     <h2><i class="fa fa-shopping-cart"></i> Detail Barang</h2>
