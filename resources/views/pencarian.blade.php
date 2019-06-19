@@ -27,10 +27,11 @@
                                 </div>
                                 <div class="form-group">
                                 <select name="cari"  class="form-control form-control-sm">
-                                        <option value="produk" {{request('cari') == 'produk' ? 'selected' :  ''}}>Produk</option>
-                                        <option value="penjual" {{request('cari') == 'penjual' ? 'selected' :  ''}}>Penjual</option>
-                                    </select>
-                                </div>
+                                    <option value="produk" {{request('cari') == 'produk' ? 'selected' :  ''}}>Produk</option>
+                                    <option value="penjual" {{request('cari') == 'penjual' ? 'selected' :  ''}}>Penjual</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary text-right"><i class="fa fa-search"></i> Cari</button>
                         </form>
                     </div>
                 </div>
