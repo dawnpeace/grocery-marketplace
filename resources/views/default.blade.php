@@ -67,7 +67,7 @@
         @guest
         <div class="container w-75">
             <div class="alert alert-secondary" role="alert">
-                <strong>Anda belum masuk. Silahkan masuk untuk melanjutkan</strong>
+                <strong>Anda belum masuk. <a href="{{route('login')}}">Silahkan masuk untuk melanjutkan</a></strong>
             </div>
         </div>
         @endguest
