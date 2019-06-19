@@ -86,7 +86,7 @@
                             <th>Nama Produk</th>
                             <th class="text-right">Jumlah</th>
                             <th class="text-right">Harga Satuan</th>
-                            <th class="text-center">Subtotal</th>
+                            <th class="text-right">Subtotal</th>
                         </thead>
                         <tbody>
                             @php $total = 0; @endphp
