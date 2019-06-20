@@ -80,7 +80,7 @@
                 <div class="col-md-3 my-2">
                     <div class="card">
                         <a href="{{route('lihat.produk',[$item->id])}}">
-                            <img src="{{gambarDefaultProduk($item)}}" alt="" class="img-fluid mh-25">
+                            <img src="{{displayUrl($item)}}" alt="" class="img-fluid mh-25">
                         </a>
                         <div class="card-body">
                             <p class="text-center text-primary">{{$item->nama_produk}}</p>
