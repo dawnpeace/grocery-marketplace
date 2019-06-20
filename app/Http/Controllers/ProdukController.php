@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Produk;
 use App\Http\Requests\ProdukRequest;
+use App\Http\Requests\Edit\ProdukRequest as EditProdukRequest;
 
 class ProdukController extends Controller
 {
@@ -16,9 +17,9 @@ class ProdukController extends Controller
             return redirect('/')->with('warning','Akun anda belum diverifikasi pihak Admin.');            
         }
         $user = Auth::user()->load(['penjual']);
-         $daftarProduk = Produk::where('penjual_id', $user->penjual->id)
+        $daftarProduk = Produk::where('penjual_id', $user->penjual->id)
         ->orderBy('nama_produk')
-        ->with(['item'])
+        ->with(['item','display'])
         ->paginate(5);
 
         return view('users.penjual.dashboard', ['daftarProduk' => $daftarProduk]);
@@ -34,7 +35,7 @@ class ProdukController extends Controller
         $user = Auth::user()->load(['penjual']);
         $produk = $user->penjual->produk()->create($request->all());
         if($request->has('foto_produk')){
-            $fileName = uniqid("foto-").".".$request->file('foto_produk')->extension();
+            $fileName = uniqid(now().'_').".".$request->file('foto_produk')->extension();
             $request->file('foto_produk')->storeAs('foto_produk',$fileName,'public');
             $produk->gallery()->create(['foto_produk'=>$fileName]);
         }
@@ -47,7 +48,7 @@ class ProdukController extends Controller
         return view('users.penjual.lihat-produk', compact('produk'));
     }
 
-    public function update(ProdukRequest $request, Produk $produk)
+    public function update(EditProdukRequest $request, Produk $produk)
     {
         $this->authorize('ProdukUpdate',$produk);
         $produk->update($request->all());

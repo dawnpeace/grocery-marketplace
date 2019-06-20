@@ -30,7 +30,7 @@ class ProdukRequest extends FormRequest
             'deskripsi' => 'required|string|max:600',
             'harga' => 'required|integer|min:0',
             'satuan_unit' => 'required|string|max:8',
-            'jumlah_tersedia' => 'required|integer|min:0'
+            'jumlah_tersedia' => 'required|integer|min:0',
         ];
     }
 }

@@ -19,10 +19,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
           <form method="GET" action="{{route('pencarian')}}" class="mx-2 my-auto d-inline w-100">
-            <div class="input-group">
-              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Pencarian" aria-label="Search">
+            <div class="input-group mr-sm-2">
+              <input class="form-control" name="q" type="search" placeholder="Pencarian" aria-label="Search">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-light"><i class="fa fa-arrow-right"></i></button>
+              </div>
+              
               @can('pembeli')
-              <a href="{{route('keranjang')}}" class="btn btn-primary">
+              <a href="{{route('keranjang')}}" class="btn btn-primary ml-sm-2">
                   <i class="fas fa-cart-plus"></i>
                   Keranjang Anda
               </a>

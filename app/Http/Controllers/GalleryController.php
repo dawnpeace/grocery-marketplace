@@ -20,7 +20,7 @@ class GalleryController extends Controller
     public function store(FotoProdukRequest $request, Produk $produk)
     {
         $this->authorize('PhotoStore',$produk);
-        $fileName = uniqid("foto-").".".$request->file('foto_produk')->extension();
+        $fileName = uniqid(now()).".".$request->file('foto_produk')->extension();
         $request->file('foto_produk')->storeAs('foto_produk',$fileName,'public');
         $produk->gallery()->create(['foto_produk'=>$fileName]);
         return redirect()->back()->with('success','Foto Berhasil di Upload');
@@ -35,8 +35,11 @@ class GalleryController extends Controller
     public function update(FotoProdukRequest $request, FotoProduk $fotoproduk)
     {
         $this->authorize('PhotoUpdate',$fotoproduk);
-        Storage::disk('public')->delete("foto_produk/".$fotoproduk->foto_produk);
-        $request->file('foto_produk')->storeAs('foto_produk',$fotoproduk->foto_produk,'public');
+        $file = $request->file('foto_produk');
+        $filename = uniqid(now().'_').$file->extension();
+        $fotoproduk->updateFoto($filename);
+        $file->storeAs('foto_produk',$filename,'public');
+        
         return redirect()->back()->with("success","Foto berhasil dirubah");
     }
 

@@ -80,6 +80,7 @@
                             </span>
                             @endif
                         </div>
+
                         <div class="form-group">
                             <label for="harga">Harga per Satuan produk</label>
                             <input type="text" name="harga" value="{{old('harga') ?? $produk->harga}}" class="form-control {{$errors->has('harga') ? 'is-invalid' : ''}}" placeholder="Harga Produk">                            

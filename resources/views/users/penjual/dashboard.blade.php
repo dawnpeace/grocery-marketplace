@@ -32,7 +32,14 @@
                     </div>
                     <h5>{{$produk->nama_produk}}</h5> 
                     <hr>
-                    <p class="text-justify">{{$produk->deskripsi}}</p>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{{displayUrl($produk->display)}}" class="img img-fluid">
+                        </div>
+                        <div class="col-md-9 m-auto">
+                            <p class="text-justify">{{$produk->deskripsi}}</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="row">
