@@ -1,7 +1,7 @@
 @extends('default')
 
 @section('breadcrumb')
-    <div class="container mt-3">
+    <div class="container w-75 mt-3">
         <nav class="breadcrumb">
             <a class="breadcrumb-item" href="{{url('/')}}">Dapurpedia</a>
             <span class="breadcrumb-item active">Profil </span>
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="container mh-70vh">
+    <div class="container w-75 mh-70vh">
         <div class="card mb-4">
             <div class="card-body mb-3">
                 <h2 class="text-center">{{$driver->user->nama." - ".strtoupper($driver->plat_nomor_kendaraan)}}</h2>

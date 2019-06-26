@@ -15,10 +15,19 @@ class PencarianController extends Controller
         $hasil = [];
         switch($cari){
             case 'produk':
-                $hasil = Produk::where('nama_produk','like','%'.$request->q.'%')->with(['penjual','display'])->paginate('16');
+                if(isset($request->harga)){
+                    $harga = $request->harga == 'murah' ? 'asc' : 'desc' ;
+                    $hasil = Produk::where('nama_produk','like','%'.$request->q.'%')->with(['penjual','display'])->orderBy('harga',$harga)->paginate('15');
+                } else {
+                    $hasil = Produk::where('nama_produk','like','%'.$request->q.'%')->with(['penjual','display'])->orderBy('nama_produk')->paginate('15');                    
+                }
                 break;
             case 'penjual':
-                $hasil = Penjual::where('nama_toko','like','%'.$request->q.'%')->paginate('16');
+                if(isset($request->q)){
+                    $hasil = Penjual::where('nama_toko','like','%'.$request->q.'%')->orderBy('nama_toko','asc')->paginate('15');
+                } else{
+                    $hasil = Penjual::inRandomOrder()->paginate('15');
+                }
                 break;
         }
         return view('pencarian',compact('hasil'));

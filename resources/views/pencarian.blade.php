@@ -1,7 +1,7 @@
 @extends('default')
 
 @section('breadcrumb')
-    <div class="container mt-4">
+    <div class="container w-75 mt-4">
         <nav class="breadcrumb">
             <a class="breadcrumb-item" href="{{url('/')}}">Dapurpedia</a>
             <span class="breadcrumb-item active">Pencarian</span>
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="container mh-70vh">
+    <div class="container w-75 mh-70vh">
         <div class="row">
             <div class="col-md-3 col-sm-12">
                 <div class="card mt-2">
@@ -18,20 +18,26 @@
                         <form action="{{route('pencarian')}}">
                                 <div class="form-group">
                                     <label for="q">Pencarian</label>
-                                    <input type="text" id="q" value="{{request('q')}}" name="q" value="{{old('q')}} " class="form-control form-control-sm {{$errors->has('q') ? 'is-invalid' : ''}}" />
-                                    @if ($errors->has('q'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('q') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input type="text" id="q" value="{{request('q')}}" name="q" class="form-control form-control-sm {{$errors->has('q') ? 'is-invalid' : ''}}" />
                                 </div>
                                 <div class="form-group">
+                                <label for="cari">Jenis Pencarian</label>
                                 <select name="cari"  class="form-control form-control-sm">
                                     <option value="produk" {{request('cari') == 'produk' ? 'selected' :  ''}}>Produk</option>
                                     <option value="penjual" {{request('cari') == 'penjual' ? 'selected' :  ''}}>Penjual</option>
                                 </select>
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-primary text-right"><i class="fa fa-search"></i> Cari</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="harga">Urutkan berdasarkan</label>
+                                    <select name="harga" id="harga" class="form-control form-control-sm">
+                                        <option  value="" {{empty(request('harga')) ? 'selected' : ''}}>--</option>
+                                        <option value="murah" {{request('harga') == 'murah' ? 'selected' : ''}}>Urukan dari Termurah</option>
+                                        <option value="mahal" {{request('harga') == 'mahal' ? 'selected' : ''}}>Urutkan dari Termahal</option>
+                                    </select>
+                                </div>
+                                <div class="d-block text-right">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Cari</button>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -64,7 +70,7 @@
                     @endforelse
                     @else
                     @forelse($hasil as $produk)
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="p-2">
                             <div class="card shadow">
                                 <a href="{{route('lihat.produk',[$produk->id])}}" class="link-unstyled">
@@ -93,7 +99,7 @@
                 </div>
                 <div class="d-flex my-4">
                     <div class="mx-auto">
-                        {{$hasil->links()}}
+                        {{$hasil->appends(['q'=>request('q'),'harga'=>request('harga'),'cari'=>request('cari')])->links()}}
                     </div>
                 </div>
             </div>

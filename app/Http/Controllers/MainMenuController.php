@@ -12,7 +12,8 @@ class MainMenuController extends Controller
     public function index()
     {
         $daftarPasar = Pasar::all();
-        return view('dashboard',compact('daftarPasar'));
+        $produkMurah = Produk::orderBy('harga','asc')->limit(4)->with(['display','penjual'])->get();
+        return view('dashboard',compact(['daftarPasar','produkMurah']));
     }
 
     public function daftarProduk(Pasar $pasar)
