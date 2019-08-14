@@ -55,7 +55,7 @@ if(!function_exists('whatsappLink')){
         
         $greetings = "";
         $user  = Auth::user();
-        $number = explode('+',$number)[1];
+        $number = substr($number,1);
         if($user != null){
             switch($user->jenis){
                 case UserLevel::PEMBELI:
