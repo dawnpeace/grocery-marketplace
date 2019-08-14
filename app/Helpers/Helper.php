@@ -55,7 +55,7 @@ if(!function_exists('whatsappLink')){
         
         $greetings = "";
         $user  = Auth::user();
-
+        $number = explode('+',$number)[1];
         if($user != null){
             switch($user->jenis){
                 case UserLevel::PEMBELI:
@@ -71,9 +71,9 @@ if(!function_exists('whatsappLink')){
                     $greetings = "Halo saya $user->name admin dari Dapurpedia !. ";
                     break;
             }
-            return "'https://web.whatsapp.com/send?phone=".$number.'&text='.$greetings."'";
+            return "'https://api.whatsapp.com/send?phone=".$number.'&text='.$greetings."'";
         } else {
-            return "'https://web.whatsapp.com/send?phone=".$number.'&text=Halo saya melihat profil anda dari Dapurpedia'."'";
+            return "'https://api.whatsapp.com/send?phone=".$number.'&text=Halo saya melihat profil anda dari Dapurpedia'."'";
         }
 
         
