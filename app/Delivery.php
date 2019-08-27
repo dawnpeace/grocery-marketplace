@@ -24,7 +24,11 @@ class Delivery extends Model
         if(!$this->telah_dibayarkan){
             return "Item Belum dibayar.";
         } else if(!$this->sedang_diantarkan){
-            return "Item siap diantarkan.";
+            if($this->keranjang->metode_pengiriman == 'jemput'){
+                return "Item siap diambil.";
+            } else {
+                return "Item siap diantarkan.";
+            }
         } else if($this->sedang_diantarkan && !$this->telah_sampai){
             return "Item dalam pengantaran";
         } else if($this->telah_sampai){

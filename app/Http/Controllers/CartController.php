@@ -70,9 +70,10 @@ class CartController extends Controller
         $this->authorize('BelumCheckout',$keranjang);
         $request->validate([
             "metode_pembayaran" => ["required", Rule::in(["ovo","bca","mandiri","gopay"])],
+            "metode_pengiriman" => ["required", Rule::in(["gojek","grab","bujangkurir","jemput"])],
             "nomor_identifikasi" => "required|string"
         ]);
-        $keranjang->checkout($request->metode_pembayaran,$request->nomor_identifikasi);
+        $keranjang->checkout($request->metode_pembayaran,$request->nomor_identifikasi,$request->metode_pengiriman);
         return redirect()->route('keranjang')->with('success','Transaksi anda telah diselesaikan, menunggu konfirmasi Penjual.');
     }
 

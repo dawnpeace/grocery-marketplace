@@ -37,16 +37,16 @@
                     </tr>
                     @if($belanja->telah_diproses)
                     <tr>
-                        <th>Tanggal Diproses</th>
-                        <td>{{localeDate($belanja->tanggal_diproses)}}</td>
+                        <th>Status Proses</th>
+                        <td>{{$belanja->status->tampilStatus()}}</td>
                     </tr>
                     @endif
-                    @isset($belanja->biaya_antar)
+                    @if(!is_null($belanja->biaya_antar))
                     <tr>
                         <th>Biaya Antar</th>
                         <td>{{formatRP($belanja->biaya_antar)}}</td>
                     </tr>
-                    @endisset
+                    @endif
                     <tr>
                         <td colspan="2" class="text-right">
                             @can('SelesaikanTransaksi',[$belanja])

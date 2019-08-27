@@ -16,6 +16,7 @@ class AddPaymentMethodToOrdersTable extends Migration
         Schema::table('tb_keranjang_belanja', function (Blueprint $table) {
             $table->string('nomor_identifikasi')->nullable();
             $table->string('metode_pembayaran')->nullable();
+            $table->string('metode_pengiriman')->nullable();
         });
     }
 
@@ -29,6 +30,7 @@ class AddPaymentMethodToOrdersTable extends Migration
         Schema::table('tb_keranjang_belanja', function (Blueprint $table) {
             $table->dropColumn('nomor_identifikasi');
             $table->dropColumn('metode_pembayaran');
+            $table->dropColumn('metode_pengiriman');
         });
     }
 }

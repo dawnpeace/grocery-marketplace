@@ -53,6 +53,10 @@
                             <th class="text-right">Nomor Identifikasi</th>
                             <td>{{$keranjang->nomor_identifikasi." / ".$keranjang->metode_pembayaran}}</td>
                         </tr>
+                        <tr>
+                            <th class="text-right">Metode Pengiriman</th>
+                            <td>{{$keranjang->getPengantaran()}}</td>
+                        </tr>
                         @if($keranjang->telah_diproses)
                         <tr>
                             <th class="text-right">Tanggal Proses</th>
