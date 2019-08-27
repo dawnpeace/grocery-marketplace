@@ -185,61 +185,63 @@
 
 @section('js')
     <script>
-        $('#button-confirm').click(function(){    
-            swal({
-                title: "Proses Pesanan",
-                text: "Anda ingin memproses Pesanan?",
-                icon: "info",
-                buttons: true,
-                dangerMode: true,
-            }).then((val)=>{
-                if(val){
-                    formdel = $('form#confirm-order');
-                    formdel.attr('action',$(this).data('url'));
-                    formdel.submit();
-                }
+        $(document).ready(function(){
+            $('#button-confirm').click(function(){    
+                swal({
+                    title: "Proses Pesanan",
+                    text: "Anda ingin memproses Pesanan?",
+                    icon: "info",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((val)=>{
+                    if(val){
+                        formdel = $('form#confirm-order');
+                        formdel.attr('action',$(this).data('url'));
+                        formdel.submit();
+                    }
+                });
             });
-        });
-        $('#button-paid').click(function(){    
-            swal({
-                title: "Proses Pesanan",
-                text: "Tandai pesanan sebagai telah dibayar?",
-                icon: "info",
-                buttons: true,
-                dangerMode: true,
-            }).then((val)=>{
-                if(val){
-                    formdel = $('form#confirm-order');
-                    formdel.attr('action',$(this).data('url'));
-                    formdel.submit();
-                }
+            $('#button-paid').click(function(){    
+                swal({
+                    title: "Proses Pesanan",
+                    text: "Tandai pesanan sebagai telah dibayar?",
+                    icon: "info",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((val)=>{
+                    if(val){
+                        formdel = $('form#confirm-order');
+                        formdel.attr('action',$(this).data('url'));
+                        formdel.submit();
+                    }
+                });
             });
-        });
-        $('#button-send').click(function(){    
-            swal({
-                title: "Proses Pesanan",
-                text: "Kirim Pesanan?",
-                icon: "info",
-                buttons: true,
-                dangerMode: true,
-            }).then((val)=>{
-                if(val){
-                    formdel = $('form#confirm-order');
-                    formdel.attr('action',$(this).data('url'));
-                    formdel.submit();
-                }
+            $('#button-send').click(function(){    
+                swal({
+                    title: "Proses Pesanan",
+                    text: "Kirim Pesanan?",
+                    icon: "info",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((val)=>{
+                    if(val){
+                        formdel = $('form#confirm-order');
+                        formdel.attr('action',$(this).data('url'));
+                        formdel.submit();
+                    }
+                });
             });
-        });
-
-        listHeight = $('#user-info').height();
-        $('#pembeli-img').css({'max-height':listHeight});
-
-        var clipboard = new ClipboardJS('.clipboard');
-        clipboard.on('success',function(e){
-            $('.copy-text').show();
-            setInterval(function(){
-                $('.copy-text').hide();
-            },1600);
+    
+            listHeight = $('#user-info').height();
+            $('#pembeli-img').css({'max-height':listHeight});
+    
+            var clipboard = new ClipboardJS('.clipboard');
+            clipboard.on('success',function(e){
+                $('.copy-text').show();
+                setInterval(function(){
+                    $('.copy-text').hide();
+                },1600);
+            });
         });
     </script>
 @endsection

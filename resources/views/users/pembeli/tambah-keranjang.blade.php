@@ -131,29 +131,31 @@
 
 @section('js')
     <script>
-        $('#btn-plus').click(function(){
-            value = $('#input-number').val();
-            value++;
-            $('#input-number').val(value);
-        });
-        $('#btn-minus').click(function(){
-            value = $('#input-number').val();
-            if(value > 0){
-                value--;
+        $(document).ready(function(){
+            $('#btn-plus').click(function(){
+                value = $('#input-number').val();
+                value++;
                 $('#input-number').val(value);
-            }
-        });
-        $('#input-number').keypress(function(event){
-            if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
-                event.preventDefault(); //stop character from entering input
-            }
-        });
-        var clipboard = new ClipboardJS('.clipboard');
-        clipboard.on('success',function(e){
-            $('.copy-text').show();
-            setInterval(function(){
-                $('.copy-text').hide();
-            },1600);
+            });
+            $('#btn-minus').click(function(){
+                value = $('#input-number').val();
+                if(value > 0){
+                    value--;
+                    $('#input-number').val(value);
+                }
+            });
+            $('#input-number').keypress(function(event){
+                if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+                    event.preventDefault(); //stop character from entering input
+                }
+            });
+            var clipboard = new ClipboardJS('.clipboard');
+            clipboard.on('success',function(e){
+                $('.copy-text').show();
+                setInterval(function(){
+                    $('.copy-text').hide();
+                },1600);
+            });
         });
     </script>
 @endsection

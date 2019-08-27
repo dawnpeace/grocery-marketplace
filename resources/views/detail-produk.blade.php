@@ -100,9 +100,11 @@
 
 @section('js')
     <script>
-        $('button.read-more').click(function(){
-            deskripsi = $(this).siblings('.text-description');
-            deskripsi.text(deskripsi.data('deskripsi'));
+        $(document).ready(function(){
+            $('button.read-more').click(function(){
+                deskripsi = $(this).siblings('.text-description');
+                deskripsi.text(deskripsi.data('deskripsi'));
+            });
         });
     </script>
 @endsection
