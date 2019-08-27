@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="mt-3 text-right">
-                    <a href="{{route('register.index')}}" class="btn btn-dark">Daftar</a>
+                    <a href="{{route('register')}}" class="btn btn-dark">Daftar</a>
                     <button class="btn btn-primary">
                         Log In
                         <i class="fa fa-sign-in"></i>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Keranjang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class CartController extends Controller
 {
@@ -64,10 +65,14 @@ class CartController extends Controller
         return redirect()->back()->with('success','Keranjang berhasil dihapus');
     }
 
-    public function checkoutKeranjang(Keranjang $keranjang)
+    public function checkoutKeranjang(Request $request, Keranjang $keranjang)
     {
         $this->authorize('BelumCheckout',$keranjang);
-        $keranjang->checkout();
+        $request->validate([
+            "metode_pembayaran" => ["required", Rule::in(["ovo","bca","mandiri","gopay"])],
+            "nomor_identifikasi" => "required|string"
+        ]);
+        $keranjang->checkout($request->metode_pembayaran,$request->nomor_identifikasi);
         return redirect()->route('keranjang')->with('success','Transaksi anda telah diselesaikan, menunggu konfirmasi Penjual.');
     }
 

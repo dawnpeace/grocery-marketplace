@@ -17,7 +17,7 @@ Route::get('/cari','PencarianController@cari')->name('pencarian');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');
 
 Route::get('profil-penjual/{penjual}','ProfilController@penjual')->name('profil.penjual');
-Route::get('profil-driver/{driver}','ProfilController@driver')->name('profil.driver')->middleware('auth');
+// Route::get('profil-driver/{driver}','ProfilController@driver')->name('profil.driver')->middleware('auth');
 
 Route::group(['middleware'=>['can:pembeli']],function(){
     Route::get('tambah-keranjang/{produk}','ItemController@lihatProduk')->name('tambah.produk');
@@ -42,11 +42,10 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware(['guest'])->group(function(){
-    Route::view('daftar-registrasi','auth.daftar-registrasi')->name('register.index');
-    Route::get('register/{jenis?}','Auth\CustomRegisterController@buat')->name('register');
-    Route::post('register/driver','Auth\CustomRegisterController@simpanDriver');
-    Route::post('register/penjual','Auth\CustomRegisterController@simpanPenjual');
-    Route::post('register/pembeli','Auth\CustomRegisterController@simpanPembeli');
+    Route::get('daftar-registrasi','Auth\CustomRegisterController@buat')->name('register');
+    // Route::post('register/driver','Auth\CustomRegisterController@simpanDriver')->name('store.driver');
+    Route::post('register/penjual','Auth\CustomRegisterController@simpanPenjual')->name('store.seller');
+    Route::post('register/pembeli','Auth\CustomRegisterController@simpanPembeli')->name('store.customer');
 });
 
 Route::group(['middleware'=>['can:superadmin'],'prefix'=>'admin'],function(){
@@ -60,16 +59,16 @@ Route::group(['middleware'=>['can:superadmin'],'prefix'=>'admin'],function(){
 
     Route::post('manajemen-pasar/{pasar}/hapus','PasarController@delete')->name('pasar.delete');
 
-    Route::get('manajemen-driver','VerifikasiController@indexDriver')->name('admin.manajemen.driver');
+    // Route::get('manajemen-driver','VerifikasiController@indexDriver')->name('admin.manajemen.driver');
     Route::get('manajemen-pembeli','VerifikasiController@indexPembeli')->name('admin.manajemen.pembeli');
     Route::get('manajemen-penjual','VerifikasiController@indexPenjual')->name('admin.manajemen.penjual');
     
-    Route::post('verifikasi-driver/{idDriver}','VerifikasiController@updateDriver')->name('verif.driver');
+    // Route::post('verifikasi-driver/{idDriver}','VerifikasiController@updateDriver')->name('verif.driver');
     Route::post('verifikasi-Pembeli/{idPembeli}','VerifikasiController@updatePembeli')->name('verif.pembeli');
     Route::post('verifikasi-Penjual/{idPenjual}','VerifikasiController@updatePenjual')->name('verif.penjual');
     
-    Route::get('profil-driver/{id}','DriverController@edit')->name('edit.driver');
-    Route::post('profil-driver/{id}','DriverController@update')->name('update.driver');
+    // Route::get('profil-driver/{id}','DriverController@edit')->name('edit.driver');
+    // Route::post('profil-driver/{id}','DriverController@update')->name('update.driver');
     
     Route::get('profil-penjual/{id}','PenjualController@edit')->name('edit.penjual');
     Route::post('profil-penjual/{id}','PenjualController@update')->name('update.penjual');
@@ -109,25 +108,27 @@ Route::group(['middleware'=>['can:penjual'], 'prefix'=>'penjual'],function(){
         Route::get('/daftar-proses','PermintaanController@daftarProses')->name('permintaan.diproses');
         Route::post('/pesanan/{keranjang}/diambil','PermintaanController@diambilDriver')->name('permintaan.diambil');
         Route::post('/{keranjang}/biaya-antar','PermintaanController@tambahBiayaAntar')->name('permintaan.biaya');
+        Route::post('/{keranjang}/telah-dibayar','PermintaanController@siapDibayarkan')->name('permintaan.dibayarkan');
+        Route::post('/{keranjang}/antar','PermintaanController@antar')->name('permintaan.antar');
     });
     
 });
 
 
-Route::get('/driver','AntarController@index')->name('driver.dashboard');
-Route::get('/driver/profil-saya','DriverController@editProfil')->name('driver.profil.edit');
-Route::group(['middleware'=>['can:driver'],'prefix'=>'driver'],function(){
+// Route::get('/driver','AntarController@index')->name('driver.dashboard');
+// Route::get('/driver/profil-saya','DriverController@editProfil')->name('driver.profil.edit');
+// Route::group(['middleware'=>['can:driver'],'prefix'=>'driver'],function(){
 
-    Route::post('/profil-saya','DriverController@updateProfil')->name('driver.profil.update');
+//     Route::post('/profil-saya','DriverController@updateProfil')->name('driver.profil.update');
 
-    Route::group(['middleware'=>['can:TidakBekerja']],function(){
-        Route::get('/detail-pesanan/{keranjang}','AntarController@detailPesanan')->name('pesanan.detail');
-        Route::post('/ambil-pesanan/{keranjang}','AntarController@ambilPesanan')->name('pesanan.ambil');
-    });
+//     Route::group(['middleware'=>['can:TidakBekerja']],function(){
+//         Route::get('/detail-pesanan/{keranjang}','AntarController@detailPesanan')->name('pesanan.detail');
+//         Route::post('/ambil-pesanan/{keranjang}','AntarController@ambilPesanan')->name('pesanan.ambil');
+//     });
 
-    Route::middleware(['can:SedangBekerja'])->group(function(){
-        // Route::get('pekerjaan-aktif','PekerjaanController@index')->name('pekerjaan.index');
-        Route::post('selesaikan-pekerjaan','PekerjaanController@selesaikanPekerjaan')->name('pekerjaan.selesai');
-    });
+//     Route::middleware(['can:SedangBekerja'])->group(function(){
+//         // Route::get('pekerjaan-aktif','PekerjaanController@index')->name('pekerjaan.index');
+//         Route::post('selesaikan-pekerjaan','PekerjaanController@selesaikanPekerjaan')->name('pekerjaan.selesai');
+//     });
     
-});
+// });

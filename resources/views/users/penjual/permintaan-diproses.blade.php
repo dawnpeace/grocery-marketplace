@@ -24,7 +24,6 @@
                     <thead>
                         <th>Nama Pelanggan</th>
                         <th>Tanggal Pesan</th>
-                        <th>Driver</th>
                         <th>Status Pengantaran</th>
                         <th>Aksi</th>
                     </thead>
@@ -33,16 +32,9 @@
                         <tr>
                             <td>{{$item->pembeli->user->nama}}</td>
                             <td>{{$item->tanggalPemesanan()}}</td>
-                            <td>
-                                @if($item->telah_diambil_driver)
-                                <a href="{{route('profil.driver',[$item->status->driver->id])}}">{{$item->status->driver->user->nama ?? "-"}}</a>
-                                @endif
-                            </td>
                             <td>{{$item->status->tampilStatus()}}</td>
                             <td>
-                                @if($item->telah_diambil_driver && !$item->status->telah_dijemput)
-                                <button data-url="{{route('permintaan.diambil',[$item->id])}}" class="btn btn-takeout btn-sm btn-primary"><i class="fa fa-thumbs-up"></i> Barang Diambil</button>
-                                @endif
+                                
                                 @can('DetailPermintaan',$item)
                                 <a class="btn btn-sm btn-secondary" href="{{route('permintaan.detail',[$item->id])}}"><i class="fa fa-list"></i> Detail</a>
                                 @endcan

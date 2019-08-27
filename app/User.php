@@ -58,14 +58,14 @@ class User extends Authenticatable
     public function tanggalDaftar()
     {
         $tanggal = Carbon::parse($this->created_at);
-        return $tanggal->isoFormat("d MMMM Y");
+        return $tanggal->isoFormat("DD MMMM Y");
     }
 
     public function profilUrl()
     {
         switch($this->jenis){
-            case UserLevel::DRIVER:
-                return route('driver.profil.edit');
+            // case UserLevel::DRIVER:
+            //     return route('driver.profil.edit');
             case UserLevel::PENJUAL:
                 return route('penjual.profil.edit');
             case UserLevel::PEMBELI:
@@ -78,8 +78,8 @@ class User extends Authenticatable
     public function dashboardUrl()
     {
         switch($this->jenis){
-            case UserLevel::DRIVER:
-                return route('driver.dashboard');
+            // case UserLevel::DRIVER:
+            //     return route('driver.dashboard');
             case UserLevel::PENJUAL:
                 return route('penjual.dashboard');
             case UserLevel::PEMBELI:

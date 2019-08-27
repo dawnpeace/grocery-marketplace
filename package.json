@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.5.22"
     },
     "dependencies": {
+        "clipboard": "^2.0.4",
         "font-awesome": "^4.7.0",
         "select2": "^4.0.7",
         "sweetalert": "^2.1.2",

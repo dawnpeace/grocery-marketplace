@@ -18,7 +18,7 @@ use App\Enums\UserLevel;
 $factory->define(App\User::class, function (Faker $faker) {
 
     $username = $faker->unique()->username;
-    $level_pool = collect(UserLevel::LEVELS)->except(UserLevel::SUPERADMIN)->keys();
+    $level_pool = collect(UserLevel::LEVELS)->except([UserLevel::SUPERADMIN,UserLevel::DRIVER])->keys();
 
     return [
         'username' => $username,

@@ -18,16 +18,8 @@
             {{Session::get('success')}}
         </div>
         @endif
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-body">
-                <div class="float-right">
-                    @if(!$keranjang->telah_diselesaikan)
-                    <form method="POST" action="{{route('keranjang.checkout',$keranjang->id)}}">
-                        @csrf
-                        <button  id="btn-checkout" type="button" class="btn btn-success"><i class="fa fa-check"></i> Checkout</button>
-                    </form>
-                    @endif
-                </div>
                 <h2 class="mb-3">Detail Keranjang</h2>
                 <div class="clearfix"></div>
                 <div class="table-responsive">
@@ -66,10 +58,76 @@
                     </table>
                     <form id="delete-item" action="" method="POST">@csrf</form>
                 </div>
+                <div class="w-100 mt-3">
+                    @if($errors->has('metode_pembayaran'))
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        {{$errors->get('metode_pembayaran')[0]}}
+                    </div>
+                    @endif
+
+                    @if($errors->has('nomor_identifikasi'))
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        {{$errors->get('nomor_identifikasi')[0]}}
+                    </div>
+                    @endif
+
+                    @if(!$keranjang->telah_diselesaikan)
+                    <form id="checkout" method="POST" action="{{route('keranjang.checkout',$keranjang->id)}}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Pembayaran</h3>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="custom-control custom-radio">
+                                    <input name="metode_pembayaran" value="bca" type="radio" class="custom-control-input" id="bca">
+                                    <label class="custom-control-label" for="bca">Transfer BCA</label>
+                                </div>
+                                <img src="{{asset('img/payment/BCA.png')}}" alt="" class="img img-fluid payment-icon">
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="custom-control custom-radio">
+                                    <input name="metode_pembayaran" value="mandiri" type="radio" class="custom-control-input" id="mandiri">
+                                    <label class="custom-control-label" for="mandiri">Transfer Mandiri</label>
+                                </div>
+                                <img src="{{asset('img/payment/mandiri.png')}}" alt="" class="img img-fluid payment-icon">
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="custom-control custom-radio">
+                                    <input name="metode_pembayaran" value="ovo" type="radio" class="custom-control-input" id="ovo">
+                                    <label class="custom-control-label" for="ovo">Pembayaran Melalui OVO</label>
+                                </div>
+                                <img src="{{asset('img/payment/ovo.jpg')}}" alt="" class="img img-fluid payment-icon">
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="custom-control custom-radio">
+                                    <input name="metode_pembayaran" value="gopay" type="radio" class="custom-control-input" id="gopay">
+                                    <label class="custom-control-label" for="gopay">Pembayaran Melalui GO-Pay</label>
+                                </div>
+                                <img src="{{asset('img/payment/gopay.jpg')}}" alt="" class="img img-fluid payment-icon">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="nomor_identifikasi">Nomor Identifikasi</label>
+                                <input placeholder="Input Nomor Akun Pembayaran" type="text" id="nomor_identifikasi" name="nomor_identifikasi" value="{{old('nomor_identifikasi')}}" class="form-control {{$errors->has('nomor_identifikas') ? 'is-invalid' : ''}}" required/>
+                                @if ($errors->has('nomor_identifikasi'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('nomor_identifikasi') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="text-right mt-3">
+                            <button  id="btn-checkout" type="button" class="btn btn-success"><i class="fa fa-check"></i> Checkout</button>
+                        </div>
+                    </form>
+                    @endif
+                </div>
             </div>
         </div>
-        
-
     </div>
 @endsection
 
@@ -100,7 +158,7 @@
                 dangerMode: true,
             }).then((val)=>{
                 if(val){
-                    $(this).parent('form').submit();
+                    $('#checkout').submit();
                 }
             });
         });

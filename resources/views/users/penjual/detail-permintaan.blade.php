@@ -22,13 +22,25 @@
             <div class="card-body">
                 <div class="float-right m-2">
                     @can('ProsesPermintaan',$keranjang)
-                    <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Terima Pesanan Ini</button>
+                    <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Pesanan Siap Dibayarkan</button>
                     @endcan
+
+                    @can('BelumDibayar',$keranjang)
+                    <button id="button-paid" data-url="{{route('permintaan.dibayarkan',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Pesanan Telah Dibayarkan</button>
+                    @endcan
+
+                    @can('SiapDiantar',$keranjang)
+                    <button id="button-send" data-url="{{route('permintaan.antar',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Antarkan Pesanan</button>
+                    @endcan
+
                     <button type="button" class="btn btn-info btn-sm my-1" data-toggle="modal" data-target="#modal-info"><i class="fa fa-info"></i> Informasi Pelanggan</button>
                     <button type="button" onclick="openWA({{whatsappLink($keranjang->pembeli->no_telp)}})" class="btn btn-sm btn-success my-1"><i class="fab fa-whatsapp"></i> Kirim Pesan WA ke Pembeli</button>
                 </div>
                 <div class="clearfix"></div>
-                <h2 class="ml-2 mb-2"><i class="fa fa-info-circle"></i> Detail Keranjang {{$keranjang->pembeli->user->nama}}</h2>
+                <h2 class="ml-2 mb-2">
+                    <i class="fa fa-info-circle"></i> 
+                    Detail Keranjang {{$keranjang->pembeli->user->nama}} 
+                </h2>
                  
                 <div class="table-responsive my-3">
                     <table class="table-sm table-borderless">
@@ -36,23 +48,22 @@
                             <th class="text-right">Tanggal Checkout</th>
                             <td>{{localeDate($keranjang->tanggal_checkout)}}</td>
                         </tr>
+                        <tr>
+                            <th class="text-right">Nomor Identifikasi</th>
+                            <td>{{$keranjang->nomor_identifikasi." / ".$keranjang->metode_pembayaran}}</td>
+                        </tr>
                         @if($keranjang->telah_diproses)
                         <tr>
                             <th class="text-right">Tanggal Proses</th>
                             <td>{{localeDate($keranjang->tanggal_diproses)}}</td>
                         </tr>
                         @endif
-                        
-                        @if($keranjang->telah_diambil_driver)
+                        @cannot('InputBiayaAntar',$keranjang)
                         <tr>
-                            <th class="text-right">Tanggal Jemputan Driver</th>
-                            <td>{{localeDateTime($keranjang->tanggal_dijemput)}}</td>
-                        </tr>
-                        <tr>
-                            <th  class="text-right">Biaya Antar</th>
+                            <th class="text-right">Biaya Antar</th>
                             <td>{{formatRP($keranjang->biaya_antar)}}</td>
                         </tr>
-                        @endif
+                        @endcannot
                         @can('InputBiayaAntar',$keranjang)
                         <tr>
                             <th class="text-right">Biaya Antar</th>
@@ -79,7 +90,10 @@
                         @endcan
                     </table>
                 </div>
-
+                
+                @can('SedangDiantar',$keranjang)
+                <p class="font-weight-bold text-right" class="text-right ">Barang sedang dalam pengantaran</p>
+                @endcan
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -174,6 +188,36 @@
             swal({
                 title: "Proses Pesanan",
                 text: "Anda ingin memproses Pesanan?",
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+            }).then((val)=>{
+                if(val){
+                    formdel = $('form#confirm-order');
+                    formdel.attr('action',$(this).data('url'));
+                    formdel.submit();
+                }
+            });
+        });
+        $('#button-paid').click(function(){    
+            swal({
+                title: "Proses Pesanan",
+                text: "Tandai pesanan sebagai telah dibayar?",
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+            }).then((val)=>{
+                if(val){
+                    formdel = $('form#confirm-order');
+                    formdel.attr('action',$(this).data('url'));
+                    formdel.submit();
+                }
+            });
+        });
+        $('#button-send').click(function(){    
+            swal({
+                title: "Proses Pesanan",
+                text: "Kirim Pesanan?",
                 icon: "info",
                 buttons: true,
                 dangerMode: true,

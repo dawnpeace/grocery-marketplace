@@ -27,15 +27,16 @@ class PenjualRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'username' => ['required', 'regex:/^[a-zA-Z0-9_]*$/', 'between:5,12', 'unique:users,username'],
-            'kota' => ['required','string', 'max:191'],
-            'alamat' => ['required','string', 'max:191'],
-            'no_telp' => ['required','string', new RuleNumber],
+            'nama_penjual' => ['required', 'string', 'max:255'],
+            'email_penjual' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'password_penjual' => ['required', 'string', 'min:6', 'confirmed'],
+            'username_penjual' => ['required', 'regex:/^[a-zA-Z0-9_]*$/', 'between:5,12', 'unique:users,username'],
+            'kota_penjual' => ['required','string', 'max:191'],
+            'alamat_penjual' => ['required','string', 'max:191'],
+            'no_telp_penjual' => ['required','string', new RuleNumber],
+            'nama_toko' => ['required','string'],
             'pasar_id' => ['required','exists:tb_pasar,id'],
-            'foto_profil' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
+            'foto_profil_penjual' => ['nullable','file','mimes:jpg,jpeg,png','max:1024']
         ];
     }
 }

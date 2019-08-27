@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Delivery extends Model
 {
     protected $table = 'tb_status_pengantaran';
-    protected $fillable = ['keranjang_id','driver_id','telah_dijemput','telah_sampai'];
+    protected $fillable = ['keranjang_id','driver_id','telah_dijemput','telah_sampai','telah_dibayarkan','sedang_diantarkan'];
 
     public function keranjang()
     {
@@ -21,11 +21,11 @@ class Delivery extends Model
 
     public function tampilStatus()
     {
-        if(!$this->telah_dijemput && is_null($this->driver_id)){
-            return "Belum menemukan driver.";
-        } else if(!$this->telah_dijemput && $this->driver_id){
-            return "Menunggu jemputan driver.";
-        } else if($this->telah_dijemput && !$this->telah_sampai){
+        if(!$this->telah_dibayarkan){
+            return "Item Belum dibayar.";
+        } else if(!$this->sedang_diantarkan){
+            return "Item siap diantarkan.";
+        } else if($this->sedang_diantarkan && !$this->telah_sampai){
             return "Item dalam pengantaran";
         } else if($this->telah_sampai){
             return "Item telah sampai ditujuan";

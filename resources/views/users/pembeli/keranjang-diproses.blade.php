@@ -23,7 +23,7 @@
         @forelse($keranjang as $belanja)
         <div class="card mb-3">
             <div class="card-header">
-                <h4><a href="{{route('profil.penjual',$belanja->penjual->id)}}">{{$belanja->penjual->nama_toko}}</a> {{$belanja->telah_diproses ? '(Transaksi telah Diproses Penjual)' : ''}}</h4>
+                <h4><a href="{{route('profil.penjual',$belanja->penjual->id)}}">{{$belanja->penjual->nama_toko}}</a> {{$belanja->telah_diproses && $belanja->status->sedang_diantarkan ? '(Transaksi telah Diproses Penjual)' : ''}}</h4>
             </div>
             <div class="card-body">
                 <table class="table table-sm table-borderless m-0 mb-3">
@@ -51,9 +51,6 @@
                         <td colspan="2" class="text-right">
                             @can('SelesaikanTransaksi',[$belanja])
                             <button data-url="{{route('transaksi.selesai',[$belanja->id])}}" class="btn btn-sm btn-outline-success btn-selesai"><i class="fa fa-thumbs-up"></i> Transaksi Selesai</button>
-                            @endcan
-                            @if($belanja->telah_diambil_driver)
-                            <a href="{{route('profil.driver',$belanja->status->driver_id)}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-motorcycle"></i> Lihat Driver</a>
                             @endcan
                             <button data-bid="{{$belanja->id}}" class="btn btn-sm btn-outline-info btn-detail"><i class="fa fa-eye"></i> Lihat Detail</button>
                         </td>

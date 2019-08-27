@@ -36,7 +36,7 @@
                         <div class="clearfix mb-2"></div>
                         
                         <button type="button" onclick="openWA({{whatsappLink($penjual->no_telp)}})" class="btn btn-success float-right"><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
-                        
+                        <button data-clipboard-text="{{$penjual->no_telp}}" class="btn btn-secondary clipboard"><i class="fa fa-clipboard"></i> Salin No Telp</button>
                     </div>
                 </div>
                 <hr>
@@ -71,4 +71,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+            var clipboard = new ClipboardJS('.clipboard');
+        });
+    </script>
 @endsection

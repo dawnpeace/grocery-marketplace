@@ -99,7 +99,6 @@ class AntarController extends Controller
         $this->authorize('SelesaikanTransaksi',$keranjang);
         $keranjang->load(['status']);   
         $keranjang->update(['transaksi_selesai'=>1]);
-        $keranjang->status->driver->selesaiBekerja();
         return redirect()->back()->with('success','Transaksi telah diselesaikan. Terima kasih telah beberbelanja di Dapurpedia !');
     }
 }

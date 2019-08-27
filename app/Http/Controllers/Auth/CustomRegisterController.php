@@ -15,19 +15,10 @@ use App\User;
 
 class CustomRegisterController extends Controller
 {
-    public function buat($jenis = "")
+    public function buat()
     {
-        if(empty($jenis))
-        { 
-            return redirect()->route('register.index'); 
-        }
-        $jenisView = ["driver" => "auth.component.register-driver", "pembeli"=>"auth.component.register-pembeli", "penjual" => "auth.component.register-penjual"];
-        // cek apabila request URI diizinkan dan mengirim component view path
-        if(in_array(($jenis),array_keys($jenisView))){
-            return view("auth.register",["viewComponent"=>$jenisView[$jenis],"jenis"=>ucfirst($jenis),'pasar'=>Pasar::all()]);
-        } else {
-            return abort(404);
-        }
+        $pasar = Pasar::all();
+        return view('auth.daftar-registrasi',compact('pasar'));
     }
     
     public function simpanDriver(DriverRequest $request)
@@ -65,22 +56,22 @@ class CustomRegisterController extends Controller
         $request['jenis'] = UserLevel::PENJUAL;
         $request['password'] = Hash::make($request->password);
         DB::transaction(function() use ($request){
-            if($request->hasFile('foto_profil')){
-                $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
-                $request->file('foto_profil')->storeAs('foto_profil',$namaberkasfoto,'public');
+            if($request->hasFile('foto_profil_penjual')){
+                $namaberkasfoto = uniqid().".".$request->file('foto_profil_penjual')->extension();
+                $request->file('foto_profil_penjual')->storeAs('foto_profil',$namaberkasfoto,'public');
             } else {
                 $namaberkasfoto = null;
             }
             $array = [
-                'nama' => $request->nama,
-                'password' => $request->password,
-                'email' => $request->email,
-                'username' => $request->username,
-                'password' => $request->password,
-                'kota' => $request->kota,
+                'nama' => $request->nama_penjual,
+                'password' => $request->password_penjual,
+                'email' => $request->email_penjual,
+                'username' => $request->username_penjual,
+                'password' => bcrypt($request->password_penjual),
+                'kota' => $request->kota_penjual,
                 'nama_toko' => $request->nama_toko,
-                'alamat' => $request->alamat,
-                'no_telp' => $request->no_telp,
+                'alamat' => $request->alamat_penjual,
+                'no_telp' => $request->no_telp_penjual,
                 'jenis' => UserLevel::PENJUAL,
                 'foto_profil' => $namaberkasfoto,
                 'pasar_id' => $request->pasar_id

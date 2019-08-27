@@ -23,9 +23,9 @@ class UserSeeder extends Seeder
                         case UserLevel::PENJUAL:
                             $user->penjual()->save(factory(App\Penjual::class)->make(["pasar_id"=> $pasar->random(1)->first()->id]));
                             break;
-                        case UserLevel::DRIVER:
-                            $user->driver()->save(factory(App\Driver::class)->make());
-                            break;
+                        // case UserLevel::DRIVER:
+                        //     $user->driver()->save(factory(App\Driver::class)->make());
+                        //     break;
                         case UserLevel::PEMBELI:
                             $user->pembeli()->save(factory(App\Pembeli::class)->make());
                             break;

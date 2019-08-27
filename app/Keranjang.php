@@ -8,16 +8,21 @@ use Carbon\Carbon;
 class Keranjang extends Model
 {
     protected $table = "tb_keranjang_belanja";
-    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai","tanggal_checkout","tanggal_dijemput","tanggal_diproses","biaya_antar"];
+    protected $fillable = ["penjual_id","telah_diselesaikan","telah_diambil_driver","transaksi_selesai","tanggal_checkout","tanggal_dijemput","tanggal_diproses","biaya_antar","metode_pembayaran","nomor_identifikasi"];
 
     public function belanjaan()
     {
         return $this->hasMany("App\Item");
     }
 
-    public function checkout()
+    public function checkout($metodePembayaran, $nomorIdentifikasi)
     {
-        $this->update(['telah_diselesaikan'=>1,'tanggal_checkout'=>now()]);
+        $this->update([
+            'telah_diselesaikan' => 1,
+            'tanggal_checkout' => now(),
+            'metode_pembayaran' => $metodePembayaran,
+            'nomor_identifikasi' => $nomorIdentifikasi
+        ]);
     }
 
     public function penjual()
@@ -30,6 +35,12 @@ class Keranjang extends Model
         return $this->belongsTo('App\Pembeli');
     }
     
+    public function antar()
+    {
+        $this->status()->update([
+            "sedang_diantarkan" => 1
+        ]);
+    }
 
     public function tanggalPemesanan()
     {
@@ -56,6 +67,13 @@ class Keranjang extends Model
     public function status()
     {
         return $this->hasOne('App\Delivery');
+    }
+
+    public function telahDibayarkan()
+    {
+        $this->status()->update([
+            'telah_dibayarkan' => 1
+        ]);
     }
 
 }

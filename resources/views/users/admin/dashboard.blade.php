@@ -8,21 +8,8 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-md-4 pb-3">
-            <a class="link-unstyled" href="{{route('admin.manajemen.driver')}}">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-center">Driver Total : {{$dataUser["driver"]["total"]}}</h5>
-                        <div class="row">
-                            <div class="col-sm-6 text-center">Telah Diverifikasi <br>{{$dataUser["driver"]["telahDiverifikasi"]}}</div>
-                            <div class="col-sm-6 text-center">Belum Diverifikasi <br>{{$dataUser["driver"]["belumDiverifikasi"]}}</div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
 
-        <div class="col-md-4 pb-3">
+        <div class="col-md-6 pb-3">
             <a href="{{route('admin.manajemen.pembeli')}}" class="link-unstyled">
                 <div class="card">
                     <div class="card-body">
@@ -36,7 +23,7 @@
             </a>
         </div>
 
-        <div class="col-md-4 pb-3">
+        <div class="col-md-6 pb-3">
             <a href="{{route('admin.manajemen.penjual')}}" class="link-unstyled">
                 <div class="card">
                     <div class="card-body">

@@ -30,14 +30,18 @@ class PermintaanController extends Controller
 
     public function lihatDetail(Keranjang $keranjang)
     {
+        if($keranjang->telah_diselesaikan){
+            return redirect()->route('permintaan');
+        }
         $keranjang->load([
             'belanjaan' => function($query){
                 $query->with(['produk']);
             },
             'pembeli'=>function($query){
                 $query->with(['user']);
-            }
-            ]);
+            },
+            'status'
+        ]);
         $this->authorize('DetailPermintaan',$keranjang);
             
         return view('users.penjual.detail-permintaan',compact('keranjang'));
@@ -63,6 +67,22 @@ class PermintaanController extends Controller
         ]);
 
         return redirect()->back()->with('success','Biaya antar berhasil ditambahkan !');
+    }
+
+    public function siapDibayarkan(Keranjang $keranjang)
+    {
+        $keranjang->load('status');
+        $this->authorize('BelumDibayar',$keranjang);
+        $keranjang->telahDibayarkan();
+        return redirect()->back()->with('success','Status pembayaran telah diperbaharui !');        
+    }
+
+    public function antar(Keranjang $keranjang)
+    {
+        $keranjang->load('status');
+        $this->authorize('TelahDibayar',$keranjang);
+        $keranjang->antar();
+        return redirect()->back()->with('success','Status pembayaran telah diperbaharui !');        
     }
 
     public function daftarProses()
