@@ -79,11 +79,12 @@
         </div>
     </div>
     <hr>
-    <div class="mt-2 row">
+    @if($produk->penilaian->isNotEmpty())
+    <div class="my-2 row">
         <div class="col-md-12">
             <h3 class="text-center">Ulasan Terhadap Produk</h3>
         </div>
-        @foreach($produk->penilaian->take(3) as $review)
+        @foreach($produk->penilaian as $review)
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
@@ -94,6 +95,7 @@
                                 @endfor
                             </p>
                         </div>
+                        <p class="text-left font-weight-bold">{{$review->item->keranjang->pembeli->user->nama}}</p>
                         <hr>
                         <p>
                             {{$review->review}}
@@ -103,6 +105,7 @@
             </div>
         @endforeach
     </div>
+    @endif
     <div class="mt-2">
         @if(!$penjual->produk->isEmpty())
         <h5 class="text-center">Produk Lainnya dari {{$penjual->nama_toko}}</h5>

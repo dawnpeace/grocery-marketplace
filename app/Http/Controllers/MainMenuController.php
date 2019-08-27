@@ -29,7 +29,7 @@ class MainMenuController extends Controller
             'penjual',
             'gallery',
             'penilaian' => function($query){
-                $query->inRandomOrder()->limit(3);
+                $query->with('item.keranjang.pembeli.user')->inRandomOrder()->limit(3);
             }
         ]);
         $ratingProduk = $produk->penilaian()->selectRaw('AVG(rating) as average_rate ')->get();
