@@ -19,4 +19,9 @@ class Item extends Model
     {
         return $this->belongsTo('App\Produk');
     }
+
+    public function review()
+    {
+        return $this->hasOne('App\Review');
+    }
 }

@@ -43,6 +43,9 @@
                 @if(auth()->user()->jenis != 'SUPERADMIN')
                 <a class="dropdown-item" href="{{Auth::user()->profilUrl()}}">Profil</a>
                 @endif
+                @if(auth()->user()->jenis == 'PEMBELI')
+                <a class="dropdown-item" href="{{route('review.index')}}">Penilaian</a>
+                @endif
                 @if(auth()->user()->jenis != 'PEMBELI')
                 <a class="dropdown-item" href="{{Auth::user()->dashboardUrl()}}">Dashboard</a>
                 @endif

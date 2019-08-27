@@ -72,4 +72,8 @@ class Produk extends Model
         return $this;
     }
 
+    public function penilaian()
+    {
+        return $this->hasMany('App\Review');
+    }
 }

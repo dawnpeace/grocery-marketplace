@@ -25,10 +25,17 @@ class MainMenuController extends Controller
 
     public function lihatProduk(Produk $produk)
     {
-        $produk->load(['penjual','gallery']);
+        $produk->load([
+            'penjual',
+            'gallery',
+            'penilaian' => function($query){
+                $query->inRandomOrder()->limit(3);
+            }
+        ]);
+        $ratingProduk = $produk->penilaian()->selectRaw('AVG(rating) as average_rate ')->get();
         $penjual = $produk->penjual->load(['produk'=>function($query) use ($produk){
             $query->where('id','<>',$produk->id)->inRandomOrder()->limit(12)->with(['display']);
         },'user','pasar']);
-        return view('detail-produk',['produk'=>$produk, 'penjual'=>$penjual]);
+        return view('detail-produk',['produk'=>$produk, 'penjual'=>$penjual, 'nilaiProduk' => $ratingProduk[0]->average_rate]);
     }
 }

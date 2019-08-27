@@ -40,6 +40,11 @@
                         <th>Status Proses</th>
                         <td>{{$belanja->status->tampilStatus()}}</td>
                     </tr>
+                    @else 
+                    <tr>
+                        <th>Status Proses</th>
+                        <td>Menunggu Konfirmasi Penjual</td>
+                    </tr>
                     @endif
                     @if(!is_null($belanja->biaya_antar))
                     <tr>

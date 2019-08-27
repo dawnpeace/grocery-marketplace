@@ -56,6 +56,15 @@
                         @endif
                         <li class="list-group-item">{{$produk->harga()}}/{{$produk->satuan_unit}}</li>
                         <li class="list-group-item">
+                            @if(!is_null($nilaiProduk))
+                            @for($i = 0; $i < floor($nilaiProduk); ++$i)
+                            <i class="fas fa-star text-warning"></i>                            
+                            @endfor
+                            @else
+                            Belum terdapat ulasan
+                            @endif
+                        </li>
+                        <li class="list-group-item">
                             <div>{{$produk->deskripsi()}}</div>
                             <div class="clearfix"></div>
                             @can('pembeli')
@@ -70,6 +79,30 @@
         </div>
     </div>
     <hr>
+    <div class="mt-2 row">
+        <div class="col-md-12">
+            <h3 class="text-center">Ulasan Terhadap Produk</h3>
+        </div>
+        @foreach($produk->penilaian->take(3) as $review)
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-right">
+                            <p>
+                                @for($i = 0 ;$i < $review->rating; $i++)
+                                <i class="fas fa-star text-warning"></i>
+                                @endfor
+                            </p>
+                        </div>
+                        <hr>
+                        <p>
+                            {{$review->review}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
     <div class="mt-2">
         @if(!$penjual->produk->isEmpty())
         <h5 class="text-center">Produk Lainnya dari {{$penjual->nama_toko}}</h5>

@@ -29,6 +29,10 @@ Route::group(['middleware'=>['can:pembeli']],function(){
     Route::post('keranjang/{keranjang}/checkout','CartController@checkoutKeranjang')->name('keranjang.checkout');
     Route::get('keranjang-saya/diproses','CartController@lihatTransaksiBerjalan')->name('keranjang.diproses');
     Route::post('selesaikan-transaksi/{keranjang}','AntarController@transaksiSelesai')->name('transaksi.selesai');
+
+    Route::get('penilaian','ReviewController@index')->name('review.index');
+    Route::get('penilaian/{item}/produk','ReviewController@show')->name('review.show');
+    Route::post('penilaian/{item}/produk','ReviewController@store')->name('review.store');
 });
 Route::get('profil-saya','PembeliController@editProfil')->name('pembeli.profil.edit');
 Route::post('profil-saya','PembeliController@updateProfil')->name('pembeli.profil.update');

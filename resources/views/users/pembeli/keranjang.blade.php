@@ -154,7 +154,7 @@
                             </div>
                             <div class="col-md-3 text-center">
                                 <div class="custom-control custom-radio">
-                                    <input name="metode_pengiriman" value="ambil" type="radio" class="custom-control-input" id="ambil">
+                                    <input name="metode_pengiriman" value="jemput" type="radio" class="custom-control-input" id="ambil">
                                     <label class="custom-control-label" for="ambil">Jemput Sendiri</label>
                                 </div>
                                 <img src="{{asset('img/courier/self.png')}}" alt="" class="img img-fluid payment-icon">
