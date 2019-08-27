@@ -33,10 +33,12 @@
                                 </p>
                             </li>
                         </ul>
-                        <div class="clearfix mb-2"></div>
-                        
-                        <button type="button" onclick="openWA({{whatsappLink($penjual->no_telp)}})" class="btn btn-success float-right"><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
-                        <button data-clipboard-text="{{$penjual->no_telp}}" class="btn btn-secondary clipboard"><i class="fa fa-clipboard"></i> Salin No Telp</button>
+                        <div class="mb-2"></div>
+                        <div class="text-right">
+                            <button type="button" onclick="openWA({{whatsappLink($penjual->no_telp)}})" class="btn btn-success"><i class="fab fa-whatsapp"></i> Kontak Penjual</button>
+                            <button data-toggle="tooltip" data-clipboard-text="{{$penjual->no_telp}}" class="btn btn-secondary clipboard"><i class="fa fa-clipboard"></i> Salin No Telp</button>
+                        </div>
+                        <p style="display:none;" class="copy-text pr-3 text-right font-weight-bold pt-2">Nomor telepon tersalin !</p>
                     </div>
                 </div>
                 <hr>
@@ -77,6 +79,12 @@
     <script>
         $(document).ready(function(){
             var clipboard = new ClipboardJS('.clipboard');
+            clipboard.on('success',function(e){
+                $('.copy-text').show();
+                setInterval(function(){
+                    $('.copy-text').hide();
+                },1600);
+            });
         });
     </script>
 @endsection

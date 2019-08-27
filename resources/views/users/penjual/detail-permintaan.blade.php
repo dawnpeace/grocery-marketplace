@@ -20,7 +20,7 @@
     <div class="table-responsive">
         <div class="card">
             <div class="card-body">
-                <div class="float-right m-2">
+                <div class="text-right m-2">
                     @can('ProsesPermintaan',$keranjang)
                     <button id="button-confirm" data-url="{{route('permintaan.proses',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Pesanan Siap Dibayarkan</button>
                     @endcan
@@ -33,10 +33,11 @@
                     <button id="button-send" data-url="{{route('permintaan.antar',[$keranjang->id])}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-check-circle"></i> Antarkan Pesanan</button>
                     @endcan
 
+                    <button data-toggle="tooltip" data-clipboard-text="{{$keranjang->pembeli->no_telp}}" class="btn btn-sm btn-secondary clipboard"><i class="fa fa-clipboard"></i> Salin No Telp</button>                    
                     <button type="button" class="btn btn-info btn-sm my-1" data-toggle="modal" data-target="#modal-info"><i class="fa fa-info"></i> Informasi Pelanggan</button>
                     <button type="button" onclick="openWA({{whatsappLink($keranjang->pembeli->no_telp)}})" class="btn btn-sm btn-success my-1"><i class="fab fa-whatsapp"></i> Kirim Pesan WA ke Pembeli</button>
+                    <p style="display:none;" class="copy-text pr-3 text-right font-weight-bold pt-2">Nomor telepon tersalin !</p>
                 </div>
-                <div class="clearfix"></div>
                 <h2 class="ml-2 mb-2">
                     <i class="fa fa-info-circle"></i> 
                     Detail Keranjang {{$keranjang->pembeli->user->nama}} 
@@ -233,5 +234,12 @@
         listHeight = $('#user-info').height();
         $('#pembeli-img').css({'max-height':listHeight});
 
+        var clipboard = new ClipboardJS('.clipboard');
+        clipboard.on('success',function(e){
+            $('.copy-text').show();
+            setInterval(function(){
+                $('.copy-text').hide();
+            },1600);
+        });
     </script>
 @endsection

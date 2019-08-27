@@ -30,7 +30,7 @@ class PermintaanController extends Controller
 
     public function lihatDetail(Keranjang $keranjang)
     {
-        if($keranjang->telah_diselesaikan){
+        if($keranjang->transaksi_selesai){
             return redirect()->route('permintaan');
         }
         $keranjang->load([

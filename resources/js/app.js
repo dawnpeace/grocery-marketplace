@@ -6,8 +6,6 @@
 
 require('./bootstrap');
 require('sweetalert');
-require('select2');
-require('clipboard');
 
 
 window.Vue = require('vue');

@@ -70,7 +70,8 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="float-right mt-2">
+                            <div class="text-right mt-2">
+                                <button type="button" data-toggle="tooltip" data-clipboard-text="{{$produk->penjual->no_telp}}" class="btn btn-secondary clipboard"><i class="fa fa-clipboard"></i> Salin No Telp</button>
                                 <button type="button" onclick="openWA({{whatsappLink($produk->penjual->no_telp)}})" class="btn-whatsapp btn btn-success"><i class="fab fa-whatsapp"></i> Tanya Penjual</button>
                                 <button 
                                     @if(!$belanjaan->isEmpty())
@@ -79,6 +80,7 @@
                                 type="button" class="btn btn-info" {{$belanjaan->isEmpty() ? 'disabled' : ''}}><i class="fa fa-eye"></i> Lihat Keranjang</button>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Tambah</button>
                             </div>
+                            <p style="display:none;" class="copy-text pr-3 text-right font-weight-bold pt-2">Nomor telepon tersalin !</p>
                             <div class="clearfix"></div>
                             </form>
                             @else 
@@ -146,6 +148,12 @@
                 event.preventDefault(); //stop character from entering input
             }
         });
-
+        var clipboard = new ClipboardJS('.clipboard');
+        clipboard.on('success',function(e){
+            $('.copy-text').show();
+            setInterval(function(){
+                $('.copy-text').hide();
+            },1600);
+        });
     </script>
 @endsection
