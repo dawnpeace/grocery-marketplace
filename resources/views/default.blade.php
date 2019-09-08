@@ -45,6 +45,7 @@
                 @endif
                 @if(auth()->user()->jenis == 'PEMBELI')
                 <a class="dropdown-item" href="{{route('review.index')}}">Penilaian</a>
+                <a class="dropdown-item" href="{{route('transaksi.history')}}">Riwayat Belanja</a>
                 @endif
                 @if(auth()->user()->jenis != 'PEMBELI')
                 <a class="dropdown-item" href="{{Auth::user()->dashboardUrl()}}">Dashboard</a>

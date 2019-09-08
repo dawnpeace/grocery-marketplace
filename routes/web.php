@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('test','Auth\CustomRegisterController@index');
 Route::get('/','MainMenuController@index')->name('dashboard');
 Route::get('/cari','PencarianController@cari')->name('pencarian');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');
@@ -33,6 +33,8 @@ Route::group(['middleware'=>['can:pembeli']],function(){
     Route::get('penilaian','ReviewController@index')->name('review.index');
     Route::get('penilaian/{item}/produk','ReviewController@show')->name('review.show');
     Route::post('penilaian/{item}/produk','ReviewController@store')->name('review.store');
+
+    Route::get('transaksi-saya','TransaksiController@index')->name('transaksi.history');
 });
 Route::get('profil-saya','PembeliController@editProfil')->name('pembeli.profil.edit');
 Route::post('profil-saya','PembeliController@updateProfil')->name('pembeli.profil.update');
@@ -46,7 +48,7 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware(['guest'])->group(function(){
-    Route::get('daftar-registrasi','Auth\CustomRegisterController@buat')->name('register');
+    Route::get('daftar-registrasi','Auth\CustomRegisterController@index')->name('register');
     // Route::post('register/driver','Auth\CustomRegisterController@simpanDriver')->name('store.driver');
     Route::post('register/penjual','Auth\CustomRegisterController@simpanPenjual')->name('store.seller');
     Route::post('register/pembeli','Auth\CustomRegisterController@simpanPembeli')->name('store.customer');

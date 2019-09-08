@@ -20,6 +20,12 @@ class CustomRegisterController extends Controller
         $pasar = Pasar::all();
         return view('auth.daftar-registrasi',compact('pasar'));
     }
+
+    public function index()
+    {
+        $pasar = Pasar::all();
+        return view('auth.custom-register',compact('pasar'));
+    }
     
     public function simpanDriver(DriverRequest $request)
     {
@@ -56,22 +62,22 @@ class CustomRegisterController extends Controller
         $request['jenis'] = UserLevel::PENJUAL;
         $request['password'] = Hash::make($request->password);
         DB::transaction(function() use ($request){
-            if($request->hasFile('foto_profil_penjual')){
-                $namaberkasfoto = uniqid().".".$request->file('foto_profil_penjual')->extension();
-                $request->file('foto_profil_penjual')->storeAs('foto_profil',$namaberkasfoto,'public');
+            if($request->hasFile('foto_profil')){
+                $namaberkasfoto = uniqid().".".$request->file('foto_profil')->extension();
+                $request->file('foto_profil')->storeAs('foto_profil',$namaberkasfoto,'public');
             } else {
                 $namaberkasfoto = null;
             }
             $array = [
-                'nama' => $request->nama_penjual,
-                'password' => $request->password_penjual,
-                'email' => $request->email_penjual,
-                'username' => $request->username_penjual,
-                'password' => bcrypt($request->password_penjual),
-                'kota' => $request->kota_penjual,
+                'nama' => $request->nama,
+                'password' => $request->password,
+                'email' => $request->email,
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+                'kota' => $request->kota,
                 'nama_toko' => $request->nama_toko,
-                'alamat' => $request->alamat_penjual,
-                'no_telp' => $request->no_telp_penjual,
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
                 'jenis' => UserLevel::PENJUAL,
                 'foto_profil' => $namaberkasfoto,
                 'pasar_id' => $request->pasar_id
@@ -79,7 +85,8 @@ class CustomRegisterController extends Controller
             $userPenjual = User::create($array);
             $penjual = $userPenjual->penjual()->create($array);
         });        
-        return redirect()->route('login')->with("success","Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
+        session()->flash('success',"Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
+        // return redirect()->route('login')->with("success","Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
     }
 
     public function simpanPembeli(PembeliRequest $request)
@@ -107,6 +114,7 @@ class CustomRegisterController extends Controller
             $userPembeli = User::create($array);
             $pembeli = $userPembeli->pembeli()->create($array);
         });
-        return redirect()->route('login')->with("success","Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
+        session()->flash('success',"Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
+        // return redirect()->route('login')->with("success","Akun Anda berhasil diajukan. Mohon tunggu maksimal 2 x 24 jam sebelum akun anda dapat digunakan");
     }
 }
