@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="{{$item->produk->display->url()}}" alt="" class="img img-fluid">
+                            <img src="{{displayUrl($item->produk->display)}}" alt="" class="img img-fluid">
                         </div>
                         <div class="col-md-8">
                             <h4>{{$item->produk->nama_produk}}</h4>

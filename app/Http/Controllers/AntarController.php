@@ -96,9 +96,24 @@ class AntarController extends Controller
 
     public function transaksiSelesai(Keranjang $keranjang)
     {
+        $keranjang->load(['status','belanjaan.produk']);
         $this->authorize('SelesaikanTransaksi',$keranjang);
-        $keranjang->load(['status']);   
-        $keranjang->update(['transaksi_selesai'=>1]);
+        DB::beginTransaction();
+        try{
+            $keranjang->belanjaan->each(function($item,$key){
+                $hasilPengurangan = $item->produk->jumlah_tersedia - $item->jumlah;
+                $stock = $hasilPengurangan < 0 ? 0 : $hasilPengurangan;
+                if($stock === 0)
+                {
+                    $item->produk->gantiKetersediaan();
+                }
+                $item->produk()->update(['jumlah_tersedia' => $stock]);
+            });
+            $keranjang->update(['transaksi_selesai'=>1]);
+            DB::commit();
+        } catch(\PDOException $e){
+            return $e->getMessage();
+        }
         return redirect()->route('review.index')->with('success','Terima kasih telah beberbelanja di Dapurpedia ! Silahkan berikan penilaian terhadap produk');
     }
 }

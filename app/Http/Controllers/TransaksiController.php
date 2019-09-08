@@ -15,6 +15,7 @@ class TransaksiController extends Controller
             ->where('pembeli_id',$user->pembeli->id)
             ->where('transaksi_selesai',1)
             ->with(['penjual','belanjaan.produk'])
+            ->orderBy('tanggal_checkout','DESC')
             ->paginate(5);
             
         return view('users.pembeli.transaksi-saya',compact(['user','keranjang']));

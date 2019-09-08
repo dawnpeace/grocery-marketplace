@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('test','Auth\CustomRegisterController@index');
 Route::get('/','MainMenuController@index')->name('dashboard');
 Route::get('/cari','PencarianController@cari')->name('pencarian');
 Route::get('produk/{produk}','MainMenuController@lihatProduk')->name('lihat.produk');

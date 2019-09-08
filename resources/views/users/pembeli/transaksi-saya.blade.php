@@ -45,14 +45,23 @@
                                     <td class="text-right">{{$belanja->jumlah}}</td>
                                     <td class="text-right">{{$subtotal = $belanja->harga * $belanja->jumlah}}</td>
                                 </tr>
+                                @php $total+=$subtotal; @endphp
                                 @endforeach
+                                <tr>
+                                    <td class="text-left" colspan="3">
+                                        Biaya Antar
+                                    </td>
+                                    <td class="text-right">
+                                        {{$item->biaya_antar}}
+                                    </td>
+                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="3">
                                         <h5 class="font-weight-bold">Total</h5>
                                     </td>
-                                    <td class="text-right font-weight-bold">{{$total+=$subtotal}}</td>
+                                    <td class="text-right font-weight-bold">{{formatRP($total+$item->biaya_antar)}}</td>
                                 </tr>
                             </tfoot>
                         </table>
